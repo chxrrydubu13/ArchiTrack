@@ -1,0 +1,1452 @@
+/* =========================================================
+   ARCHITECT FILE LIBRARY
+   COMPACT FLOWING METRICS
+========================================================= */
+
+.files-page {
+    padding: 36px 40px 60px;
+    background: #f7f5f2;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.files-page .library-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.files-page .library-title {
+    max-width: 760px;
+}
+
+.files-page .library-eyebrow {
+    display: inline-block;
+    margin-bottom: 9px;
+
+    color: #f97316;
+
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.files-page .library-title h2 {
+    margin: 0 0 9px;
+
+    color: #24303b;
+
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.files-page .library-title p {
+    margin: 0;
+
+    color: #747d85;
+
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   COMPACT FLOWING METRICS
+========================================================= */
+
+.files-page .library-counts {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: start;
+
+    width: 100%;
+    min-height: 160px;
+
+    padding: 4px 36px 52px;
+
+    overflow: hidden;
+
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   FLOWING LINE
+========================================================= */
+
+.files-page .library-counts::before {
+    content: "";
+
+    position: absolute;
+
+    left: 2%;
+    bottom: 19px;
+
+    width: 96%;
+    height: 40px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f97316 0%,
+            #f5b942 27%,
+            #22c55e 44%,
+            #8b5cf6 70%,
+            #1687f8 100%
+        );
+
+    clip-path: polygon(
+        0% 52%,
+        10% 62%,
+        20% 69%,
+        30% 67%,
+        40% 51%,
+        50% 34%,
+        60% 37%,
+        70% 54%,
+        80% 67%,
+        90% 65%,
+        100% 48%,
+
+        100% 55%,
+        90% 72%,
+        80% 74%,
+        70% 61%,
+        60% 44%,
+        50% 41%,
+        40% 58%,
+        30% 74%,
+        20% 76%,
+        10% 69%,
+        0% 59%
+    );
+
+    opacity: 0.72;
+
+    animation: waveFloat 5.8s ease-in-out infinite alternate;
+
+    pointer-events: none;
+}
+
+
+/* MOVING SHINE */
+
+.files-page .library-counts::after {
+    content: "";
+
+    position: absolute;
+
+    left: -20%;
+    bottom: 12px;
+
+    width: 20%;
+    height: 55px;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(255, 255, 255, 0.35) 35%,
+            transparent 72%
+        );
+
+    filter: blur(7px);
+
+    animation: waveShine 7s linear infinite;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   EACH METRIC
+========================================================= */
+
+.files-page .library-count {
+    position: relative;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-width: 0;
+    padding: 0 14px;
+
+    text-align: center;
+
+    transition: transform 0.22s ease;
+}
+
+.files-page .library-count:hover {
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   ICONS
+========================================================= */
+
+.files-page .metric-icon {
+    width: 56px;
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 10px;
+
+    border-radius: 50%;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.files-page .metric-icon svg {
+    width: 28px;
+    height: 28px;
+
+    fill: none;
+
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.files-page .library-count:hover .metric-icon {
+    transform: scale(1.05);
+}
+
+
+/* TOTAL */
+
+.files-page .metric-total .metric-icon {
+    background: #fff0e3;
+
+    box-shadow:
+        0 0 0 7px rgba(249, 115, 22, 0.035),
+        0 0 18px rgba(249, 115, 22, 0.09);
+
+    animation: iconFloat 3.2s ease-in-out infinite;
+}
+
+.files-page .metric-total .metric-icon svg {
+    stroke: #f97316;
+}
+
+
+/* ACTIVE */
+
+.files-page .metric-active .metric-icon {
+    background: #edf8ef;
+
+    box-shadow:
+        0 0 0 7px rgba(34, 197, 94, 0.035),
+        0 0 18px rgba(34, 197, 94, 0.09);
+
+    animation: iconFloat 3.2s ease-in-out infinite;
+    animation-delay: 0.3s;
+}
+
+.files-page .metric-active .metric-icon svg {
+    stroke: #16a34a;
+}
+
+
+/* ARCHIVED */
+
+.files-page .metric-archived .metric-icon {
+    background: #f3edff;
+
+    box-shadow:
+        0 0 0 7px rgba(139, 92, 246, 0.035),
+        0 0 18px rgba(139, 92, 246, 0.09);
+
+    animation: iconFloat 3.2s ease-in-out infinite;
+    animation-delay: 0.6s;
+}
+
+.files-page .metric-archived .metric-icon svg {
+    stroke: #7c3aed;
+}
+
+
+/* THIS WEEK */
+
+.files-page .metric-week .metric-icon {
+    background: #eaf4ff;
+
+    box-shadow:
+        0 0 0 7px rgba(59, 130, 246, 0.035),
+        0 0 18px rgba(59, 130, 246, 0.09);
+
+    animation: iconFloat 3.2s ease-in-out infinite;
+    animation-delay: 0.9s;
+}
+
+.files-page .metric-week .metric-icon svg {
+    stroke: #2563eb;
+}
+
+
+/* =========================================================
+   METRIC NUMBER
+========================================================= */
+
+.files-page .library-count > strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #202b36;
+
+    font-size: 28px;
+    font-weight: 750;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   METRIC LABEL
+========================================================= */
+
+.files-page .library-count > span {
+    color: #707a83;
+
+    font-size: 13px;
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   POINTER
+========================================================= */
+
+.files-page .metric-pointer {
+    position: absolute;
+
+    bottom: -18px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid #f97316;
+}
+
+.files-page .metric-active .metric-pointer {
+    border-top-color: #22c55e;
+}
+
+.files-page .metric-archived .metric-pointer {
+    border-top-color: #8b5cf6;
+}
+
+.files-page .metric-week .metric-pointer {
+    border-top-color: #1687f8;
+}
+
+
+/* =========================================================
+   NODE
+========================================================= */
+
+.files-page .metric-node {
+    position: absolute;
+
+    bottom: -46px;
+
+    width: 17px;
+    height: 17px;
+
+    background: #f97316;
+
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 5px rgba(249, 115, 22, 0.07),
+        0 0 16px rgba(249, 115, 22, 0.22);
+
+    animation: nodePulse 2.8s ease-in-out infinite;
+}
+
+.files-page .metric-active .metric-node {
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 5px rgba(34, 197, 94, 0.07),
+        0 0 16px rgba(34, 197, 94, 0.22);
+
+    animation-delay: 0.25s;
+}
+
+.files-page .metric-archived .metric-node {
+    background: #8b5cf6;
+
+    box-shadow:
+        0 0 0 5px rgba(139, 92, 246, 0.07),
+        0 0 16px rgba(139, 92, 246, 0.22);
+
+    animation-delay: 0.5s;
+}
+
+.files-page .metric-week .metric-node {
+    background: #1687f8;
+
+    box-shadow:
+        0 0 0 5px rgba(59, 130, 246, 0.07),
+        0 0 16px rgba(59, 130, 246, 0.22);
+
+    animation-delay: 0.75s;
+}
+
+
+/* =========================================================
+   RECENT UPLOADS
+========================================================= */
+
+.files-page .recent-section {
+    margin-top: 0;
+    margin-bottom: 28px;
+}
+
+.files-page .section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 14px;
+}
+
+.files-page .section-heading h3 {
+    margin: 0 0 4px;
+
+    color: #29333d;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.files-page .section-heading p {
+    margin: 0;
+
+    color: #858e96;
+
+    font-size: 14px;
+}
+
+.files-page .section-heading > a {
+    color: #e86810;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.files-page .section-heading > a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   RECENT FILE CARDS
+========================================================= */
+
+.files-page .recent-files {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.files-page .recent-file-card {
+    position: relative;
+
+    min-width: 0;
+    min-height: 118px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 13px;
+
+    padding: 17px;
+
+    background: #ffffff;
+
+    border: 1px solid #e7e1db;
+    border-radius: 15px;
+
+    color: inherit;
+    text-decoration: none;
+
+    box-shadow:
+        0 5px 16px rgba(44, 39, 34, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.files-page .recent-file-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #f0b98d;
+
+    box-shadow:
+        0 10px 23px rgba(44, 39, 34, 0.075);
+}
+
+.files-page .recent-file-card::after {
+    content: "";
+
+    position: absolute;
+
+    left: 17px;
+    bottom: 0;
+
+    width: 36px;
+    height: 3px;
+
+    background: #f97316;
+
+    border-radius: 6px 6px 0 0;
+}
+
+
+/* =========================================================
+   RECENT FILE TYPE
+========================================================= */
+
+.files-page .recent-file-type {
+    width: 48px;
+    height: 48px;
+
+    flex: 0 0 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff1e6;
+
+    border: 1px solid #f3caa9;
+    border-radius: 12px;
+
+    color: #df6410;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   RECENT FILE INFO
+========================================================= */
+
+.files-page .recent-file-info {
+    min-width: 0;
+}
+
+.files-page .recent-file-info strong {
+    display: block;
+
+    overflow: hidden;
+
+    margin-bottom: 6px;
+
+    color: #2b353f;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.files-page .recent-file-info span {
+    display: block;
+
+    overflow: hidden;
+
+    margin-bottom: 5px;
+
+    color: #646e77;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.files-page .recent-file-info small {
+    display: block;
+
+    color: #969da4;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   FILE VIEW TABS
+========================================================= */
+
+.files-page .file-view-tabs {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    width: 100%;
+
+    margin-bottom: 16px;
+    padding: 6px;
+
+    background: #ece8e4;
+
+    border-radius: 13px;
+}
+
+.files-page .file-view-tabs a {
+    min-height: 40px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 18px;
+
+    border-radius: 9px;
+
+    color: #69727a;
+
+    font-size: 14px;
+    font-weight: 650;
+
+    text-decoration: none;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.files-page .file-view-tabs a:hover {
+    background: rgba(255, 255, 255, 0.55);
+
+    color: #db620e;
+}
+
+.files-page .file-view-tabs a.active {
+    background: #ffffff;
+
+    color: #e6670f;
+
+    box-shadow:
+        0 3px 9px rgba(43, 38, 33, 0.06);
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.files-page .library-filters {
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 1.4fr)
+        minmax(150px, 0.65fr)
+        minmax(135px, 0.55fr)
+        minmax(135px, 0.55fr)
+        minmax(135px, 0.55fr)
+        auto
+        auto;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+    padding: 15px;
+
+    background: #ffffff;
+
+    border: 1px solid #e6e0da;
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 16px rgba(42, 37, 32, 0.035);
+}
+
+.files-page .library-search {
+    position: relative;
+}
+
+.files-page .library-search svg {
+    position: absolute;
+
+    top: 50%;
+    left: 15px;
+
+    width: 19px;
+    height: 19px;
+
+    transform: translateY(-50%);
+
+    fill: none;
+    stroke: #949ba2;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.files-page .library-search input,
+.files-page .library-filters select {
+    width: 100%;
+    height: 44px;
+
+    background: #f8f7f5;
+
+    border: 1px solid #e2ddd7;
+    border-radius: 10px;
+
+    color: #36404a;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.files-page .library-search input {
+    padding: 0 15px 0 44px;
+}
+
+.files-page .library-filters select {
+    padding: 0 34px 0 13px;
+
+    cursor: pointer;
+}
+
+.files-page .library-search input:focus,
+.files-page .library-filters select:focus {
+    background: #ffffff;
+
+    border-color: #eda66f;
+
+    box-shadow:
+        0 0 0 3px rgba(249, 115, 22, 0.08);
+}
+
+.files-page .filter-button {
+    height: 44px;
+
+    padding: 0 19px;
+
+    background: #f97316;
+
+    border: 1px solid #f97316;
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+}
+
+.files-page .filter-button:hover {
+    background: #e8680e;
+
+    transform: translateY(-1px);
+}
+
+.files-page .reset-filter {
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 13px;
+
+    border-radius: 10px;
+
+    color: #747d85;
+
+    font-size: 13px;
+    font-weight: 650;
+
+    text-decoration: none;
+}
+
+.files-page .reset-filter:hover {
+    background: #f3efeb;
+
+    color: #e76910;
+}
+
+
+/* =========================================================
+   MASTER LIBRARY
+========================================================= */
+
+.files-page .master-library {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5dfd9;
+    border-radius: 17px;
+
+    box-shadow:
+        0 8px 24px rgba(42, 37, 32, 0.045);
+}
+
+.files-page .master-library-heading {
+    min-height: 78px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 19px 22px;
+
+    border-bottom: 1px solid #ece7e2;
+}
+
+.files-page .master-library-heading h3 {
+    margin: 0 0 4px;
+
+    color: #29323b;
+
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.files-page .master-library-heading span {
+    color: #858d94;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.files-page .library-note {
+    padding: 8px 12px;
+
+    background: #f6f3ef;
+
+    border-radius: 999px;
+
+    color: #747d85;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FILE ROW
+========================================================= */
+
+.files-page .master-file-row {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        54px
+        minmax(280px, 1fr)
+        auto;
+
+    align-items: center;
+
+    gap: 16px;
+
+    min-height: 102px;
+
+    padding: 17px 22px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #efebe7;
+
+    transition:
+        background 0.18s ease;
+}
+
+.files-page .master-file-row:last-child {
+    border-bottom: none;
+}
+
+.files-page .master-file-row:hover {
+    background: #fffaf6;
+}
+
+.files-page .master-file-row:hover::before {
+    content: "";
+
+    position: absolute;
+
+    top: 15px;
+    bottom: 15px;
+    left: 0;
+
+    width: 4px;
+
+    background: #f97316;
+
+    border-radius: 0 6px 6px 0;
+}
+
+
+/* =========================================================
+   MASTER FILE ICON
+========================================================= */
+
+.files-page .master-file-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff0e4;
+
+    border: 1px solid #f3c9a9;
+    border-radius: 13px;
+
+    color: #df650f;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   FILE DETAILS
+========================================================= */
+
+.files-page .master-file-details {
+    min-width: 0;
+}
+
+.files-page .file-title-line {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-bottom: 5px;
+}
+
+.files-page .file-title-line > strong {
+    max-width: 700px;
+
+    overflow: hidden;
+
+    color: #29323b;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.files-page .file-state {
+    min-height: 24px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 9px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.files-page .file-state.active {
+    background: #edf7ef;
+
+    border: 1px solid #cce5d1;
+
+    color: #3d7e4d;
+}
+
+.files-page .file-state.archived {
+    background: #f2f0ee;
+
+    border: 1px solid #ddd8d3;
+
+    color: #747c82;
+}
+
+.files-page .master-project-name {
+    display: inline-flex;
+
+    margin-bottom: 8px;
+
+    color: #e66810;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.files-page .master-project-name:hover {
+    text-decoration: underline;
+}
+
+.files-page .file-metadata {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    color: #7e878f;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.files-page .file-metadata strong {
+    color: #545e67;
+
+    font-weight: 700;
+}
+
+.files-page .metadata-dot {
+    width: 4px;
+    height: 4px;
+
+    background: #b8bec3;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   FILE ACTIONS
+========================================================= */
+
+.files-page .master-file-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 8px;
+}
+
+.files-page .master-file-actions form {
+    margin: 0;
+}
+
+.files-page .file-download-button,
+.files-page .file-project-button,
+.files-page .file-more-button {
+    min-height: 39px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 13px;
+
+    border-radius: 9px;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.files-page .file-download-button {
+    background: #f97316;
+
+    border: 1px solid #f97316;
+
+    color: #ffffff;
+}
+
+.files-page .file-download-button:hover {
+    background: #e8680e;
+
+    transform: translateY(-1px);
+}
+
+.files-page .file-project-button {
+    background: #ffffff;
+
+    border: 1px solid #dcd7d2;
+
+    color: #59636c;
+}
+
+.files-page .file-project-button:hover {
+    background: #f7f4f1;
+}
+
+.files-page .file-more-button {
+    background: #f7f5f2;
+
+    border: 1px solid #ded9d4;
+
+    color: #6d767e;
+}
+
+.files-page .file-more-button:hover {
+    background: #ebe7e3;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.files-page .master-empty {
+    min-height: 320px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 45px 24px;
+
+    text-align: center;
+}
+
+.files-page .master-empty-icon {
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 16px;
+
+    background: #fff0e4;
+
+    border: 1px solid #f2caaa;
+    border-radius: 17px;
+}
+
+.files-page .master-empty-icon svg {
+    width: 29px;
+    height: 29px;
+
+    fill: none;
+    stroke: #f97316;
+    stroke-width: 1.7;
+}
+
+.files-page .master-empty h3 {
+    margin: 0 0 7px;
+
+    color: #2e3740;
+
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.files-page .master-empty p {
+    max-width: 440px;
+
+    margin: 0 0 15px;
+
+    color: #818990;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.files-page .master-empty > a {
+    color: #e96a11;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes waveFloat {
+    0% {
+        transform:
+            translateX(-0.5%)
+            translateY(0)
+            scaleY(0.98);
+    }
+
+    50% {
+        transform:
+            translateX(0.5%)
+            translateY(-2px)
+            scaleY(1.03);
+    }
+
+    100% {
+        transform:
+            translateX(-0.5%)
+            translateY(1px)
+            scaleY(0.99);
+    }
+}
+
+@keyframes waveShine {
+    0% {
+        left: -20%;
+    }
+
+    100% {
+        left: 105%;
+    }
+}
+
+@keyframes iconFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes nodePulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.13);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1400px) {
+    .files-page .recent-files {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .files-page .library-filters {
+        grid-template-columns:
+            minmax(280px, 1fr)
+            repeat(4, minmax(130px, 0.5fr))
+            auto;
+    }
+
+    .files-page .reset-filter {
+        grid-column: 1 / -1;
+        justify-self: flex-end;
+    }
+}
+
+
+@media (max-width: 1150px) {
+    .files-page .recent-files {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .files-page .library-filters {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .files-page .library-search {
+        grid-column: 1 / -1;
+    }
+
+    .files-page .master-file-row {
+        grid-template-columns:
+            52px
+            minmax(0, 1fr);
+    }
+
+    .files-page .master-file-actions {
+        grid-column: 2;
+        justify-content: flex-start;
+    }
+}
+
+
+@media (max-width: 850px) {
+    .files-page {
+        padding: 26px 22px 45px;
+    }
+
+    .files-page .library-title h2 {
+        font-size: 28px;
+    }
+
+    .files-page .library-counts {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 34px 15px;
+
+        min-height: auto;
+
+        padding: 5px 15px 20px;
+    }
+
+    .files-page .library-counts::before,
+    .files-page .library-counts::after,
+    .files-page .metric-pointer,
+    .files-page .metric-node {
+        display: none;
+    }
+
+    .files-page .file-view-tabs {
+        overflow-x: auto;
+    }
+
+    .files-page .library-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .files-page .library-search {
+        grid-column: auto;
+    }
+
+    .files-page .master-library-heading {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 9px;
+    }
+}
+
+
+@media (max-width: 760px) {
+    .files-page {
+        padding: 22px 16px 38px;
+    }
+
+    .files-page .recent-files {
+        grid-template-columns: 1fr;
+    }
+
+    .files-page .master-file-row {
+        grid-template-columns:
+            48px
+            minmax(0, 1fr);
+
+        gap: 13px;
+
+        padding: 16px;
+    }
+
+    .files-page .master-file-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .files-page .master-file-actions {
+        grid-column: 1 / -1;
+
+        flex-wrap: wrap;
+    }
+}
+
+
+@media (max-width: 520px) {
+    .files-page .library-title h2 {
+        font-size: 25px;
+    }
+
+    .files-page .library-counts {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .files-page .metric-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .files-page .metric-icon svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    .files-page .library-count > strong {
+        font-size: 25px;
+    }
+
+    .files-page .library-count > span {
+        font-size: 12px;
+    }
+
+    .files-page .file-download-button,
+    .files-page .file-project-button,
+    .files-page .file-more-button {
+        flex: 1;
+
+        min-width: 100px;
+    }
+}

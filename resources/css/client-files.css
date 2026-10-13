@@ -1,0 +1,919 @@
+/* =========================================================
+   CLIENT CENTRALIZED FILES
+   ARCHITECT'S DESK STYLE
+   Page-specific styles only.
+   Shared topbar/background remain in client-dashboard.css.
+========================================================= */
+
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
+.files-main {
+    position: relative;
+    z-index: 5;
+    width: min(1380px, calc(100% - 70px));
+    margin: 0 auto;
+    padding: 145px 0 70px;
+}
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
+.files-page-heading {
+    margin-bottom: 24px;
+}
+
+.files-heading-copy {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.files-heading-line {
+    width: 2px;
+    background: #cf681e;
+}
+
+.files-heading-label,
+.files-section-label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.05px;
+    color: #b95617;
+    text-transform: uppercase;
+}
+
+.files-page-heading h1 {
+    margin: 0;
+    font-size: 38px;
+    line-height: 1.12;
+    font-weight: 760;
+    letter-spacing: -0.8px;
+    color: #26333d;
+}
+
+.files-page-heading p {
+    max-width: 680px;
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #73808a;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+========================================================= */
+
+.files-summary-grid {
+    margin-bottom: 18px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.file-summary-card {
+    position: relative;
+
+    min-height: 116px;
+    padding: 15px 16px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid #dcd7d2;
+    border-radius: 3px;
+
+    background: rgba(255, 255, 255, .97);
+
+    box-shadow: 0 4px 14px rgba(38, 44, 48, .035);
+
+    transition:
+        border-color .16s ease,
+        background .16s ease,
+        transform .16s ease;
+}
+
+.file-summary-card::before {
+    content: "";
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 9px;
+    height: 9px;
+    border-top: 1px solid #d0c8c1;
+    border-right: 1px solid #d0c8c1;
+}
+
+.file-summary-card:hover {
+    transform: translateY(-1px);
+    border-color: #d5b59d;
+    background: #fffdfb;
+}
+
+.file-summary-card.active {
+    border-color: #d1a27f;
+    background: #fbefe6;
+}
+
+.file-summary-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .6px;
+    color: #7b858c;
+    text-transform: uppercase;
+}
+
+.file-summary-card strong {
+    margin-top: 9px;
+    font-size: 27px;
+    line-height: 1;
+    font-weight: 720;
+    color: #303c45;
+}
+
+.file-summary-card small {
+    margin-top: auto;
+    padding-top: 9px;
+    font-size: 10px;
+    line-height: 1.4;
+    color: #8a9298;
+}
+
+
+/* =========================================================
+   FILE LIBRARY SHEET
+========================================================= */
+
+.files-library {
+    position: relative;
+    overflow: hidden;
+
+    border: 1px solid #d8d4cf;
+    border-radius: 4px;
+
+    background: rgba(255, 255, 255, .98);
+
+    box-shadow: 0 8px 24px rgba(38, 44, 48, .045);
+}
+
+.files-library::before {
+    content: "";
+    position: absolute;
+    z-index: 5;
+    top: 8px;
+    right: 8px;
+    width: 13px;
+    height: 13px;
+    border-top: 1px solid #c9c2bb;
+    border-right: 1px solid #c9c2bb;
+    pointer-events: none;
+}
+
+.files-library::after {
+    content: "";
+    position: absolute;
+    z-index: 5;
+    left: 8px;
+    bottom: 8px;
+    width: 13px;
+    height: 13px;
+    border-left: 1px solid #d0cac4;
+    border-bottom: 1px solid #d0cac4;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   LIBRARY HEADER
+========================================================= */
+
+.files-library-head {
+    min-height: 78px;
+    padding: 18px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-bottom: 1px solid #ddd8d3;
+
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, .96),
+            rgba(255, 255, 255, .96)
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 79px,
+            rgba(80, 88, 93, .025) 80px
+        );
+}
+
+.files-library-head h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 730;
+    letter-spacing: -0.3px;
+    color: #2e3942;
+}
+
+.files-result-count {
+    padding: 5px 8px;
+
+    border: 1px solid #d9d4cf;
+    border-radius: 2px;
+
+    background: #f7f4f1;
+
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: .35px;
+
+    color: #747e85;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   QUICK TABS
+========================================================= */
+
+.files-quick-tabs {
+    padding: 11px 18px 0;
+
+    display: flex;
+    gap: 3px;
+
+    overflow-x: auto;
+
+    border-bottom: 1px solid #e2ddd8;
+
+    background: #fdfcfb;
+}
+
+.files-quick-tabs a {
+    min-height: 36px;
+    padding: 0 12px;
+
+    display: inline-flex;
+    align-items: center;
+
+    border-bottom: 2px solid transparent;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .35px;
+
+    color: #7b858c;
+
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.files-quick-tabs a:hover {
+    color: #b95d1d;
+}
+
+.files-quick-tabs a.active {
+    border-bottom-color: #bd601f;
+    color: #b95d1d;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.files-filter-bar {
+    padding: 13px 18px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(220px, 1.5fr)
+        minmax(140px, .9fr)
+        minmax(120px, .7fr)
+        minmax(120px, .7fr)
+        minmax(135px, .8fr)
+        auto
+        auto;
+
+    gap: 7px;
+    align-items: center;
+
+    border-bottom: 1px solid #ddd8d3;
+
+    background:
+        linear-gradient(
+            rgba(253, 252, 250, .97),
+            rgba(253, 252, 250, .97)
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 31px,
+            rgba(79, 85, 89, .02) 32px
+        );
+}
+
+.files-search-field {
+    position: relative;
+}
+
+.files-search-field svg {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+    transform: translateY(-50%);
+    fill: none;
+    stroke: #7d878e;
+    stroke-width: 1.7;
+    pointer-events: none;
+}
+
+.files-search-field input,
+.files-filter-bar select {
+    width: 100%;
+    min-height: 38px;
+
+    border: 1px solid #d8d3ce;
+    border-radius: 2px;
+
+    outline: none;
+
+    background: #fff;
+
+    font-size: 10px;
+    color: #46515a;
+
+    transition:
+        border-color .16s ease,
+        box-shadow .16s ease;
+}
+
+.files-search-field input {
+    padding: 0 10px 0 36px;
+}
+
+.files-filter-bar select {
+    padding: 0 9px;
+}
+
+.files-search-field input:focus,
+.files-filter-bar select:focus {
+    border-color: #c47a46;
+    box-shadow: 0 0 0 2px rgba(196, 122, 70, .07);
+}
+
+.files-filter-bar > button {
+    min-height: 38px;
+    padding: 0 12px;
+
+    border: 1px solid #b95d1d;
+    border-radius: 2px;
+
+    background: #bd601f;
+
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .35px;
+
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.files-filter-bar > button:hover {
+    background: #a95119;
+}
+
+.files-clear-filter {
+    min-height: 38px;
+    padding: 0 8px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 9px;
+    font-weight: 750;
+
+    color: #7a848b;
+}
+
+
+/* =========================================================
+   FILE LIST
+========================================================= */
+
+.files-list {
+    padding: 5px 13px 13px;
+}
+
+
+/* =========================================================
+   FILE ROW
+========================================================= */
+
+.file-row {
+    min-height: 94px;
+    padding: 12px 9px;
+
+    display: grid;
+
+    grid-template-columns:
+        66px
+        minmax(200px, 1.6fr)
+        minmax(90px, .65fr)
+        minmax(105px, .75fr)
+        70px
+        minmax(95px, .75fr)
+        92px;
+
+    gap: 12px;
+    align-items: center;
+
+    border-bottom: 1px solid #e8e4df;
+
+    transition: background .14s ease;
+}
+
+.file-row:last-child {
+    border-bottom: 0;
+}
+
+.file-row:hover {
+    background: #fbf6f2;
+}
+
+
+/* =========================================================
+   FILE PREVIEW
+========================================================= */
+
+.file-preview {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-preview img {
+    width: 60px;
+    height: 60px;
+
+    display: block;
+
+    border: 1px solid #d9d3cd;
+    border-radius: 2px;
+
+    object-fit: cover;
+}
+
+.file-extension-icon {
+    position: relative;
+
+    width: 52px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d8c9be;
+    border-radius: 2px;
+
+    background: #fbefe6;
+
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .35px;
+
+    color: #b95d1d;
+}
+
+.file-extension-icon::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 7px;
+    height: 7px;
+    border-top: 1px solid #cbaa92;
+    border-right: 1px solid #cbaa92;
+}
+
+
+/* =========================================================
+   FILE PRIMARY DETAILS
+========================================================= */
+
+.file-primary {
+    min-width: 0;
+}
+
+.file-name-row {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    min-width: 0;
+}
+
+.file-name-row > strong {
+    min-width: 0;
+    overflow: hidden;
+
+    font-size: 12px;
+    font-weight: 720;
+
+    color: #35414a;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.latest-badge,
+.archived-badge {
+    flex-shrink: 0;
+
+    padding: 3px 5px;
+
+    border-radius: 2px;
+
+    font-size: 7px;
+    font-weight: 850;
+    letter-spacing: .35px;
+
+    text-transform: uppercase;
+}
+
+.latest-badge {
+    border: 1px solid #bfd5c5;
+    background: #f2f8f3;
+    color: #46815a;
+}
+
+.archived-badge {
+    border: 1px solid #d4d4d4;
+    background: #f4f4f4;
+    color: #777f84;
+}
+
+.file-project-name {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: .3px;
+
+    color: #b95d1d;
+    text-transform: uppercase;
+}
+
+.file-primary p {
+    margin: 4px 0 0;
+
+    font-size: 9px;
+    line-height: 1.45;
+
+    color: #899197;
+}
+
+
+/* =========================================================
+   FILE DETAILS
+========================================================= */
+
+.file-detail {
+    min-width: 0;
+}
+
+.file-detail > span {
+    display: block;
+    margin-bottom: 4px;
+
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: .55px;
+
+    color: #9a9fa3;
+    text-transform: uppercase;
+}
+
+.file-detail > strong {
+    display: block;
+    overflow: hidden;
+
+    font-size: 10px;
+    font-weight: 650;
+
+    color: #515c64;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.file-detail > small {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 8px;
+
+    color: #969da2;
+}
+
+
+/* =========================================================
+   FILE ACTIONS
+========================================================= */
+
+.file-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.file-open-button {
+    min-height: 32px;
+    padding: 0 9px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #c66b2d;
+    border-radius: 2px;
+
+    background: #fff;
+
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .35px;
+
+    color: #ad571d;
+    text-transform: uppercase;
+}
+
+.file-open-button:hover {
+    background: #f8eee7;
+}
+
+.file-download-button {
+    width: 32px;
+    height: 32px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d7d2cd;
+    border-radius: 2px;
+
+    background: #fff;
+
+    color: #667179;
+}
+
+.file-download-button:hover {
+    background: #f5f2ef;
+}
+
+.file-download-button svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.files-empty {
+    min-height: 340px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+
+    text-align: center;
+}
+
+.files-empty-icon {
+    width: 64px;
+    height: 64px;
+
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #dbc5b5;
+    border-radius: 2px;
+
+    background: #fbefe6;
+
+    color: #b95d1d;
+}
+
+.files-empty-icon svg {
+    width: 29px;
+    height: 29px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+}
+
+.files-empty h3 {
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: 720;
+
+    color: #3b474f;
+}
+
+.files-empty p {
+    max-width: 420px;
+
+    margin: 7px 0 0;
+
+    font-size: 11px;
+    line-height: 1.55;
+
+    color: #848d93;
+}
+
+
+/* =========================================================
+   RESPONSIVE - LARGE TABLET
+========================================================= */
+
+@media (max-width: 1180px) {
+
+    .files-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .files-filter-bar {
+        grid-template-columns:
+            minmax(220px, 1.5fr)
+            repeat(2, minmax(120px, 1fr));
+    }
+
+    .file-row {
+        grid-template-columns:
+            66px
+            minmax(200px, 1.5fr)
+            minmax(100px, .8fr)
+            minmax(100px, .8fr)
+            90px;
+    }
+
+    .file-row .file-detail:nth-of-type(3),
+    .file-row .file-detail:nth-of-type(4) {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .files-main {
+        width: calc(100% - 28px);
+        padding-top: 110px;
+    }
+
+    .files-page-heading h1 {
+        font-size: 31px;
+    }
+
+    .files-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .files-filter-bar {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .files-search-field {
+        grid-column: 1 / -1;
+    }
+
+    .file-row {
+        grid-template-columns:
+            58px
+            minmax(0, 1fr)
+            auto;
+
+        gap: 10px;
+    }
+
+    .file-preview,
+    .file-preview img {
+        width: 54px;
+        height: 54px;
+    }
+
+    .file-extension-icon {
+        width: 48px;
+        height: 54px;
+    }
+
+    .file-row .file-detail {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+    .files-main {
+        width: calc(100% - 20px);
+        padding-top: 100px;
+        padding-bottom: 35px;
+    }
+
+    .files-page-heading h1 {
+        font-size: 28px;
+    }
+
+    .files-page-heading p {
+        font-size: 12px;
+    }
+
+    .files-summary-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+    }
+
+    .file-summary-card {
+        min-height: 104px;
+        padding: 12px;
+    }
+
+    .file-summary-card strong {
+        font-size: 24px;
+    }
+
+    .files-library-head {
+        align-items: flex-start;
+    }
+
+    .files-filter-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .files-search-field {
+        grid-column: auto;
+    }
+
+    .file-row {
+        grid-template-columns:
+            50px
+            minmax(0, 1fr);
+    }
+
+    .file-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-end;
+    }
+
+    .file-open-button {
+        flex: 1;
+    }
+}

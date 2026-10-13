@@ -1,0 +1,756 @@
+/* =========================================================
+           BEARO SETTINGS
+           IMPORTANT:
+           - Sidebar is controlled ONLY by dashboard.css
+           - No sidebar selectors are overridden here
+           - Typography follows the Admin Dashboard scale
+        ========================================================= */
+
+        .bearo-page {
+            min-height: 100vh;
+            background: transparent;
+        }
+
+        .bearo-main,
+        .bearo-main button,
+        .bearo-main input,
+        .bearo-main select,
+        .bearo-main textarea {
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .bearo-main {
+            position: relative;
+
+            width: 100%;
+            max-width: 1540px;
+
+            margin: 0 auto;
+            padding: 24px 28px 50px;
+
+            color: #30373c;
+        }
+
+        .bearo-main::before {
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+            z-index: 0;
+
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent 0,
+                    transparent 79px,
+                    rgba(60, 66, 70, 0.028) 80px,
+                    transparent 81px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0,
+                    transparent 79px,
+                    rgba(60, 66, 70, 0.028) 80px,
+                    transparent 81px
+                );
+
+            background-size: 80px 80px;
+
+            animation: bearoGridMove 48s linear infinite;
+        }
+
+        @keyframes bearoGridMove {
+            from { transform: translate3d(0, 0, 0); }
+            to { transform: translate3d(80px, 80px, 0); }
+        }
+
+        .bearo-main > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* HEADER */
+        .bearo-header {
+            min-height: 150px;
+
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+
+            gap: 28px;
+            align-items: center;
+
+            margin-bottom: 16px;
+            padding: 28px 30px;
+
+            background: rgba(250, 248, 245, 0.95);
+
+            border: 1px solid #d8d0c9;
+            border-radius: 4px;
+        }
+
+        .bearo-heading {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 15px;
+            min-width: 0;
+        }
+
+        .bearo-heading-accent {
+            width: 4px;
+            min-height: 76px;
+            flex: 0 0 4px;
+
+            background: #df6e24;
+        }
+
+        .bearo-heading small {
+            display: block;
+            margin-bottom: 6px;
+
+            color: #b76531;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+        }
+
+        .bearo-heading h1 {
+            margin: 0;
+
+            color: #30373c;
+
+            font-size: 38px;
+            font-weight: 700;
+
+            line-height: 1.08;
+            letter-spacing: -1px;
+        }
+
+        .bearo-heading p {
+            max-width: 720px;
+
+            margin: 8px 0 0;
+
+            color: #747b80;
+
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .bearo-status-card {
+            min-width: 220px;
+
+            padding: 15px 17px;
+
+            color: #ffffff;
+            background: #30363a;
+
+            border-left: 4px solid #df6e24;
+            border-radius: 2px;
+        }
+
+        .bearo-status-card small,
+        .bearo-status-card strong {
+            display: block;
+        }
+
+        .bearo-status-card small {
+            margin-bottom: 5px;
+
+            color: rgba(255, 255, 255, 0.50);
+
+            font-size: 9px;
+            font-weight: 700;
+
+            letter-spacing: 1px;
+        }
+
+        .bearo-status-card strong {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* ALERTS */
+        .bearo-alert {
+            margin-bottom: 14px;
+            padding: 12px 14px;
+
+            border-radius: 2px;
+
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .bearo-alert.success {
+            color: #3c704f;
+            background: #edf6ef;
+            border: 1px solid #cdded2;
+        }
+
+        .bearo-alert.error {
+            color: #8a403a;
+            background: #fbefee;
+            border: 1px solid #e7c7c4;
+        }
+
+        /* GRID */
+        .bearo-layout {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.35fr)
+                minmax(310px, 0.65fr);
+
+            gap: 16px;
+            align-items: start;
+        }
+
+        .bearo-left,
+        .bearo-side {
+            display: grid;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        /* CARDS */
+        .bearo-card,
+        .bearo-note {
+            background: rgba(250, 248, 245, 0.96);
+
+            border: 1px solid #d8d0c9;
+            border-radius: 4px;
+        }
+
+        .bearo-card {
+            overflow: hidden;
+        }
+
+        .bearo-card-head {
+            min-height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 12px;
+            padding: 15px 17px;
+
+            border-bottom: 1px solid #ddd6cf;
+        }
+
+        .bearo-card-title {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            min-width: 0;
+        }
+
+        .bearo-card-title > div {
+            min-width: 0;
+        }
+
+        .bearo-card-title strong,
+        .bearo-card-title span {
+            display: block;
+        }
+
+        .bearo-card-title strong {
+            margin-bottom: 3px;
+
+            color: #343b40;
+
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .bearo-card-title span {
+            color: #858b8f;
+
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .bearo-card-body {
+            padding: 17px;
+        }
+
+        /* TOGGLES */
+        .bearo-toggle-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+
+            gap: 16px;
+            align-items: center;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #e1dad4;
+        }
+
+        .bearo-toggle-row:first-child {
+            padding-top: 0;
+        }
+
+        .bearo-toggle-row:last-child {
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .bearo-toggle-copy strong,
+        .bearo-toggle-copy span {
+            display: block;
+        }
+
+        .bearo-toggle-copy strong {
+            margin-bottom: 4px;
+
+            color: #444b50;
+
+            font-size: 13px;
+        }
+
+        .bearo-toggle-copy span {
+            max-width: 610px;
+
+            color: #858c90;
+
+            font-size: 11px;
+            line-height: 1.55;
+        }
+
+        .bearo-switch {
+            position: relative;
+
+            width: 46px;
+            height: 24px;
+        }
+
+        .bearo-switch input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .bearo-switch-track {
+            position: absolute;
+            inset: 0;
+
+            cursor: pointer;
+
+            background: #d8d1ca;
+
+            transition: 0.2s ease;
+        }
+
+        .bearo-switch-track::before {
+            content: "";
+
+            position: absolute;
+            left: 4px;
+            top: 4px;
+
+            width: 16px;
+            height: 16px;
+
+            background: #ffffff;
+
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+
+            transition: 0.2s ease;
+        }
+
+        .bearo-switch input:checked + .bearo-switch-track {
+            background: #df6e24;
+        }
+
+        .bearo-switch input:checked + .bearo-switch-track::before {
+            transform: translateX(22px);
+        }
+
+        /* FIELDS */
+        .bearo-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .bearo-field {
+            min-width: 0;
+            margin-bottom: 14px;
+        }
+
+        .bearo-field:last-child {
+            margin-bottom: 0;
+        }
+
+        .bearo-field label {
+            display: block;
+            margin-bottom: 7px;
+
+            color: #555e64;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 0.7px;
+        }
+
+        .bearo-input,
+        .bearo-textarea {
+            width: 100%;
+            max-width: 100%;
+
+            color: #30373c;
+            background: #fffefa;
+
+            border: 1px solid #cbc3bc;
+            border-radius: 2px;
+
+            outline: none;
+
+            font-size: 13px;
+
+            transition:
+                border-color 0.18s ease,
+                box-shadow 0.18s ease,
+                background 0.18s ease;
+        }
+
+        .bearo-input {
+            height: 44px;
+            padding: 0 12px;
+        }
+
+        .bearo-textarea {
+            min-height: 110px;
+            padding: 10px 12px;
+
+            resize: vertical;
+            line-height: 1.55;
+        }
+
+        .bearo-input:focus,
+        .bearo-textarea:focus {
+            background: #ffffff;
+            border-color: #df6e24;
+
+            box-shadow:
+                0 0 0 3px rgba(223, 110, 36, 0.08);
+        }
+
+        .bearo-field-help {
+            margin-top: 6px;
+
+            color: #92979a;
+
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* PREVIEW */
+        .bearo-preview {
+            overflow: hidden;
+
+            background: #30363a;
+
+            border: 1px solid #252b2f;
+            border-radius: 4px;
+        }
+
+        .bearo-preview-head {
+            min-height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 12px;
+            padding: 12px 14px;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .bearo-preview-profile {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .bearo-avatar {
+            width: 42px;
+            height: 42px;
+            flex: 0 0 42px;
+
+            overflow: hidden;
+
+            background: #ffffff;
+
+            border: 2px solid #df6e24;
+            border-radius: 2px;
+        }
+
+        .bearo-avatar img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .bearo-preview-profile strong,
+        .bearo-preview-profile span {
+            display: block;
+        }
+
+        .bearo-preview-profile strong {
+            margin-bottom: 3px;
+
+            color: #ffffff;
+
+            font-size: 13px;
+        }
+
+        .bearo-preview-profile span {
+            color: rgba(255, 255, 255, 0.52);
+
+            font-size: 10px;
+        }
+
+        .bearo-online {
+            display: flex;
+            align-items: center;
+
+            gap: 6px;
+
+            color: rgba(255, 255, 255, 0.58);
+
+            font-size: 10px;
+        }
+
+        .bearo-online i {
+            width: 6px;
+            height: 6px;
+
+            background: #df6e24;
+            border-radius: 50%;
+        }
+
+        .bearo-preview-body {
+            min-height: 290px;
+            padding: 15px;
+
+            background:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                ),
+                #30363a;
+
+            background-size: 30px 30px;
+        }
+
+        .bearo-preview-label {
+            margin-bottom: 12px;
+
+            color: #e4935d;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            letter-spacing: 1.3px;
+        }
+
+        .preview-msg {
+            width: fit-content;
+            max-width: 87%;
+
+            padding: 9px 10px;
+
+            color: #505960;
+            background: #ffffff;
+
+            border-radius: 2px 8px 8px 8px;
+
+            font-size: 11px;
+            line-height: 1.55;
+        }
+
+        .preview-msg + .preview-msg {
+            margin-top: 10px;
+        }
+
+        .preview-msg.user {
+            margin-left: auto;
+
+            color: #ffffff;
+            background: #df6e24;
+
+            border-radius: 8px 2px 8px 8px;
+        }
+
+        .preview-actions {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .preview-actions span {
+            padding: 6px 8px;
+
+            color: rgba(255, 255, 255, 0.70);
+
+            background: rgba(255, 255, 255, 0.045);
+
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 2px;
+
+            font-size: 9px;
+        }
+
+        /* NOTE */
+        .bearo-note {
+            padding: 15px 16px;
+        }
+
+        .bearo-note strong {
+            display: block;
+            margin-bottom: 7px;
+
+            color: #444b50;
+
+            font-size: 12px;
+        }
+
+        .bearo-note p {
+            margin: 0;
+
+            color: #7e8589;
+
+            font-size: 11px;
+            line-height: 1.55;
+        }
+
+        .bearo-note ul {
+            margin: 9px 0 0;
+            padding-left: 17px;
+
+            color: #858c90;
+
+            font-size: 11px;
+            line-height: 1.65;
+        }
+
+        /* SAVE */
+        .bearo-save-row {
+            display: flex;
+            justify-content: flex-end;
+
+            margin-top: 16px;
+        }
+
+        .bearo-save {
+            min-height: 42px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 16px;
+
+            color: #ffffff;
+            background: #df6e24;
+
+            border: 1px solid #df6e24;
+            border-radius: 2px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.18s ease,
+                border-color 0.18s ease;
+        }
+
+        .bearo-save:hover {
+            background: #c86120;
+            border-color: #c86120;
+        }
+
+        .bearo-save svg {
+            display: none;
+        }
+
+        @media (max-width: 1180px) {
+            .bearo-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .bearo-side {
+                grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .bearo-header {
+                grid-template-columns: 1fr;
+            }
+
+            .bearo-status-card {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .bearo-side {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .bearo-main {
+                padding: 18px 12px 40px;
+            }
+
+            .bearo-header {
+                min-height: auto;
+                padding: 22px 19px;
+            }
+
+            .bearo-heading h1 {
+                font-size: 30px;
+            }
+
+            .bearo-heading p {
+                font-size: 13px;
+            }
+
+            .bearo-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bearo-card-head,
+            .bearo-card-body {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bearo-main::before {
+                animation: none !important;
+            }
+        }

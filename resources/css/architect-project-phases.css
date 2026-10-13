@@ -1,0 +1,2353 @@
+/* =========================================================
+   PROJECT PHASES
+========================================================= */
+
+.project-phases-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.phase-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.phase-page-header > div {
+    width: 100%;
+}
+
+.phase-page-header h2 {
+    margin: 6px 0 8px;
+
+    font-size: 30px;
+    line-height: 1.1;
+
+    font-weight: 800;
+    letter-spacing: -0.6px;
+
+    color: #182230;
+}
+
+.phase-page-header p {
+    max-width: 780px;
+
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.75;
+
+    color: #667085;
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+========================================================= */
+
+.phase-success-message {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px 16px;
+
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+
+    background: #f0fdf4;
+
+    color: #166534;
+}
+
+.phase-message-icon {
+    display: grid;
+    place-items: center;
+
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    border-radius: 9px;
+
+    background: #22c55e;
+
+    color: #ffffff;
+
+    font-weight: 900;
+}
+
+.phase-success-message strong,
+.phase-success-message span {
+    display: block;
+}
+
+.phase-success-message strong {
+    margin-bottom: 2px;
+
+    font-size: 12px;
+}
+
+.phase-success-message span {
+    font-size: 12px;
+
+    color: #4d7257;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+========================================================= */
+
+.phase-error-message {
+    padding: 15px 18px;
+
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+
+    background: #fef2f2;
+
+    color: #991b1b;
+}
+
+.phase-error-message strong {
+    display: block;
+
+    font-size: 12px;
+}
+
+.phase-error-message ul {
+    margin: 8px 0 0 18px;
+    padding: 0;
+}
+
+.phase-error-message li {
+    margin: 3px 0;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PROJECT PROGRESS
+========================================================= */
+
+.phase-progress-dashboard {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 27px 30px;
+
+    border: 1px solid #e7eaee;
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            125deg,
+            #ffffff 0%,
+            #ffffff 70%,
+            #fff8f3 100%
+        );
+
+    box-shadow:
+        0 10px 28px
+        rgba(31, 41, 55, 0.055);
+}
+
+.phase-progress-dashboard::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    top: -135px;
+    right: -120px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(249, 115, 22, 0.06);
+}
+
+.phase-progress-main {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.phase-progress-number {
+    display: flex;
+    align-items: flex-start;
+
+    min-width: 150px;
+
+    padding-right: 25px;
+
+    border-right: 1px solid #eceff2;
+}
+
+.phase-progress-number strong {
+    font-size: 64px;
+    line-height: 0.9;
+
+    font-weight: 900;
+    letter-spacing: -4px;
+
+    color: #f2550c;
+}
+
+.phase-progress-number span {
+    margin: 6px 0 0 4px;
+
+    font-size: 21px;
+
+    font-weight: 900;
+
+    color: #f97316;
+}
+
+.phase-progress-copy > span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+
+    color: #98a2b3;
+}
+
+.phase-progress-copy h3 {
+    margin: 0 0 6px;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    color: #182230;
+}
+
+.phase-progress-copy p {
+    margin: 0;
+
+    font-size: 12px;
+
+    color: #667085;
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.phase-progress-bar {
+    height: 9px;
+
+    margin-top: 24px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #edf0f3;
+}
+
+.phase-progress-bar-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ef4f0b,
+            #f97316,
+            #fba561
+        );
+
+    box-shadow:
+        0 0 14px
+        rgba(249, 115, 22, 0.24);
+
+    transition: width 0.35s ease;
+}
+
+
+/* =========================================================
+   PHASE INFO NOTE
+========================================================= */
+
+.phase-weight-note {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 15px 17px;
+
+    border: 1px solid #fed7aa;
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff8f2,
+            #ffffff
+        );
+}
+
+.phase-weight-note-icon {
+    display: grid;
+    place-items: center;
+
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f2550c,
+            #fb923c
+        );
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.phase-weight-note strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 12px;
+
+    color: #344054;
+}
+
+.phase-weight-note span {
+    display: block;
+
+    font-size: 11px;
+    line-height: 1.6;
+
+    color: #7d695b;
+}
+
+
+/* =========================================================
+   ROADMAP
+========================================================= */
+
+.standard-phase-roadmap {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+
+/* =========================================================
+   PHASE CARD
+========================================================= */
+
+.standard-phase-card {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        86px
+        minmax(0, 1fr);
+
+    overflow: hidden;
+
+    border: 1px solid #e5e9ef;
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 5px 17px
+        rgba(31, 41, 55, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.standard-phase-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 29px
+        rgba(31, 41, 55, 0.07);
+}
+
+
+/* =========================================================
+   PHASE STATES
+========================================================= */
+
+.standard-phase-completed {
+    border-color: #ccebd6;
+
+    border-left: 4px solid #22c55e;
+}
+
+.standard-phase-in_progress {
+    border-color: #fdba74;
+
+    border-left: 4px solid #f97316;
+
+    box-shadow:
+        0 10px 28px
+        rgba(249, 115, 22, 0.09);
+}
+
+.standard-phase-ready {
+    border-left: 4px solid #fb923c;
+}
+
+.standard-phase-locked {
+    border-left: 4px solid #d8dde5;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #fbfcfd
+        );
+}
+
+
+/* =========================================================
+   PHASE NUMBER COLUMN
+========================================================= */
+
+.standard-phase-number {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+
+    padding-top: 27px;
+
+    border-right: 1px solid #edf0f3;
+
+    background: #fafbfc;
+}
+
+.phase-number-circle {
+    position: relative;
+    z-index: 3;
+
+    display: grid;
+    place-items: center;
+
+    width: 42px;
+    height: 42px;
+
+    border: 2px solid #dfe3e8;
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    color: #98a2b3;
+}
+
+.phase-number-circle svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 2.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.standard-phase-completed
+.phase-number-circle {
+    border-color: #22c55e;
+
+    background: #22c55e;
+
+    color: #ffffff;
+}
+
+.standard-phase-in_progress
+.phase-number-circle {
+    border-color: #f97316;
+
+    background: #fff7ed;
+
+    color: #f97316;
+
+    box-shadow:
+        0 0 0 5px
+        rgba(249, 115, 22, 0.08);
+}
+
+.standard-phase-ready
+.phase-number-circle {
+    border-color: #fb923c;
+
+    color: #f97316;
+}
+
+.phase-connector {
+    position: absolute;
+
+    top: 69px;
+    bottom: -500px;
+
+    width: 2px;
+
+    z-index: 1;
+
+    background: #e3e7ec;
+}
+
+.standard-phase-completed
+.phase-connector {
+    background:
+        linear-gradient(
+            180deg,
+            #22c55e,
+            #dce9e0
+        );
+}
+
+
+/* =========================================================
+   PHASE CONTENT
+========================================================= */
+
+.standard-phase-content {
+    padding: 24px;
+}
+
+.standard-phase-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.standard-phase-title {
+    max-width: 760px;
+}
+
+.standard-phase-label-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 8px;
+}
+
+.phase-small-label {
+    font-size: 8px;
+
+    font-weight: 900;
+    letter-spacing: 1.4px;
+
+    color: #98a2b3;
+}
+
+.phase-weight-badge {
+    padding: 4px 8px;
+
+    border: 1px solid #fed7aa;
+    border-radius: 999px;
+
+    background: #fff7ed;
+
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+
+    color: #ea580c;
+}
+
+.standard-phase-title h3 {
+    margin: 0 0 7px;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    color: #1d2939;
+}
+
+.standard-phase-title p {
+    max-width: 720px;
+
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.7;
+
+    color: #667085;
+}
+
+
+/* =========================================================
+   PHASE STATUS
+========================================================= */
+
+.phase-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 7px 11px;
+
+    border-radius: 999px;
+
+    white-space: nowrap;
+
+    font-size: 8px;
+    font-weight: 900;
+}
+
+.phase-status svg {
+    width: 13px;
+    height: 13px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.phase-status-completed {
+    border: 1px solid #bbf7d0;
+
+    background: #f0fdf4;
+
+    color: #15803d;
+}
+
+.phase-status-in_progress {
+    border: 1px solid #fed7aa;
+
+    background: #fff7ed;
+
+    color: #ea580c;
+}
+
+.phase-status-ready {
+    border: 1px solid #fed7aa;
+
+    background: #fffaf6;
+
+    color: #e96517;
+}
+
+.phase-status-locked {
+    border: 1px solid #e4e7ec;
+
+    background: #f8fafc;
+
+    color: #98a2b3;
+}
+
+.current-phase-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #f97316;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(249, 115, 22, 0.12);
+}
+
+
+/* =========================================================
+   PHASE CONTRIBUTION
+========================================================= */
+
+.phase-contribution {
+    display: grid;
+
+    grid-template-columns:
+        195px
+        minmax(0, 1fr);
+
+    align-items: center;
+    gap: 18px;
+
+    margin-top: 21px;
+
+    padding: 13px 0;
+
+    border-top: 1px solid #f0f2f5;
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.phase-contribution-copy span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 7px;
+    font-weight: 900;
+    letter-spacing: 1.1px;
+
+    color: #98a2b3;
+}
+
+.phase-contribution-copy strong {
+    font-size: 11px;
+
+    font-weight: 800;
+
+    color: #475467;
+}
+
+.phase-contribution-track {
+    height: 7px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #edf1f4;
+}
+
+.phase-contribution-fill {
+    height: 100%;
+
+    border-radius: inherit;
+}
+
+.phase-contribution-fill.completed {
+    background:
+        linear-gradient(
+            90deg,
+            #16a34a,
+            #4ade80
+        );
+}
+
+
+/* =========================================================
+   PHASE ACTION AREA
+========================================================= */
+
+.phase-action-area {
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   CURRENT PHASE SUMMARY
+========================================================= */
+
+.phase-current-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 16px;
+
+    border: 1px solid #fed7aa;
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff7ed,
+            #ffffff
+        );
+}
+
+.phase-current-summary span,
+.phase-current-summary strong,
+.phase-current-summary small {
+    display: block;
+}
+
+.phase-current-summary span {
+    margin-bottom: 3px;
+
+    font-size: 7px;
+    font-weight: 900;
+    letter-spacing: 1.1px;
+
+    color: #ea580c;
+}
+
+.phase-current-summary strong {
+    margin-bottom: 2px;
+
+    font-size: 12px;
+
+    color: #344054;
+}
+
+.phase-current-summary small {
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   READY PHASE
+========================================================= */
+
+.phase-ready-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+
+    padding: 14px 16px;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 10px;
+
+    background: #fafbfc;
+}
+
+.phase-ready-area span,
+.phase-ready-area strong {
+    display: block;
+}
+
+.phase-ready-area span {
+    margin-bottom: 3px;
+
+    font-size: 7px;
+    font-weight: 900;
+    letter-spacing: 1.1px;
+
+    color: #98a2b3;
+}
+
+.phase-ready-area strong {
+    font-size: 11px;
+
+    color: #344054;
+}
+
+
+/* =========================================================
+   START PHASE BUTTON
+========================================================= */
+
+.start-phase-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 38px;
+
+    padding: 0 15px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ef4f0b,
+            #f97316
+        );
+
+    color: #ffffff;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 15px
+        rgba(249, 115, 22, 0.2);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.start-phase-button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(249, 115, 22, 0.26);
+}
+
+.start-phase-button svg {
+    width: 14px;
+    height: 14px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   LOCKED PHASE
+========================================================= */
+
+.phase-locked-message {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 13px 15px;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 10px;
+
+    background: #f9fafb;
+}
+
+.phase-lock-icon {
+    display: grid;
+    place-items: center;
+
+    width: 33px;
+    height: 33px;
+
+    flex: 0 0 33px;
+
+    border-radius: 9px;
+
+    background: #eef1f4;
+
+    color: #98a2b3;
+}
+
+.phase-lock-icon svg {
+    width: 16px;
+    height: 16px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.phase-locked-message strong,
+.phase-locked-message span {
+    display: block;
+}
+
+.phase-locked-message strong {
+    margin-bottom: 2px;
+
+    font-size: 10px;
+
+    color: #667085;
+}
+
+.phase-locked-message span {
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   COMPLETED PHASE PROOF
+========================================================= */
+
+.phase-completed-proof {
+    padding: 16px;
+
+    border: 1px solid #bbf7d0;
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0fdf4,
+            #ffffff
+        );
+}
+
+.phase-completed-proof-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+.completed-proof-check {
+    display: grid;
+    place-items: center;
+
+    width: 36px;
+    height: 36px;
+
+    flex: 0 0 36px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    color: #ffffff;
+}
+
+.completed-proof-check svg {
+    width: 18px;
+    height: 18px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.phase-completed-proof-header span,
+.phase-completed-proof-header strong {
+    display: block;
+}
+
+.phase-completed-proof-header span {
+    margin-bottom: 2px;
+
+    font-size: 7px;
+    font-weight: 900;
+    letter-spacing: 1.1px;
+
+    color: #16a34a;
+}
+
+.phase-completed-proof-header strong {
+    font-size: 12px;
+
+    color: #166534;
+}
+
+.completed-proof-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    overflow: hidden;
+
+    border: 1px solid #dcfce7;
+    border-radius: 9px;
+
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.completed-proof-detail {
+    padding: 11px 13px;
+}
+
+.completed-proof-detail + .completed-proof-detail {
+    border-left: 1px solid #dcfce7;
+}
+
+.completed-proof-detail span,
+.completed-proof-detail strong {
+    display: block;
+}
+
+.completed-proof-detail span {
+    margin-bottom: 3px;
+
+    font-size: 7px;
+    font-weight: 900;
+    letter-spacing: 1px;
+
+    color: #98a2b3;
+}
+
+.completed-proof-detail strong {
+    font-size: 9px;
+
+    color: #475467;
+}
+
+.completed-added-progress {
+    color: #16a34a !important;
+}
+
+.completed-note-box {
+    margin-top: 11px;
+
+    padding: 11px 13px;
+
+    border-left: 3px solid #22c55e;
+    border-radius: 0 8px 8px 0;
+
+    background: #ffffff;
+}
+
+.completed-note-box span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 7px;
+    font-weight: 900;
+    letter-spacing: 1.1px;
+
+    color: #98a2b3;
+}
+
+.completed-note-box p {
+    margin: 0;
+
+    font-size: 10px;
+    line-height: 1.65;
+
+    color: #475467;
+}
+
+
+/* =========================================================
+   PHASE MILESTONE SECTION
+========================================================= */
+
+.phase-milestone-section {
+    margin-top: 20px;
+
+    padding: 17px;
+
+    border: 1px solid #edf0f3;
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fafbfc,
+            #ffffff
+        );
+}
+
+.phase-milestone-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+
+    margin-bottom: 14px;
+}
+
+.phase-milestone-header strong {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 13px;
+
+    color: #344054;
+}
+
+.phase-milestone-header small {
+    display: block;
+
+    max-width: 570px;
+
+    margin-top: 3px;
+
+    font-size: 9px;
+    line-height: 1.5;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   ADD MILESTONE BUTTON
+========================================================= */
+
+.add-milestone-button {
+    min-height: 35px;
+
+    padding: 0 13px;
+
+    border: 1px solid #fed7aa;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #ea580c;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.add-milestone-button:hover {
+    transform: translateY(-1px);
+
+    background: #f97316;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MILESTONE LIST
+========================================================= */
+
+.milestone-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   MILESTONE CARD
+========================================================= */
+
+.milestone-card {
+    overflow: hidden;
+
+    border: 1px solid #e6e9ee;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.milestone-card-progress {
+    border-color: #fed7aa;
+
+    box-shadow:
+        0 5px 14px
+        rgba(249, 115, 22, 0.06);
+}
+
+.milestone-card-completed {
+    border-color: #bbf7d0;
+}
+
+
+/* =========================================================
+   MILESTONE HEADER
+========================================================= */
+
+.milestone-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 13px 14px;
+}
+
+.milestone-card-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.milestone-card-title strong {
+    display: block;
+
+    font-size: 11px;
+
+    color: #344054;
+}
+
+.milestone-card-title p {
+    margin: 3px 0;
+
+    font-size: 10px;
+    line-height: 1.5;
+
+    color: #667085;
+}
+
+.milestone-card-title small {
+    display: block;
+
+    font-size: 8px;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   MILESTONE DOT
+========================================================= */
+
+.milestone-dot {
+    width: 8px;
+    height: 8px;
+
+    flex: 0 0 8px;
+
+    margin-top: 4px;
+
+    border-radius: 50%;
+
+    background: #cbd2da;
+}
+
+.milestone-dot-in_progress {
+    background: #f97316;
+
+    box-shadow:
+        0 0 0 3px
+        #ffedd5;
+}
+
+.milestone-dot-completed {
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 3px
+        #dcfce7;
+}
+
+
+/* =========================================================
+   MILESTONE STATUS
+========================================================= */
+
+.milestone-status {
+    padding: 5px 8px;
+
+    border-radius: 999px;
+
+    white-space: nowrap;
+
+    font-size: 7px;
+    font-weight: 900;
+}
+
+.milestone-status-pending {
+    background: #f1f3f5;
+
+    color: #667085;
+}
+
+.milestone-status-in_progress {
+    background: #fff7ed;
+
+    color: #ea580c;
+}
+
+.milestone-status-completed {
+    background: #f0fdf4;
+
+    color: #15803d;
+}
+
+
+/* =========================================================
+   MILESTONE ACTIONS
+========================================================= */
+
+.milestone-action-area {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+    padding: 10px 14px;
+
+    border-top: 1px solid #eef1f4;
+
+    background: #fafbfc;
+}
+
+.milestone-start-button,
+.milestone-complete-button {
+    min-height: 34px;
+
+    padding: 0 13px;
+
+    border: 0;
+    border-radius: 8px;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.milestone-start-button {
+    background: #344054;
+
+    color: #ffffff;
+}
+
+.milestone-start-button:hover {
+    transform: translateY(-1px);
+
+    background: #1d2939;
+}
+
+.milestone-complete-button {
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 12px
+        rgba(34, 197, 94, 0.17);
+}
+
+.milestone-complete-button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 16px
+        rgba(34, 197, 94, 0.24);
+}
+
+
+/* =========================================================
+   COMPLETED MILESTONE PROOF AREA
+========================================================= */
+
+.milestone-proof-area {
+    padding: 14px;
+
+    border-top: 1px solid #dcfce7;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8fff9,
+            #ffffff
+        );
+}
+
+.milestone-proof-meta {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    overflow: hidden;
+
+    border: 1px solid #dcfce7;
+    border-radius: 8px;
+
+    background: #ffffff;
+}
+
+.milestone-proof-meta > div {
+    padding: 10px 12px;
+}
+
+.milestone-proof-meta > div + div {
+    border-left: 1px solid #dcfce7;
+}
+
+.milestone-proof-meta span,
+.milestone-proof-meta strong {
+    display: block;
+}
+
+.milestone-proof-meta span {
+    margin-bottom: 3px;
+
+    font-size: 7px;
+    font-weight: 900;
+    letter-spacing: 1px;
+
+    color: #98a2b3;
+}
+
+.milestone-proof-meta strong {
+    font-size: 9px;
+
+    color: #475467;
+}
+
+
+/* =========================================================
+   COMPLETION REPORT
+========================================================= */
+
+.milestone-report-box {
+    margin-top: 10px;
+
+    padding: 11px 12px;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+
+    background: #ffffff;
+}
+
+.milestone-report-box span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 7px;
+    font-weight: 900;
+    letter-spacing: 1.1px;
+
+    color: #98a2b3;
+}
+
+.milestone-report-box p {
+    margin: 0;
+
+    font-size: 10px;
+    line-height: 1.65;
+
+    color: #475467;
+}
+
+
+/* =========================================================
+   PROOF FILE
+========================================================= */
+
+.milestone-proof-file {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-top: 10px;
+
+    padding: 11px 12px;
+
+    border: 1px solid #dcfce7;
+    border-radius: 8px;
+
+    background: #ffffff;
+}
+
+.milestone-proof-file span,
+.milestone-proof-file strong {
+    display: block;
+}
+
+.milestone-proof-file span {
+    margin-bottom: 3px;
+
+    font-size: 7px;
+    font-weight: 900;
+    letter-spacing: 1px;
+
+    color: #98a2b3;
+}
+
+.milestone-proof-file strong {
+    max-width: 500px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-size: 9px;
+
+    color: #475467;
+}
+
+.milestone-proof-file a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 32px;
+
+    padding: 0 11px;
+
+    flex: 0 0 auto;
+
+    border: 1px solid #bbf7d0;
+    border-radius: 7px;
+
+    background: #f0fdf4;
+
+    text-decoration: none;
+
+    color: #15803d;
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.milestone-proof-file a:hover {
+    background: #22c55e;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   EMPTY MILESTONE
+========================================================= */
+
+.milestone-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+
+    padding: 15px;
+
+    border: 1px dashed #d0d5dd;
+    border-radius: 9px;
+
+    background: rgba(255, 255, 255, 0.8);
+
+    text-align: center;
+}
+
+.milestone-empty span {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    color: #667085;
+}
+
+.milestone-empty small {
+    font-size: 8px;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   PHASE FINAL COMPLETION
+========================================================= */
+
+.phase-final-completion {
+    margin-top: 15px;
+}
+
+.phase-completion-blocked {
+    padding: 13px 14px;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 9px;
+
+    background: #f8fafc;
+}
+
+.phase-completion-blocked strong,
+.phase-completion-blocked span {
+    display: block;
+}
+
+.phase-completion-blocked strong {
+    margin-bottom: 3px;
+
+    font-size: 10px;
+
+    color: #475467;
+}
+
+.phase-completion-blocked span {
+    font-size: 9px;
+    line-height: 1.5;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   FINAL COMPLETION FORM
+========================================================= */
+
+.phase-final-completion-form {
+    padding: 15px;
+
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0fdf4,
+            #ffffff
+        );
+}
+
+.phase-final-note label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    color: #344054;
+}
+
+.phase-final-note label span {
+    color: #ef4444;
+}
+
+.phase-final-note textarea {
+    width: 100%;
+
+    min-height: 100px;
+
+    padding: 11px 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+
+    outline: none;
+    resize: vertical;
+
+    background: #ffffff;
+
+    color: #344054;
+
+    font: inherit;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.phase-final-note textarea:focus {
+    border-color: #22c55e;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(34, 197, 94, 0.08);
+}
+
+.phase-final-note small {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 8px;
+
+    color: #98a2b3;
+}
+
+.phase-final-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+
+    margin-top: 14px;
+
+    padding-top: 13px;
+
+    border-top: 1px solid #dcfce7;
+}
+
+.phase-final-submit strong,
+.phase-final-submit span {
+    display: block;
+}
+
+.phase-final-submit strong {
+    margin-bottom: 2px;
+
+    font-size: 10px;
+
+    color: #166534;
+}
+
+.phase-final-submit span {
+    font-size: 8px;
+
+    color: #6b8b73;
+}
+
+
+/* =========================================================
+   COMPLETE PHASE BUTTON
+========================================================= */
+
+.complete-phase-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 38px;
+
+    padding: 0 15px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+
+    color: #ffffff;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 14px
+        rgba(34, 197, 94, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.complete-phase-button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(34, 197, 94, 0.25);
+}
+
+.complete-phase-button svg {
+    width: 14px;
+    height: 14px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 2.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.phase-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2500;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.phase-modal.show {
+    display: flex;
+}
+
+.phase-modal-backdrop {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(15, 23, 42, 0.62);
+
+    backdrop-filter: blur(4px);
+}
+
+.phase-modal-card {
+    position: relative;
+    z-index: 2;
+
+    width: min(610px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 25px 70px
+        rgba(15, 23, 42, 0.28);
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.phase-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+
+    margin-bottom: 21px;
+}
+
+.phase-modal-header h3 {
+    margin: 5px 0;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    color: #1d2939;
+}
+
+.phase-modal-header p {
+    margin: 0;
+
+    font-size: 11px;
+    line-height: 1.5;
+
+    color: #667085;
+}
+
+.phase-modal-close {
+    display: grid;
+    place-items: center;
+
+    width: 35px;
+    height: 35px;
+
+    flex: 0 0 35px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: #f2f4f7;
+
+    color: #475467;
+
+    font-size: 21px;
+
+    cursor: pointer;
+}
+
+.phase-modal-close:hover {
+    background: #fff7ed;
+
+    color: #f97316;
+}
+
+
+/* =========================================================
+   MODAL FORM
+========================================================= */
+
+.phase-form-group {
+    margin-bottom: 15px;
+}
+
+.phase-form-group label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    color: #344054;
+}
+
+.phase-form-group label span {
+    color: #ef4444;
+}
+
+.phase-form-group input,
+.phase-form-group select,
+.phase-form-group textarea {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #344054;
+
+    font: inherit;
+    font-size: 10px;
+}
+
+.phase-form-group textarea {
+    resize: vertical;
+}
+
+.phase-form-group input:focus,
+.phase-form-group select:focus,
+.phase-form-group textarea:focus {
+    border-color: #f97316;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(249, 115, 22, 0.09);
+}
+
+.phase-form-group small {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 8px;
+
+    color: #98a2b3;
+}
+
+.phase-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 13px;
+}
+
+
+/* =========================================================
+   PROOF WARNING
+========================================================= */
+
+.milestone-proof-warning {
+    padding: 12px 13px;
+
+    border: 1px solid #fed7aa;
+    border-radius: 8px;
+
+    background: #fff7ed;
+}
+
+.milestone-proof-warning strong,
+.milestone-proof-warning span {
+    display: block;
+}
+
+.milestone-proof-warning strong {
+    margin-bottom: 3px;
+
+    font-size: 9px;
+
+    color: #9a3412;
+}
+
+.milestone-proof-warning span {
+    font-size: 8px;
+    line-height: 1.5;
+
+    color: #b45309;
+}
+
+
+/* =========================================================
+   MODAL ACTIONS
+========================================================= */
+
+.phase-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+    margin-top: 20px;
+}
+
+.phase-cancel-button,
+.phase-save-button {
+    min-height: 39px;
+
+    padding: 0 16px;
+
+    border: 0;
+    border-radius: 8px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.phase-cancel-button {
+    background: #f2f4f7;
+
+    color: #475467;
+}
+
+.phase-cancel-button:hover {
+    background: #e4e7ec;
+}
+
+.phase-save-button {
+    background:
+        linear-gradient(
+            135deg,
+            #ef4f0b,
+            #f97316
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 13px
+        rgba(249, 115, 22, 0.18);
+}
+
+.phase-save-button:hover {
+    box-shadow:
+        0 7px 17px
+        rgba(249, 115, 22, 0.24);
+}
+
+
+/* =========================================================
+   MODAL BODY LOCK
+========================================================= */
+
+body.modal-open {
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .phase-progress-main {
+        align-items: flex-start;
+    }
+
+    .standard-phase-card {
+        grid-template-columns:
+            68px
+            minmax(0, 1fr);
+    }
+
+    .standard-phase-content {
+        padding: 20px;
+    }
+
+    .standard-phase-top {
+        flex-direction: column;
+    }
+
+    .phase-contribution {
+        grid-template-columns: 1fr;
+    }
+
+    .phase-ready-area {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .start-phase-button {
+        width: 100%;
+    }
+
+    .phase-milestone-header {
+        flex-direction: column;
+    }
+
+    .add-milestone-button {
+        width: 100%;
+    }
+
+    .phase-final-submit {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .complete-phase-button {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+    .phase-page-header h2 {
+        font-size: 25px;
+    }
+
+    .phase-progress-dashboard {
+        padding: 21px;
+    }
+
+    .phase-progress-main {
+        flex-direction: column;
+    }
+
+    .phase-progress-number {
+        min-width: 0;
+
+        padding-right: 0;
+
+        border-right: 0;
+    }
+
+    .phase-progress-number strong {
+        font-size: 53px;
+    }
+
+    .standard-phase-card {
+        grid-template-columns: 1fr;
+    }
+
+    .standard-phase-number {
+        justify-content: flex-start;
+
+        padding: 14px 17px;
+
+        border-right: 0;
+        border-bottom: 1px solid #edf0f3;
+    }
+
+    .phase-connector {
+        display: none;
+    }
+
+    .standard-phase-content {
+        padding: 17px;
+    }
+
+    .standard-phase-title h3 {
+        font-size: 18px;
+    }
+
+    .phase-status {
+        align-self: flex-start;
+    }
+
+    .completed-proof-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .completed-proof-detail
+    +
+    .completed-proof-detail {
+        border-left: 0;
+
+        border-top: 1px solid #dcfce7;
+    }
+
+    .milestone-card-header {
+        flex-direction: column;
+    }
+
+    .milestone-proof-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .milestone-proof-meta > div + div {
+        border-left: 0;
+
+        border-top: 1px solid #dcfce7;
+    }
+
+    .milestone-proof-file {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .milestone-proof-file strong {
+        max-width: 100%;
+    }
+
+    .milestone-proof-file a {
+        width: 100%;
+    }
+
+    .milestone-action-area {
+        flex-direction: column;
+    }
+
+    .milestone-start-button,
+    .milestone-complete-button {
+        width: 100%;
+    }
+
+    .phase-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .phase-modal-card {
+        padding: 20px;
+    }
+
+    .phase-modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .phase-cancel-button,
+    .phase-save-button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,915 @@
+/* =========================================================
+   EDIT ARCHITECT
+   FORMAL ADMIN REDESIGN
+========================================================= */
+
+.edit-page {
+    max-width: 1480px;
+
+    margin: 0 auto;
+
+    padding:
+        22px
+        20px
+        55px;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.edit-topbar {
+    min-height: 78px;
+
+    margin:
+        16px
+        20px
+        0;
+
+    padding:
+        13px
+        18px;
+
+    background:
+        rgba(250, 248, 245, 0.93);
+
+    border:
+        1px solid
+        #d8d0c9;
+
+    border-left:
+        4px solid
+        #df6e24;
+
+    border-radius: 4px;
+
+    box-shadow:
+        0 6px 18px
+        rgba(49, 43, 38, 0.04);
+
+    backdrop-filter:
+        blur(16px);
+}
+
+.edit-topbar-copy {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.edit-topbar-copy > span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #c56a31;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1.55px;
+}
+
+.edit-topbar-copy h1 {
+    margin: 0;
+
+    color: #30373c;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+}
+
+.edit-topbar-user {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.edit-topbar-user > div:first-child {
+    text-align: right;
+}
+
+.edit-topbar-user span {
+    display: block;
+
+    color: #9b948f;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.edit-topbar-user strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #50575c;
+
+    font-size: 12px;
+}
+
+.edit-topbar-avatar {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ffffff;
+
+    background:
+        #df6e24;
+
+    border-radius: 2px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
+.edit-page-heading {
+    min-height: 165px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 18px;
+
+    padding:
+        30px
+        34px;
+
+    background:
+        rgba(250, 248, 245, 0.95);
+
+    border:
+        1px solid
+        #d8d0c9;
+
+    border-radius: 4px;
+}
+
+.edit-page-code {
+    color: #b17752;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1.65px;
+}
+
+.edit-page-heading h2 {
+    margin:
+        7px
+        0
+        7px;
+
+    color: #2f363b;
+
+    font-size: 36px;
+    font-weight: 700;
+
+    letter-spacing: -1.15px;
+}
+
+.edit-page-heading p {
+    max-width: 680px;
+
+    margin: 0;
+
+    color: #757d82;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+.back-btn {
+    min-height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding:
+        0
+        14px;
+
+    color: #5d656a;
+
+    background:
+        transparent;
+
+    border:
+        1px solid
+        #cfc6be;
+
+    border-radius: 2px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        color 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+.back-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.back-btn:hover {
+    color: #c95f1d;
+
+    background: #f4eee9;
+
+    border-color: #d99a70;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.edit-error {
+    min-height: 70px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 13px;
+
+    margin-bottom: 18px;
+
+    padding:
+        14px
+        17px;
+
+    color: #8d3d39;
+
+    background:
+        #fbefee;
+
+    border:
+        1px solid
+        #e7c7c4;
+
+    border-radius: 3px;
+}
+
+.error-bar {
+    width: 3px;
+    min-height: 42px;
+
+    background: #aa514b;
+}
+
+.edit-error strong {
+    font-size: 12px;
+}
+
+.edit-error ul {
+    margin:
+        7px
+        0
+        0;
+
+    padding-left: 18px;
+}
+
+.edit-error li {
+    margin:
+        3px
+        0;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   WORKSPACE
+========================================================= */
+
+.edit-workspace {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.35fr)
+        minmax(300px, 0.65fr);
+
+    gap: 18px;
+}
+
+.edit-form-panel,
+.architect-account-card,
+.account-note {
+    background:
+        rgba(250, 248, 245, 0.95);
+
+    border:
+        1px solid
+        #d8d0c9;
+
+    border-radius: 4px;
+}
+
+
+/* FORM PANEL */
+
+.edit-form-panel {
+    padding:
+        27px
+        28px;
+}
+
+.panel-heading {
+    margin-bottom: 25px;
+
+    padding-bottom: 18px;
+
+    border-bottom:
+        1px solid
+        #ddd6cf;
+}
+
+.panel-heading > span {
+    display: block;
+
+    color: #c56a31;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1.45px;
+}
+
+.panel-heading h3 {
+    margin:
+        5px
+        0
+        5px;
+
+    color: #343b40;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    letter-spacing: -0.4px;
+}
+
+.panel-heading p {
+    margin: 0;
+
+    color: #858b8f;
+
+    font-size: 12px;
+}
+
+.edit-form {
+    width: 100%;
+}
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        22px
+        18px;
+}
+
+.form-group {
+    margin: 0;
+}
+
+.form-group-full {
+    grid-column:
+        1 / -1;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #444c52;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-group label span {
+    color: #df6e24;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    min-height: 48px;
+
+    padding:
+        0
+        13px;
+
+    color: #343b40;
+
+    background:
+        #fffefa;
+
+    border:
+        1px solid
+        #cfc8c1;
+
+    border-radius: 2px;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group input::placeholder {
+    color: #aaa39d;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+    border-color: #bab0a8;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #df6e24;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(223, 110, 36, 0.08);
+}
+
+.form-group small {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #8b9195;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+.input-error {
+    margin:
+        6px
+        0
+        0;
+
+    color: #b3433c;
+
+    font-size: 11px;
+}
+
+
+/* ACTIONS */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 9px;
+
+    margin-top: 28px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid
+        #ddd6cf;
+}
+
+.cancel-btn,
+.save-btn {
+    min-height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        0
+        16px;
+
+    border-radius: 2px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.cancel-btn {
+    color: #60686d;
+
+    background:
+        transparent;
+
+    border:
+        1px solid
+        #cdc4bd;
+}
+
+.cancel-btn:hover {
+    background: #f2ede8;
+}
+
+.save-btn {
+    color: #ffffff;
+
+    background: #df6e24;
+
+    border:
+        1px solid
+        #df6e24;
+}
+
+.save-btn:hover {
+    background: #c86120;
+
+    border-color: #c86120;
+}
+
+
+/* =========================================================
+   SIDE PANEL
+========================================================= */
+
+.edit-side-panel {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.architect-account-card {
+    position: relative;
+
+    min-height: 255px;
+
+    padding:
+        25px;
+
+    overflow: hidden;
+}
+
+.architect-account-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #df6e24 0%,
+            #df6e24 35%,
+            rgba(223, 110, 36, 0.17) 35%,
+            rgba(223, 110, 36, 0.17) 100%
+        );
+}
+
+.account-card-label {
+    color: #9f765c;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+}
+
+.account-avatar {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 22px;
+
+    color: #ffffff;
+
+    background:
+        #d87431;
+
+    border-radius: 2px;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.architect-account-card h3 {
+    margin:
+        13px
+        0
+        5px;
+
+    color: #353c41;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.architect-account-card > p {
+    margin: 0;
+
+    overflow-wrap: anywhere;
+
+    color: #7e8589;
+
+    font-size: 11px;
+}
+
+.account-status-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 23px;
+
+    padding-top: 17px;
+
+    border-top:
+        1px solid
+        #ddd6cf;
+}
+
+.account-status-line > span {
+    color: #96908b;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.account-status-line strong {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.account-status-line strong i {
+    width: 6px;
+    height: 6px;
+
+    display: block;
+
+    border-radius: 50%;
+}
+
+.status-active {
+    color: #447b57;
+}
+
+.status-active i {
+    background: #4d9b67;
+}
+
+.status-inactive {
+    color: #767d81;
+}
+
+.status-inactive i {
+    background: #979da1;
+}
+
+.status-suspended {
+    color: #9e6b3d;
+}
+
+.status-suspended i {
+    background: #c58a52;
+}
+
+
+/* NOTE */
+
+.account-note {
+    display: flex;
+
+    gap: 12px;
+
+    padding:
+        18px;
+
+    background:
+        #f1ece7;
+}
+
+.note-icon {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #c96421;
+
+    background:
+        #fffdfa;
+
+    border:
+        1px solid
+        #d9cfc7;
+
+    border-radius: 2px;
+}
+
+.note-icon svg {
+    width: 19px;
+    height: 19px;
+}
+
+.account-note strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #424a4f;
+
+    font-size: 12px;
+}
+
+.account-note p {
+    margin: 0;
+
+    color: #767e83;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .edit-workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .edit-side-panel {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .edit-topbar {
+        min-height: 70px;
+
+        margin:
+            10px
+            10px
+            0;
+
+        padding:
+            11px
+            12px;
+    }
+
+    .edit-topbar-copy > span {
+        display: none;
+    }
+
+    .edit-topbar-copy h1 {
+        font-size: 20px;
+    }
+
+    .edit-topbar-user > div:first-child {
+        display: none;
+    }
+
+    .edit-page {
+        padding:
+            16px
+            10px
+            88px;
+    }
+
+    .edit-page-heading {
+        min-height: auto;
+
+        align-items: flex-start;
+        flex-direction: column;
+
+        padding:
+            25px
+            21px;
+    }
+
+    .edit-page-heading h2 {
+        font-size: 30px;
+    }
+
+    .back-btn {
+        width: 100%;
+    }
+
+    .edit-form-panel {
+        padding:
+            22px
+            20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group-full {
+        grid-column: auto;
+    }
+
+    .edit-side-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .cancel-btn,
+    .save-btn {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 430px) {
+
+    .edit-page-heading h2 {
+        font-size: 27px;
+    }
+
+    .edit-form-panel {
+        padding:
+            19px
+            16px;
+    }
+
+}

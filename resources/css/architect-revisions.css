@@ -1,0 +1,2563 @@
+/* =========================================================
+   ARCHITECT REVISIONS
+   FINAL PAGE DESIGN
+   Revision content only.
+   Sidebar / Topbar remain controlled by architect-dashboard.css
+========================================================= */
+
+
+/* =========================================================
+   PAGE BASE
+========================================================= */
+
+.revisions-page {
+    min-height: calc(100vh - 110px);
+
+    padding: 34px 36px 55px;
+
+    background:
+        radial-gradient(
+            circle at 95% 8%,
+            rgba(249, 115, 22, 0.07),
+            transparent 280px
+        ),
+        linear-gradient(
+            180deg,
+            #f5f3f0 0%,
+            #f3f2ef 100%
+        );
+
+    color: #25303d;
+}
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
+.revisions-page .revisions-page-head {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 32px;
+
+    margin-bottom: 28px;
+
+    padding: 24px 26px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff 0%,
+            #fffaf6 68%,
+            #fff2e8 100%
+        );
+
+    border: 1px solid #e5ded8;
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 24px rgba(38, 45, 54, 0.05);
+}
+
+.revisions-page .revisions-page-head::after {
+    content: "";
+
+    position: absolute;
+
+    width: 160px;
+    height: 160px;
+
+    right: -55px;
+    top: -70px;
+
+    border-radius: 50%;
+
+    background: rgba(249, 115, 22, 0.08);
+
+    pointer-events: none;
+}
+
+
+/* HEADING LEFT */
+
+.revisions-page .revisions-heading {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    min-width: 0;
+}
+
+.revisions-page .revisions-heading-icon {
+    width: 54px;
+    height: 54px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff2e8,
+            #ffe3cf
+        );
+
+    border: 1px solid #f5cfb3;
+    border-radius: 14px;
+
+    color: #ef6f16;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        0 5px 13px rgba(128, 77, 40, 0.07);
+}
+
+.revisions-page .revisions-heading-icon svg {
+    width: 25px;
+    height: 25px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+}
+
+.revisions-page .revisions-overline {
+    margin: 0 0 5px;
+
+    color: #ef711a;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.revisions-page .revisions-heading h2 {
+    margin: 0;
+
+    color: #26313c;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.35px;
+}
+
+.revisions-page .revisions-description {
+    max-width: 620px;
+
+    margin: 8px 0 0;
+
+    color: #75808b;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   COUNTERS
+========================================================= */
+
+.revisions-page .revisions-counts {
+    position: relative;
+
+    z-index: 2;
+
+    min-width: 365px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    border: 1px solid #e5dfd8;
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 14px rgba(34, 42, 50, 0.035);
+}
+
+.revisions-page .revision-count-item {
+    position: relative;
+
+    min-height: 74px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 12px;
+
+    text-align: center;
+}
+
+.revisions-page .revision-count-item:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: 17px;
+    bottom: 17px;
+
+    width: 1px;
+
+    background: #ebe6e1;
+}
+
+.revisions-page .revision-count-item strong {
+    display: block;
+
+    color: #2b3642;
+
+    font-size: 22px;
+    font-weight: 750;
+
+    line-height: 1;
+}
+
+.revisions-page .revision-count-item span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #8b949d;
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.revisions-page .count-pending strong {
+    color: #c78418;
+}
+
+.revisions-page .count-approved strong {
+    color: #32835b;
+}
+
+.revisions-page .count-complete strong {
+    color: #4777ae;
+}
+
+
+/* =========================================================
+   PROJECT CONTROLS
+========================================================= */
+
+.revisions-page .revisions-controls {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 22px;
+
+    margin-bottom: 15px;
+
+    padding: 0 3px;
+}
+
+.revisions-page .revisions-section-label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #ed711d;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+.revisions-page .revisions-controls h3 {
+    margin: 0;
+
+    color: #303a45;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.revisions-page .revisions-control-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.revisions-page .revision-search {
+    width: 230px;
+    height: 39px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 12px;
+
+    background: #ffffff;
+
+    border: 1px solid #ded9d3;
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 9px rgba(38, 45, 52, 0.025);
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.revisions-page .revision-search:focus-within {
+    border-color: #f0a26a;
+
+    box-shadow:
+        0 0 0 3px rgba(249, 115, 22, 0.08);
+}
+
+.revisions-page .revision-search svg {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    fill: none;
+    stroke: #7f8994;
+    stroke-width: 1.8;
+}
+
+.revisions-page .revision-search input {
+    width: 100%;
+
+    padding: 0;
+
+    border: 0;
+    outline: none;
+
+    background: transparent;
+
+    color: #394551;
+
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.revisions-page .revision-search input::placeholder {
+    color: #a1a7ae;
+}
+
+
+/* SORT */
+
+.revisions-page #revisionSort {
+    min-width: 145px;
+    height: 39px;
+
+    padding: 0 32px 0 12px;
+
+    border: 1px solid #ded9d3;
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #4a5561;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.revisions-page #revisionSort:focus {
+    border-color: #f0a26a;
+
+    box-shadow:
+        0 0 0 3px rgba(249, 115, 22, 0.08);
+}
+
+
+/* =========================================================
+   PROJECT LIST
+========================================================= */
+
+.revisions-page .revisions-project-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   PROJECT CARD
+========================================================= */
+
+.revisions-page .revision-project-card {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(230px, 0.9fr)
+        minmax(280px, 1.3fr)
+        minmax(300px, 1fr);
+
+    column-gap: 22px;
+    row-gap: 15px;
+
+    align-items: center;
+
+    padding: 20px 21px 16px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            105deg,
+            #ffffff 0%,
+            #ffffff 77%,
+            #fffaf6 100%
+        );
+
+    border: 1px solid #e2ded8;
+    border-radius: 17px;
+
+    box-shadow:
+        0 7px 20px rgba(32, 39, 47, 0.045);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.revisions-page .revision-project-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 20px;
+    bottom: 20px;
+
+    width: 4px;
+
+    border-radius: 0 8px 8px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ff9a52,
+            #f97316
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.2s ease;
+}
+
+.revisions-page .revision-project-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #efc5a7;
+
+    box-shadow:
+        0 13px 30px rgba(39, 46, 53, 0.075);
+}
+
+.revisions-page .revision-project-card:hover::before {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   PROJECT IDENTITY
+========================================================= */
+
+.revisions-page .revision-project-identity {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.revisions-page .revision-project-thumb {
+    width: 72px;
+    height: 72px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    background: #eee9e4;
+
+    border: 1px solid #e7ded6;
+    border-radius: 13px;
+}
+
+.revisions-page .revision-project-thumb img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.revisions-page .revision-project-thumb-fallback {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff2e8,
+            #ffe4d1
+        );
+
+    color: #e66d18;
+
+    font-size: 25px;
+    font-weight: 750;
+}
+
+.revisions-page .revision-project-name {
+    min-width: 0;
+}
+
+.revisions-page .revision-project-name > span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #e66f1e;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.9px;
+}
+
+.revisions-page .revision-project-name h3 {
+    overflow: hidden;
+
+    margin: 0;
+
+    color: #2b3641;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.revisions-page .revision-project-name p {
+    margin: 5px 0 0;
+
+    color: #858e98;
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   LATEST CLIENT REQUEST
+========================================================= */
+
+.revisions-page .revision-project-request {
+    position: relative;
+
+    min-width: 0;
+
+    padding: 13px 15px 13px 17px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #faf8f5,
+            #fdfbf9
+        );
+
+    border: 1px solid #ebe5df;
+    border-radius: 11px;
+}
+
+.revisions-page .revision-project-request::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+
+    width: 3px;
+
+    background: #f97316;
+
+    border-radius: 0 6px 6px 0;
+}
+
+.revisions-page .revision-project-request > span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #a28773;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 0.9px;
+}
+
+.revisions-page .revision-project-request p {
+    display: -webkit-box;
+
+    overflow: hidden;
+
+    margin: 0;
+
+    color: #606c77;
+
+    font-size: 11px;
+    line-height: 1.65;
+
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
+/* =========================================================
+   STATUS CARDS
+========================================================= */
+
+.revisions-page .revision-project-statuses {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 8px;
+}
+
+.revisions-page .revision-status-pill {
+    position: relative;
+
+    min-height: 64px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 9px 11px;
+
+    overflow: hidden;
+
+    border: 1px solid transparent;
+    border-radius: 11px;
+}
+
+.revisions-page .revision-status-pill::after {
+    content: "";
+
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    right: -17px;
+    bottom: -20px;
+
+    border-radius: 50%;
+
+    background: currentColor;
+
+    opacity: 0.06;
+}
+
+.revisions-page .revision-status-pill strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 18px;
+    font-weight: 750;
+
+    line-height: 1;
+}
+
+.revisions-page .revision-status-pill span {
+    font-size: 9px;
+    font-weight: 650;
+}
+
+.revisions-page .revision-status-pill.pending {
+    background: #fff7e4;
+
+    border-color: #f4dfae;
+
+    color: #b87913;
+}
+
+.revisions-page .revision-status-pill.approved {
+    background: #edf8f1;
+
+    border-color: #cfe8d8;
+
+    color: #337a57;
+}
+
+.revisions-page .revision-status-pill.implemented {
+    background: #edf4fb;
+
+    border-color: #d1e1f1;
+
+    color: #4776aa;
+}
+
+
+/* =========================================================
+   PROJECT FOOTER
+========================================================= */
+
+.revisions-page .revision-project-footer {
+    grid-column: 1 / -1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid #eee9e4;
+}
+
+.revisions-page .revision-project-meta {
+    display: flex;
+    align-items: center;
+
+    gap: 38px;
+}
+
+.revisions-page .revision-project-meta > div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.revisions-page .revision-project-meta span {
+    color: #9b9fa4;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+}
+
+.revisions-page .revision-project-meta strong {
+    color: #4c5762;
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.revisions-page .revision-open-button {
+    min-height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 0 13px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #fff8f3,
+            #fff1e7
+        );
+
+    border: 1px solid #f1c6a7;
+    border-radius: 9px;
+
+    color: #df6d1d;
+
+    font-size: 10px;
+    font-weight: 750;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.revisions-page .revision-open-button:hover {
+    transform: translateY(-1px);
+
+    background: #ffeada;
+
+    box-shadow:
+        0 4px 10px rgba(142, 82, 40, 0.08);
+}
+
+.revisions-page .revision-open-button svg {
+    width: 15px;
+    height: 15px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.revisions-page .revisions-empty {
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 30px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #fff9f5
+        );
+
+    border: 1px dashed #dfd5cd;
+    border-radius: 17px;
+}
+
+.revisions-page .revisions-empty-icon {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    background: #fff0e5;
+
+    border-radius: 15px;
+
+    color: #e66f20;
+}
+
+.revisions-page .revisions-empty-icon svg {
+    width: 28px;
+    height: 28px;
+
+    fill: none;
+    stroke: currentColor;
+}
+
+.revisions-page .revisions-empty h3 {
+    margin: 0 0 7px;
+
+    color: #323c47;
+
+    font-size: 18px;
+}
+
+.revisions-page .revisions-empty p {
+    max-width: 360px;
+
+    margin: 0;
+
+    color: #818b95;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   DRAWER LAYER
+========================================================= */
+
+.revision-drawer-layer {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 16px;
+
+    background: rgba(37, 43, 50, 0.27);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.revision-drawer-backdrop {
+    position: absolute;
+
+    inset: 0;
+}
+
+
+/* =========================================================
+   DRAWER PANEL
+========================================================= */
+
+.revision-drawer-panel {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(610px, calc(100vw - 38px));
+    height: calc(100vh - 32px);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #faf8f5
+        );
+
+    border: 1px solid #ded9d2;
+    border-radius: 20px;
+
+    box-shadow:
+        -16px 24px 58px rgba(27, 33, 39, 0.19);
+
+    animation: revisionsDrawerIn 0.23s ease;
+}
+
+@keyframes revisionsDrawerIn {
+
+    from {
+        opacity: 0;
+        transform: translateX(34px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+
+/* =========================================================
+   DRAWER HEADER
+========================================================= */
+
+.revision-drawer-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    padding: 21px 22px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff,
+            #fff8f3
+        );
+
+    border-bottom: 1px solid #e9e4de;
+}
+
+.revision-drawer-header > div > span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #e76f1d;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+.revision-drawer-header h2 {
+    margin: 0;
+
+    color: #2c3641;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.revision-drawer-header p {
+    margin: 4px 0 0;
+
+    color: #8e969e;
+
+    font-size: 10px;
+}
+
+.revision-drawer-x {
+    width: 35px;
+    height: 35px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border: 1px solid #e3ded8;
+    border-radius: 9px;
+
+    color: #6e7882;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.revision-drawer-x:hover {
+    background: #fff0e5;
+
+    border-color: #efc4a7;
+
+    color: #e56f1e;
+}
+
+.revision-drawer-x svg {
+    width: 16px;
+    height: 16px;
+
+    fill: none;
+    stroke: currentColor;
+}
+
+
+/* =========================================================
+   DRAWER TABS
+========================================================= */
+
+.revision-drawer-tabs {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+
+    padding: 10px 18px 0;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e8e4de;
+}
+
+.revision-drawer-tabs a {
+    position: relative;
+
+    padding: 10px 12px 12px;
+
+    color: #858e97;
+
+    font-size: 10px;
+    font-weight: 650;
+
+    text-decoration: none;
+
+    transition: color 0.18s ease;
+}
+
+.revision-drawer-tabs a:hover {
+    color: #e17120;
+}
+
+.revision-drawer-tabs a.active {
+    color: #df6d1d;
+}
+
+.revision-drawer-tabs a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 9px;
+    right: 9px;
+    bottom: -1px;
+
+    height: 3px;
+
+    background: #f97316;
+
+    border-radius: 4px 4px 0 0;
+}
+
+
+/* =========================================================
+   DRAWER CONTENT
+========================================================= */
+
+.revision-drawer-content {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 18px 19px 24px;
+}
+
+.revision-drawer-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.revision-drawer-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.revision-drawer-content::-webkit-scrollbar-thumb {
+    background: #d8d2cc;
+
+    border-radius: 20px;
+}
+
+
+/* =========================================================
+   REVISION REQUEST CARD
+========================================================= */
+
+.revision-request-card {
+    margin-bottom: 14px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e3dfd9;
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 15px rgba(33, 40, 47, 0.035);
+}
+
+.revision-request-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    background: #fbfaf8;
+
+    border-bottom: 1px solid #ece8e3;
+}
+
+.revision-request-card-head > div {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+.revision-request-card-head strong {
+    color: #46515c;
+
+    font-size: 10px;
+    font-weight: 750;
+}
+
+.revision-request-card-head > div > span {
+    color: #9ba1a8;
+
+    font-size: 8px;
+}
+
+.drawer-status {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    font-size: 8px;
+    font-weight: 750;
+}
+
+.drawer-status.pending {
+    background: #fff3d8;
+
+    color: #aa761f;
+}
+
+.drawer-status.approved {
+    background: #e8f5ed;
+
+    color: #397b59;
+}
+
+.drawer-status.implemented {
+    background: #e9f1fa;
+
+    color: #4774a5;
+}
+
+.revision-request-card-body {
+    padding: 15px;
+}
+
+.revision-request-card-body h3 {
+    margin: 0 0 12px;
+
+    color: #303a45;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CLIENT REQUEST BOX
+========================================================= */
+
+.revision-client-request-box {
+    position: relative;
+
+    padding: 12px 14px 12px 16px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #faf7f4,
+            #fffdfb
+        );
+
+    border: 1px solid #ebe4de;
+    border-radius: 10px;
+}
+
+.revision-client-request-box::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+
+    width: 3px;
+
+    border-radius: 0 6px 6px 0;
+
+    background: #f97316;
+}
+
+.revision-client-request-box > span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #9c8575;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+}
+
+.revision-client-request-box p {
+    margin: 0;
+
+    color: #616b75;
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   AI SUGGESTION
+========================================================= */
+
+.revision-ai-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 12px;
+    padding: 11px 12px;
+
+    background:
+        linear-gradient(
+            105deg,
+            #f8f6fc,
+            #fbfaff
+        );
+
+    border: 1px solid #ddd7eb;
+    border-radius: 10px;
+}
+
+.revision-ai-left {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.revision-ai-icon {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ece8f7;
+
+    border-radius: 9px;
+
+    color: #7060a0;
+}
+
+.revision-ai-icon svg {
+    width: 16px;
+    height: 16px;
+
+    fill: none;
+    stroke: currentColor;
+}
+
+.revision-ai-left span {
+    display: block;
+
+    color: #88809b;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 0.6px;
+}
+
+.revision-ai-left strong {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #5f586b;
+
+    font-size: 10px;
+}
+
+.view-ai-button {
+    min-width: 58px;
+    height: 31px;
+
+    padding: 0 11px;
+
+    background: #ffffff;
+
+    border: 1px solid #d4cde5;
+    border-radius: 8px;
+
+    color: #675c91;
+
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.view-ai-button:hover {
+    transform: translateY(-1px);
+
+    background: #f0edf8;
+
+    border-color: #bfb5dc;
+}
+
+
+/* =========================================================
+   REQUEST DETAILS
+========================================================= */
+
+.revision-request-details {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+
+    margin-top: 13px;
+    padding-top: 12px;
+
+    border-top: 1px solid #eeeae5;
+}
+
+.revision-request-details > div {
+    padding: 8px 9px;
+
+    background: #faf9f7;
+
+    border-radius: 8px;
+}
+
+.revision-request-details span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #a0a4aa;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+.revision-request-details strong {
+    color: #4f5963;
+
+    font-size: 10px;
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   DRAWER EMPTY
+========================================================= */
+
+.revision-drawer-empty {
+    min-height: 250px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    text-align: center;
+}
+
+.revision-drawer-empty h3 {
+    margin: 0 0 6px;
+
+    color: #343e48;
+
+    font-size: 15px;
+}
+
+.revision-drawer-empty p {
+    margin: 0;
+
+    color: #8a929a;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   AI MODAL
+========================================================= */
+
+.revision-ai-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1500;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(31, 35, 41, 0.34);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.revision-ai-modal.show {
+    display: flex;
+}
+
+.revision-ai-modal-card {
+    width: min(500px, 100%);
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #ded8d2;
+    border-radius: 17px;
+
+    box-shadow:
+        0 24px 60px rgba(27, 33, 39, 0.21);
+
+    animation: revisionModalOpen 0.2s ease;
+}
+
+@keyframes revisionModalOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+.revision-ai-modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 18px 20px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff,
+            #f9f7fc
+        );
+
+    border-bottom: 1px solid #e9e5ed;
+}
+
+.revision-ai-modal-head span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #74669f;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.revision-ai-modal-head h3 {
+    margin: 0;
+
+    color: #303945;
+
+    font-size: 16px;
+}
+
+.revision-ai-modal-head button {
+    width: 33px;
+    height: 33px;
+
+    border: 1px solid #e1ddd8;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #737b84;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.revision-ai-modal-body {
+    padding: 20px;
+}
+
+.revision-view-only {
+    display: inline-flex;
+
+    margin-bottom: 11px;
+    padding: 5px 9px;
+
+    background: #eeeaf7;
+
+    border-radius: 999px;
+
+    color: #6c6096;
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.revision-ai-modal-body p {
+    min-height: 120px;
+
+    margin: 0;
+    padding: 15px;
+
+    background: #faf9fc;
+
+    border: 1px solid #e1ddeb;
+    border-radius: 10px;
+
+    color: #555f69;
+
+    font-size: 12px;
+    line-height: 1.75;
+
+    white-space: pre-wrap;
+}
+
+.revision-ai-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 13px 20px;
+
+    background: #faf9f7;
+
+    border-top: 1px solid #ebe7e2;
+}
+
+.revision-ai-modal-footer button {
+    min-width: 82px;
+    height: 34px;
+
+    padding: 0 15px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: #f97316;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease;
+}
+
+.revision-ai-modal-footer button:hover {
+    transform: translateY(-1px);
+
+    background: #df6814;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1250px) {
+
+    .revisions-page .revisions-page-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .revisions-page .revisions-counts {
+        width: 100%;
+    }
+
+    .revisions-page .revision-count-item {
+        flex: 1;
+    }
+
+    .revisions-page .revision-project-card {
+        grid-template-columns:
+            minmax(220px, 1fr)
+            minmax(280px, 1.4fr);
+    }
+
+    .revisions-page .revision-project-statuses {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .revisions-page {
+        padding: 28px 25px 45px;
+    }
+
+    .revisions-page .revisions-controls {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .revisions-page .revisions-control-actions {
+        width: 100%;
+    }
+
+    .revisions-page .revision-search {
+        flex: 1;
+        width: auto;
+    }
+
+    .revisions-page .revision-project-card {
+        grid-template-columns: 1fr;
+    }
+
+    .revisions-page .revision-project-statuses {
+        grid-column: auto;
+    }
+
+    .revisions-page .revision-project-footer {
+        grid-column: auto;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .revisions-page {
+        padding: 22px 18px 40px;
+    }
+
+    .revisions-page .revisions-page-head {
+        padding: 19px;
+    }
+
+    .revisions-page .revisions-heading {
+        align-items: flex-start;
+    }
+
+    .revisions-page .revisions-heading-icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    .revisions-page .revisions-heading h2 {
+        font-size: 22px;
+    }
+
+    .revisions-page .revisions-counts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .revisions-page .revision-count-item:nth-child(3) {
+        border-top: 1px solid #e8e4de;
+    }
+
+    .revisions-page .revision-count-item:nth-child(4) {
+        border-top: 1px solid #e8e4de;
+    }
+
+    .revisions-page .revision-count-item:nth-child(3)::after {
+        display: block;
+    }
+
+    .revisions-page .revisions-control-actions {
+        flex-direction: column;
+    }
+
+    .revisions-page .revision-search,
+    .revisions-page #revisionSort {
+        width: 100%;
+    }
+
+    .revisions-page .revision-project-statuses {
+        grid-template-columns: 1fr;
+    }
+
+    .revisions-page .revision-project-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .revisions-page .revision-project-meta {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .revision-drawer-layer {
+        padding: 7px;
+    }
+
+    .revision-drawer-panel {
+        width: 100%;
+        height: calc(100vh - 14px);
+
+        border-radius: 14px;
+    }
+
+}
+
+/* =========================================================
+   FINAL READABILITY + HEADER REDESIGN
+   Add this at the VERY BOTTOM of architect-revisions.css
+========================================================= */
+
+
+/* =========================================================
+   PAGE SPACING
+========================================================= */
+
+.revisions-page {
+    padding: 38px 42px 60px;
+}
+
+
+/* =========================================================
+   MAIN REVISION HEADER
+========================================================= */
+
+.revisions-page .revisions-page-head {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 24px;
+
+    margin-bottom: 34px;
+
+    padding: 28px 30px 30px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #ffffff 0%,
+            #fffaf6 65%,
+            #fff3e9 100%
+        );
+
+    border: 1px solid #e5ded7;
+    border-radius: 20px;
+
+    box-shadow:
+        0 9px 25px rgba(42, 48, 55, 0.055);
+}
+
+
+/* REMOVE OLD DECORATIVE CIRCLE */
+
+.revisions-page .revisions-page-head::after {
+    display: none;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.revisions-page .revisions-heading {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+/* ICON */
+
+.revisions-page .revisions-heading-icon {
+    width: 62px;
+    height: 62px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffefe2,
+            #ffd8ba
+        );
+
+    border: 1px solid #f3c49f;
+
+    color: #ed6f17;
+
+    box-shadow:
+        0 6px 14px rgba(129, 78, 40, 0.08);
+}
+
+.revisions-page .revisions-heading-icon svg {
+    width: 29px;
+    height: 29px;
+}
+
+
+/* LABEL */
+
+.revisions-page .revisions-overline {
+    margin: 0 0 6px;
+
+    color: #ef7119;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 1.6px;
+}
+
+
+/* TITLE */
+
+.revisions-page .revisions-heading h2 {
+    margin: 0;
+
+    color: #26313d;
+
+    font-size: 31px;
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+
+/* DESCRIPTION */
+
+.revisions-page .revisions-description {
+    max-width: 720px;
+
+    margin: 9px 0 0;
+
+    color: #697580;
+
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   REVISION COUNTS - NEW CARD DESIGN
+========================================================= */
+
+.revisions-page .revisions-counts {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+
+    overflow: visible;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: 0;
+    border-radius: 0;
+
+    box-shadow: none;
+}
+
+
+/* EACH STATUS CARD */
+
+.revisions-page .revision-count-item {
+    position: relative;
+
+    min-height: 96px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    padding: 17px 20px;
+
+    text-align: left;
+
+    background: #ffffff;
+
+    border: 1px solid #e4dfda;
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 15px rgba(34, 41, 48, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* REMOVE OLD DIVIDERS */
+
+.revisions-page .revision-count-item::after {
+    display: none !important;
+}
+
+.revisions-page .revision-count-item + .revision-count-item {
+    border-left: 1px solid #e4dfda;
+}
+
+
+/* HOVER */
+
+.revisions-page .revision-count-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 20px rgba(34, 41, 48, 0.07);
+}
+
+
+/* NUMBER */
+
+.revisions-page .revision-count-item strong {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #293541;
+
+    font-size: 30px;
+    font-weight: 750;
+
+    line-height: 1;
+}
+
+
+/* LABEL */
+
+.revisions-page .revision-count-item span {
+    display: block;
+
+    margin: 0;
+
+    color: #6f7882;
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+
+/* TOTAL */
+
+.revisions-page .revision-count-item:first-child {
+    border-top: 4px solid #f97316;
+}
+
+.revisions-page .revision-count-item:first-child strong {
+    color: #e86f18;
+}
+
+
+/* PENDING */
+
+.revisions-page .count-pending {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #fffaf0
+        );
+
+    border-top: 4px solid #e7a12b;
+}
+
+.revisions-page .count-pending strong {
+    color: #b87b16;
+}
+
+
+/* APPROVED */
+
+.revisions-page .count-approved {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f5fbf7
+        );
+
+    border-top: 4px solid #52a777;
+}
+
+.revisions-page .count-approved strong {
+    color: #32815a;
+}
+
+
+/* IMPLEMENTED */
+
+.revisions-page .count-complete {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f5f9fd
+        );
+
+    border-top: 4px solid #5b89bd;
+}
+
+.revisions-page .count-complete strong {
+    color: #4776aa;
+}
+
+
+/* =========================================================
+   PROJECT SECTION TITLE
+========================================================= */
+
+.revisions-page .revisions-controls {
+    margin-bottom: 18px;
+}
+
+.revisions-page .revisions-section-label {
+    margin-bottom: 5px;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+.revisions-page .revisions-controls h3 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   SEARCH + SORT - MAKE READABLE
+========================================================= */
+
+.revisions-page .revision-search {
+    width: 250px;
+    height: 43px;
+
+    padding: 0 13px;
+
+    border-radius: 10px;
+}
+
+.revisions-page .revision-search svg {
+    width: 18px;
+    height: 18px;
+}
+
+.revisions-page .revision-search input {
+    font-size: 13px;
+}
+
+.revisions-page #revisionSort {
+    height: 43px;
+    min-width: 160px;
+
+    padding-left: 13px;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   PROJECT CARD - MORE READABLE
+========================================================= */
+
+.revisions-page .revision-project-card {
+    padding: 23px 24px 18px;
+
+    border-radius: 18px;
+}
+
+
+/* PROJECT IMAGE */
+
+.revisions-page .revision-project-thumb {
+    width: 82px;
+    height: 82px;
+
+    border-radius: 14px;
+}
+
+
+/* PROJECT CODE */
+
+.revisions-page .revision-project-name > span {
+    margin-bottom: 6px;
+
+    font-size: 10px;
+}
+
+
+/* PROJECT NAME */
+
+.revisions-page .revision-project-name h3 {
+    font-size: 19px;
+}
+
+
+/* CLIENT NAME */
+
+.revisions-page .revision-project-name p {
+    margin-top: 6px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   LATEST REQUEST
+========================================================= */
+
+.revisions-page .revision-project-request {
+    padding: 15px 17px 15px 19px;
+}
+
+.revisions-page .revision-project-request > span {
+    margin-bottom: 7px;
+
+    font-size: 9px;
+}
+
+.revisions-page .revision-project-request p {
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   PROJECT STATUS
+========================================================= */
+
+.revisions-page .revision-project-statuses {
+    gap: 10px;
+}
+
+.revisions-page .revision-status-pill {
+    min-height: 74px;
+
+    padding: 12px 13px;
+
+    border-radius: 12px;
+}
+
+.revisions-page .revision-status-pill strong {
+    margin-bottom: 5px;
+
+    font-size: 22px;
+}
+
+.revisions-page .revision-status-pill span {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PROJECT META
+========================================================= */
+
+.revisions-page .revision-project-meta span {
+    margin-bottom: 2px;
+
+    font-size: 9px;
+}
+
+.revisions-page .revision-project-meta strong {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   VIEW REQUEST BUTTON
+========================================================= */
+
+.revisions-page .revision-open-button {
+    min-height: 40px;
+
+    padding: 0 15px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+}
+
+.revisions-page .revision-open-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+
+/* =========================================================
+   DRAWER - READABILITY
+========================================================= */
+
+.revision-drawer-panel {
+    width: min(650px, calc(100vw - 40px));
+}
+
+.revision-drawer-header {
+    padding: 23px 24px;
+}
+
+.revision-drawer-header > div > span {
+    font-size: 10px;
+}
+
+.revision-drawer-header h2 {
+    font-size: 22px;
+}
+
+.revision-drawer-header p {
+    font-size: 12px;
+}
+
+
+/* TABS */
+
+.revision-drawer-tabs a {
+    padding: 12px 14px 14px;
+
+    font-size: 12px;
+}
+
+
+/* REVISION CARD */
+
+.revision-request-card-head {
+    padding: 14px 16px;
+}
+
+.revision-request-card-head strong {
+    font-size: 11px;
+}
+
+.revision-request-card-head > div > span {
+    font-size: 10px;
+}
+
+.drawer-status {
+    padding: 6px 10px;
+
+    font-size: 10px;
+}
+
+.revision-request-card-body {
+    padding: 17px;
+}
+
+.revision-request-card-body h3 {
+    margin-bottom: 14px;
+
+    font-size: 16px;
+}
+
+
+/* CLIENT REQUEST */
+
+.revision-client-request-box {
+    padding: 14px 16px 14px 18px;
+}
+
+.revision-client-request-box > span {
+    margin-bottom: 7px;
+
+    font-size: 9px;
+}
+
+.revision-client-request-box p {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* AI */
+
+.revision-ai-box {
+    margin-top: 14px;
+
+    padding: 13px 14px;
+}
+
+.revision-ai-icon {
+    width: 39px;
+    height: 39px;
+}
+
+.revision-ai-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.revision-ai-left span {
+    font-size: 9px;
+}
+
+.revision-ai-left strong {
+    font-size: 12px;
+}
+
+.view-ai-button {
+    min-width: 65px;
+    height: 35px;
+
+    font-size: 11px;
+}
+
+
+/* DETAILS */
+
+.revision-request-details span {
+    font-size: 9px;
+}
+
+.revision-request-details strong {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .revisions-page .revisions-page-head {
+        align-items: stretch;
+    }
+
+    .revisions-page .revision-project-card {
+        grid-template-columns:
+            minmax(240px, 1fr)
+            minmax(300px, 1.3fr);
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .revisions-page .revisions-counts {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .revisions-page .revision-project-card {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .revisions-page {
+        padding: 22px 18px 40px;
+    }
+
+    .revisions-page .revisions-page-head {
+        padding: 21px;
+    }
+
+    .revisions-page .revisions-heading {
+        align-items: flex-start;
+    }
+
+    .revisions-page .revisions-heading-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .revisions-page .revisions-heading h2 {
+        font-size: 24px;
+    }
+
+    .revisions-page .revisions-description {
+        font-size: 13px;
+    }
+
+    .revisions-page .revisions-counts {
+        grid-template-columns: 1fr;
+    }
+
+    .revisions-page .revision-count-item {
+        min-height: 80px;
+    }
+
+    .revisions-page .revisions-control-actions {
+        width: 100%;
+    }
+
+    .revisions-page .revision-search,
+    .revisions-page #revisionSort {
+        width: 100%;
+    }
+
+}

@@ -639,6 +639,34 @@
 html, body, body *, button, input, select, textarea, option, a, span, p, strong, small, label {
     font-family: "Segoe UI", Arial, sans-serif !important;
 }
+
+/* Pending requests notification badges */
+.sidebar .menu-link .sidebar-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    margin-left: auto;
+    border-radius: 999px;
+    background: #e53950;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+body.sidebar-collapsed .sidebar .menu-link .sidebar-badge {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 3px;
+    font-size: 9px;
+}
+body.sidebar-collapsed .sidebar .menu-link { position: relative; }
 </style>
 </head>
 <body>
@@ -777,6 +805,11 @@ html, body, body *, button, input, select, textarea, option, a, span, p, strong,
             <span class="menu-text">
                 Revisions
             </span>
+            @if(($pendingRevisionCount ?? 0) > 0)
+                <span class="sidebar-badge" aria-label="{{ $pendingRevisionCount }} pending revisions requests">
+                    {{ $pendingRevisionCount > 99 ? '99+' : $pendingRevisionCount }}
+                </span>
+            @endif
         </a>
         <!-- MEETINGS -->
         <a
@@ -794,6 +827,11 @@ html, body, body *, button, input, select, textarea, option, a, span, p, strong,
             <span class="menu-text">
                 Meetings
             </span>
+            @if(($pendingMeetingCount ?? 0) > 0)
+                <span class="sidebar-badge" aria-label="{{ $pendingMeetingCount }} pending meetings requests">
+                    {{ $pendingMeetingCount > 99 ? '99+' : $pendingMeetingCount }}
+                </span>
+            @endif
         </a>
         <!-- REPORTS -->
         <a

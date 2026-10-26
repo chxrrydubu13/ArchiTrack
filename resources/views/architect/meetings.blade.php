@@ -16,6 +16,11 @@
 html, body, button, input, textarea, select, option {
     font-family: "Segoe UI", Arial, sans-serif !important;
 }
+/* Match Dashboard notification badge colors only. */
+.sidebar .menu-link .sidebar-badge {
+    background-color: #ef4444 !important;
+    color: #ffffff !important;
+}
 </style>
 </head>
 <body>
@@ -242,6 +247,11 @@ html, body, button, input, textarea, select, option {
             <span class="menu-text">
                 Revisions
             </span>
+            @if(($pendingRevisionCount ?? 0) > 0)
+                <span class="sidebar-badge" aria-label="{{ $pendingRevisionCount }} pending revision requests">
+                    {{ $pendingRevisionCount > 99 ? '99+' : $pendingRevisionCount }}
+                </span>
+            @endif
         </a>
         <!-- MEETINGS -->
         <a
@@ -259,6 +269,11 @@ html, body, button, input, textarea, select, option {
             <span class="menu-text">
                 Meetings
             </span>
+            @if(($pendingMeetingCount ?? 0) > 0)
+                <span class="sidebar-badge" aria-label="{{ $pendingMeetingCount }} pending meeting requests">
+                    {{ $pendingMeetingCount > 99 ? '99+' : $pendingMeetingCount }}
+                </span>
+            @endif
         </a>
         <!-- REPORTS -->
         <a

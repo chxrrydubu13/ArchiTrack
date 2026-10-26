@@ -24,26 +24,28 @@ class ArchitectMessagesController extends Controller
 
     private function accessibleProjectsQuery($architectId)
     {
-        return Project::where(
-            function ($query) use ($architectId) {
-
-                $query
-                    ->where(
-                        'architect_id',
-                        $architectId
-                    )
-                    ->orWhereHas(
-                        'projectArchitects',
-                        function ($teamQuery) use ($architectId) {
-
-                            $teamQuery->where(
-                                'architect_id',
-                                $architectId
-                            );
-                        }
-                    );
-            }
+        // Block suspended, archived, or otherwise inactive architect accounts.
+        abort_unless(
+            Auth::check()
+            && Auth::user()->role === 'architect'
+            && Auth::user()->status === 'active'
+            && (int) Auth::id() === (int) $architectId,
+            403
         );
+
+        // An active lead architect must still own the project. This also
+        // excludes projects whose lead account was permanently deleted.
+        return Project::query()
+            ->whereHas('architect', function ($leadQuery) {
+                $leadQuery->where('role', 'architect')
+                    ->where('status', 'active');
+            })
+            ->where(function ($query) use ($architectId) {
+                $query->where('architect_id', $architectId)
+                    ->orWhereHas('projectArchitects', function ($teamQuery) use ($architectId) {
+                        $teamQuery->where('architect_id', $architectId);
+                    });
+            });
     }
 
 

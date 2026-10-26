@@ -14,6 +14,12 @@ class ClientMeetingsController extends Controller
     {
         $client = Auth::user();
 
+        // Only active client accounts may access the centralized meetings page.
+        abort_unless(
+            $client && $client->role === 'client' && $client->status === 'active',
+            403
+        );
+
         /*
         |--------------------------------------------------------------------------
         | CLIENT PROJECTS
@@ -25,6 +31,11 @@ class ClientMeetingsController extends Controller
 
         $projects = Project::with('architect')
             ->where('client_id', $client->id)
+            // Restrict projects by the LEAD architect account, not project status.
+            ->whereHas('architect', function ($query) {
+                $query->where('role', 'architect')
+                    ->where('status', 'active');
+            })
             ->orderBy('project_name')
             ->get();
 

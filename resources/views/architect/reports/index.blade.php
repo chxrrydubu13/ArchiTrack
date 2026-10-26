@@ -94,7 +94,7 @@
         .logout-btn {
             border-radius: 2px !important;
             color: #535b61 !important;
-            transition: *background* .16s ease, color .16s ease !important;
+            transition: background .16s ease, color .16s ease !important;
         }
         .menu-link:hover,
         .logout-btn:hover {
@@ -113,10 +113,32 @@
         .menu-icon svg {
             stroke-width: 1.7 !important;
         }
-        .sidebar-badge {
-            border-radius: 2px !important;
-            background: #d8d0c6 !important;
-            color: #5c6266 !important;
+        .sidebar .menu-link .sidebar-badge {
+            margin-left: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 21px;
+            height: 21px;
+            padding: 0 6px;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .sidebar-collapsed .sidebar .menu-link .sidebar-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            min-width: 17px;
+            height: 17px;
+            padding: 0 3px;
+            font-size: 9px;
+        }
+        .sidebar .menu-link .sidebar-badge {
+            border-radius: 999px !important;
+            background: #ef4444 !important;
+            color: #fff !important;
         }
         .status-button {
             border-radius: 50% !important;
@@ -894,6 +916,11 @@
             <span class="menu-text">
                 Revisions
             </span>
+            @if(($pendingRevisionCount ?? 0) > 0)
+                <span class="sidebar-badge" aria-label="{{ $pendingRevisionCount }} pending revision requests">
+                    {{ $pendingRevisionCount > 99 ? '99+' : $pendingRevisionCount }}
+                </span>
+            @endif
         </a>
         <!-- MEETINGS -->
         <a
@@ -911,6 +938,11 @@
             <span class="menu-text">
                 Meetings
             </span>
+            @if(($pendingMeetingCount ?? 0) > 0)
+                <span class="sidebar-badge" aria-label="{{ $pendingMeetingCount }} pending meeting requests">
+                    {{ $pendingMeetingCount > 99 ? '99+' : $pendingMeetingCount }}
+                </span>
+            @endif
         </a>
         <!-- REPORTS -->
         <a

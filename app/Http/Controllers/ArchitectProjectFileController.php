@@ -50,70 +50,37 @@ class ArchitectProjectFileController extends Controller
 
 
 
-    private function getProjectForArchitect(
+    private function getProjectForArchitect($projectId, array $with = [])
+    {
+        $user = auth()->user();
 
-        $projectId,
+        // Archived, suspended/on-hold, or unauthenticated architects cannot
+        // manage files, even if they still have an authenticated session.
+        abort_unless(
+            $user && $user->role === 'architect'
+                && strtolower((string) $user->status) === 'active',
+            403,
+            'Your architect account is not active.'
+        );
 
-        array $with = []
-
-    ) {
-
-        return Project::where(
-
-            'id',
-
-            $projectId
-
-        )
-
-            ->where(
-
-                function ($query) {
-
-
-
-                    $query
-
-                        ->where(
-
-                            'architect_id',
-
-                            auth()->id()
-
-                        )
-
-                        ->orWhereHas(
-
-                            'projectArchitects',
-
-                            function ($teamQuery) {
-
-
-
-                                $teamQuery->where(
-
-                                    'architect_id',
-
-                                    auth()->id()
-
-                                );
-
-                            }
-
-                        );
-
-                }
-
-            )
-
+        // Require a CURRENT, ACTIVE lead architect. This excludes projects
+        // whose original lead was archived or permanently deleted, even when
+        // the requesting architect remains listed as a collaborator.
+        return Project::query()
+            ->whereKey($projectId)
+            ->whereHas('architect', function ($query) {
+                $query->where('role', 'architect')
+                    ->where('status', 'active');
+            })
+            ->where(function ($query) use ($user) {
+                $query->where('architect_id', $user->id)
+                    ->orWhereHas('projectArchitects', function ($teamQuery) use ($user) {
+                        $teamQuery->where('architect_id', $user->id);
+                    });
+            })
             ->with($with)
-
             ->firstOrFail();
-
     }
-
-
-
 
 
     /*
@@ -128,831 +95,115 @@ class ArchitectProjectFileController extends Controller
 
 
 
+    /** Upload one or more new project files (100 MB per file). */
     public function store(Request $request, $id)
-
     {
-
-        $project =
-
-            $this->getProjectForArchitect(
-
-                $id,
-
-                [
-
-                    'client',
-
-                ]
-
-            );
-
-
-
-
-
-        /*
-
-        |--------------------------------------------------------------------------
-
-        | VALIDATION
-
-        |--------------------------------------------------------------------------
-
-        */
-
-
-
-        $validator = Validator::make(
-
-            $request->all(),
-
-            [
-
-                'file' => [
-
-                    'required',
-
-                    'file',
-
-                    'max:102400',
-
-                    'mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx',
-
-                ],
-
-
-
-                'category' => [
-
-                    'required',
-
-                    'in:general,drawing,document,presentation,reference,other',
-
-                ],
-
-
-
-                'description' => [
-
-                    'nullable',
-
-                    'string',
-
-                    'max:500',
-
-                ],
-
-            ],
-
-            [
-
-                'file.required' =>
-
-                    'Please choose a file to upload.',
-
-
-
-                'file.file' =>
-
-                    'The selected item must be a valid file.',
-
-
-
-                'file.max' =>
-
-                    'Images can be up to 100 MB. Documents can be up to 10 MB.',
-
-
-
-                'file.mimes' =>
-
-                    'Only JPG, JPEG, PNG, PDF, DOC, DOCX, XLS, and XLSX files are allowed.',
-
-
-
-                'category.required' =>
-
-                    'Please select a file category.',
-
-            ]
-
-        );
-
-
-
-
-
-        /*
-
-        |--------------------------------------------------------------------------
-
-        | VALIDATION FAILED
-
-        |--------------------------------------------------------------------------
-
-        */
-
-
+        $project = $this->getProjectForArchitect($id, ['client']);
+        $redirect = route('architect.projects.show', ['id' => $project->id]) . '?tab=files';
+
+        // Support the old single-file form as well as the new multiple-file form.
+        $incoming = $request->hasFile('files') ? $request->file('files') :
+            ($request->hasFile('file') ? [$request->file('file')] : []);
+        if (!is_array($incoming)) {
+            $incoming = [$incoming];
+        }
+
+        $validator = Validator::make([
+            'files' => $incoming,
+            'category' => $request->input('category'),
+            'description' => $request->input('description'),
+        ], [
+            'files' => ['required', 'array', 'min:1'],
+            'files.*' => ['required', 'file', 'max:102400', 'mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx'],
+            'category' => ['required', 'in:general,drawing,document,presentation,reference,other'],
+            'description' => ['nullable', 'string', 'max:500'],
+        ], [
+            'files.required' => 'No files were received. Check PHP upload_max_filesize and post_max_size settings, then try again.',
+            'files.*.max' => 'Each file must not exceed 100 MB.',
+            'files.*.mimes' => 'Only JPG, JPEG, PNG, PDF, DOC, DOCX, XLS, and XLSX files are allowed.',
+        ]);
 
         if ($validator->fails()) {
-
-
-
-            return redirect()
-
-                ->to(
-
-                    route(
-
-                        'architect.projects.show',
-
-                        [
-
-                            'id' => $project->id
-
-                        ]
-
-                    ) . '?tab=files'
-
-                )
-
-                ->withErrors($validator)
-
-                ->withInput();
-
+            return redirect()->to($redirect)->withErrors($validator)->withInput();
         }
 
-
-
-
-
-        /*
-
-        |--------------------------------------------------------------------------
-
-        | GET FILE
-
-        |--------------------------------------------------------------------------
-
-        */
-
-
-
-        $uploadedFile =
-
-            $request->file('file');
-
-
-
-
-
-        if (!$uploadedFile) {
-
-
-
-            return redirect()
-
-                ->to(
-
-                    route(
-
-                        'architect.projects.show',
-
-                        [
-
-                            'id' => $project->id
-
-                        ]
-
-                    ) . '?tab=files'
-
-                )
-
-                ->withErrors([
-
-                    'file' =>
-
-                        'No file was received. Please choose a file again.'
-
-                ]);
-
-        }
-
-
-
-
-
-        /*
-
-        |--------------------------------------------------------------------------
-
-        | ORIGINAL FILE INFORMATION
-
-        |--------------------------------------------------------------------------
-
-        */
-
-
-
-        $originalName =
-
-            basename(
-
-                $uploadedFile->getClientOriginalName()
-
-            );
-
-
-
-        $extension =
-
-            strtolower(
-
-                $uploadedFile
-
-                    ->getClientOriginalExtension()
-
-            );
-
-
-
-
-
-        $imageTypes = [
-
-            'jpg',
-
-            'jpeg',
-
-            'png',
-
-        ];
-
-
-
-
-
-        if (
-
-            !in_array(
-
-                $extension,
-
-                $imageTypes,
-
-                true
-
-            )
-
-            &&
-
-            $uploadedFile->getSize() > 10485760
-
-        ) {
-
-
-
-            return redirect()
-
-                ->to(
-
-                    route(
-
-                        'architect.projects.show',
-
-                        [
-
-                            'id' => $project->id
-
-                        ]
-
-                    ) . '?tab=files'
-
-                )
-
-                ->withErrors([
-
-                    'file' =>
-
-                        'Documents cannot be larger than 10 MB.'
-
-                ]);
-
-        }
-
-
-
-
-
-        /*
-
-        |--------------------------------------------------------------------------
-
-        | CHECK FILE EXTENSION
-
-        |--------------------------------------------------------------------------
-
-        */
-
-
-
-        if (!$this->isAllowedExtension($extension)) {
-
-
-
-            return redirect()
-
-                ->to(
-
-                    route(
-
-                        'architect.projects.show',
-
-                        [
-
-                            'id' => $project->id
-
-                        ]
-
-                    ) . '?tab=files'
-
-                )
-
-                ->withErrors([
-
-                    'file' =>
-
-                        'This file type is not supported.'
-
-                ]);
-
-        }
-
-
-
-
-
-        /*
-
-        |--------------------------------------------------------------------------
-
-        | CREATE SAFE FILE NAME
-
-        |--------------------------------------------------------------------------
-
-        */
-
-
-
-        $fileName =
-
-            $this->makeFileName(
-
-                $originalName,
-
-                $extension
-
-            );
-
-
-
-
-
-        /*
-
-        |--------------------------------------------------------------------------
-
-        | STORE FILE
-
-        |--------------------------------------------------------------------------
-
-        */
-
-
-
-        $path = null;
-
-
+        $storedPaths = [];
+        $createdIds = [];
+        $uploadedNames = [];
 
         try {
-
-
-
-            $path =
-
-                $uploadedFile->storeAs(
-
-                    'projects/' . $project->id,
-
-                    $fileName,
-
-                    'local'
-
-                );
-
-
-
-
-
-            if (!$path) {
-
-
-
-                return redirect()
-
-                    ->to(
-
-                        route(
-
-                            'architect.projects.show',
-
-                            [
-
-                                'id' => $project->id
-
-                            ]
-
-                        ) . '?tab=files'
-
-                    )
-
-                    ->withErrors([
-
-                        'file' =>
-
-                            'The file could not be saved. Please try again.'
-
-                    ]);
-
-            }
-
-
-
-
-
-            /*
-
-            |--------------------------------------------------------------------------
-
-            | CREATE NEW FILE
-
-            |--------------------------------------------------------------------------
-
-            */
-
-
-
-            $projectFile =
-
-                ProjectFile::create([
-
-
-
-                    'project_id' =>
-
-                        $project->id,
-
-
-
-                    'uploaded_by' =>
-
-                        auth()->id(),
-
-
-
-                    'file_name' =>
-
-                        $fileName,
-
-
-
-                    'original_name' =>
-
-                        $originalName,
-
-
-
-                    'file_path' =>
-
-                        $path,
-
-
-
-                    'file_type' =>
-
-                        $extension,
-
-
-
-                    'file_size' =>
-
-                        $uploadedFile->getSize(),
-
-
-
-                    'category' =>
-
-                        $request->category,
-
-
-
-                    'description' =>
-
-                        $request->filled('description')
-
-                            ? trim($request->description)
-
-                            : null,
-
-
-
-                    'version_group' =>
-
-                        (string) Str::uuid(),
-
-
-
-                    'version_number' =>
-
-                        1,
-
-
-
-                    'is_latest' =>
-
-                        true,
-
-
-
-                    'is_archived' =>
-
-                        false,
-
-
-
+            // Save all files first; if one fails, remove the new records and files.
+            \Illuminate\Support\Facades\DB::beginTransaction();
+            foreach ($incoming as $uploadedFile) {
+                $originalName = basename($uploadedFile->getClientOriginalName());
+                $extension = strtolower($uploadedFile->getClientOriginalExtension());
+                if (!$this->isAllowedExtension($extension)) {
+                    throw new \RuntimeException('Unsupported file type: ' . $originalName);
+                }
+                $fileName = $this->makeFileName($originalName, $extension);
+                $path = $uploadedFile->storeAs('projects/' . $project->id, $fileName, 'local');
+                if (!$path) {
+                    throw new \RuntimeException('Could not save ' . $originalName);
+                }
+                $storedPaths[] = $path;
+                $record = ProjectFile::create([
+                    'project_id' => $project->id,
+                    'uploaded_by' => auth()->id(),
+                    'file_name' => $fileName,
+                    'original_name' => $originalName,
+                    'file_path' => $path,
+                    'file_type' => $extension,
+                    'file_size' => $uploadedFile->getSize(),
+                    'category' => $request->input('category'),
+                    'description' => $request->filled('description') ? trim($request->input('description')) : null,
+                    'version_group' => (string) Str::uuid(),
+                    'version_number' => 1,
+                    'is_latest' => true,
+                    'is_archived' => false,
                 ]);
-
-
-
-
-
-            /*
-
-            |--------------------------------------------------------------------------
-
-            | AUDIT LOG - FILE UPLOADED
-
-            |--------------------------------------------------------------------------
-
-            */
-
-
-
-            AuditLog::create([
-
-                'user_id' =>
-
-                    auth()->id(),
-
-
-
-                'user_name' =>
-
-                    auth()->user()->name,
-
-
-
-                'action' =>
-
-                    'File Uploaded',
-
-
-
-                'project_id' =>
-
-                    $project->id,
-
-
-
-                'project_name' =>
-
-                    $project->project_name,
-
-
-
-                'details' =>
-
-                    'Architect uploaded file "'
-
-                    . $originalName
-
-                    . '" to project "'
-
-                    . $project->project_name
-
-                    . '".',
-
-            ]);
-
-
-
-
-
-            /*
-
-            |--------------------------------------------------------------------------
-
-            | NOTIFY CLIENT ABOUT NEW FILE
-
-            |--------------------------------------------------------------------------
-
-            */
-
-
-
-            if ($project->client) {
-
-
-
-                $project->client->notify(
-
-
-
-                    new ProjectActivityNotification(
-
-
-
-                        'New Project File',
-
-
-
-                        'Your architect uploaded a new file, "' .
-
-                        $originalName .
-
-                        '", for ' .
-
-                        $project->project_name .
-
-                        '.',
-
-
-
-                        'file',
-
-
-
-                        $project->id,
-
-
-
-                        route(
-
-                            'client.files.index'
-
-                        )
-
-
-
-                    )
-
-
-
-                );
-
+                $createdIds[] = $record->id;
+                $uploadedNames[] = $originalName;
+
+                AuditLog::create([
+                    'user_id' => auth()->id(),
+                    'user_name' => auth()->user()->name,
+                    'action' => 'File Uploaded',
+                    'project_id' => $project->id,
+                    'project_name' => $project->project_name,
+                    'details' => 'Architect uploaded file "' . $originalName . '" to project "' . $project->project_name . '".',
+                ]);
             }
-
-
-
+            \Illuminate\Support\Facades\DB::commit();
         } catch (\Throwable $error) {
-
-
-
-            if (
-
-                $path &&
-
-                (
-
-                    Storage::disk('local')
-
-                        ->exists($path)
-
-                    ||
-
-                    Storage::disk('public')
-
-                        ->exists($path)
-
-                )
-
-            ) {
-
-
-
-                if (
-
-                    Storage::disk('local')
-
-                        ->exists($path)
-
-                ) {
-
-
-
-                    Storage::disk('local')
-
-                        ->delete($path);
-
-                }
-
-
-
-                elseif (
-
-                    Storage::disk('public')
-
-                        ->exists($path)
-
-                ) {
-
-
-
-                    Storage::disk('public')
-
-                        ->delete($path);
-
-                }
-
+            \Illuminate\Support\Facades\DB::rollBack();
+            foreach ($storedPaths as $path) {
+                try { Storage::disk('local')->delete($path); } catch (\Throwable $ignored) {}
             }
-
-
-
-
-
-            return redirect()
-
-                ->to(
-
-                    route(
-
-                        'architect.projects.show',
-
-                        [
-
-                            'id' => $project->id
-
-                        ]
-
-                    ) . '?tab=files'
-
-                )
-
-                ->withErrors([
-
-                    'file' =>
-
-                        'Upload failed. Please try again.'
-
-                ]);
-
+            \Illuminate\Support\Facades\Log::error('Project file upload failed', [
+                'project_id' => $project->id, 'error' => $error->getMessage(),
+            ]);
+            return redirect()->to($redirect)->withErrors([
+                'files' => 'Upload failed. Please check the file size and try again.',
+            ]);
         }
 
+        // A notification failure must not turn a successful upload into an error.
+        if ($project->client) {
+            try {
+                $project->client->notify(new ProjectActivityNotification(
+                    'New Project File',
+                    'Your architect uploaded ' . count($uploadedNames) . ' file(s) for ' . $project->project_name . '.',
+                    'file', $project->id, route('client.files.index')
+                ));
+            } catch (\Throwable $error) {
+                \Illuminate\Support\Facades\Log::warning('Project file notification failed', [
+                    'project_id' => $project->id, 'error' => $error->getMessage(),
+                ]);
+            }
+        }
 
-
-
-
-        return redirect()
-
-            ->to(
-
-                route(
-
-                    'architect.projects.show',
-
-                    [
-
-                        'id' => $project->id
-
-                    ]
-
-                ) . '?tab=files'
-
-            )
-
-            ->with(
-
-                'success',
-
-                'File uploaded successfully as Version 1.'
-
-            );
-
+        return redirect()->to($redirect)->with('success', count($uploadedNames) . ' file(s) uploaded successfully.');
     }
-
-
-
-
 
     /*
 
@@ -1098,7 +349,7 @@ class ArchitectProjectFileController extends Controller
 
                 'file.max' =>
 
-                    'Images can be up to 100 MB. Documents can be up to 10 MB.',
+                    'Each file must not exceed 100 MB.',
 
 
 
@@ -1208,77 +459,7 @@ class ArchitectProjectFileController extends Controller
 
             );
 
-
-
-
-
-        $imageTypes = [
-
-            'jpg',
-
-            'jpeg',
-
-            'png',
-
-        ];
-
-
-
-
-
-        if (
-
-            !in_array(
-
-                $extension,
-
-                $imageTypes,
-
-                true
-
-            )
-
-            &&
-
-            $uploadedFile->getSize() > 10485760
-
-        ) {
-
-
-
-            return redirect()
-
-                ->to(
-
-                    route(
-
-                        'architect.projects.show',
-
-                        [
-
-                            'id' => $project->id
-
-                        ]
-
-                    ) . '?tab=files'
-
-                )
-
-                ->withErrors([
-
-                    'file' =>
-
-                        'Documents cannot be larger than 10 MB.'
-
-                ]);
-
-        }
-
-
-
-
-
-        if (!$this->isAllowedExtension($extension)) {
+if (!$this->isAllowedExtension($extension)) {
 
 
 

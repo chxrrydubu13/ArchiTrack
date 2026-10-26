@@ -7,6 +7,7 @@ use App\Models\ProjectMessage;
 use App\Models\ProjectAIHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ClientMessagesController extends Controller
@@ -14,6 +15,8 @@ class ClientMessagesController extends Controller
     public function index(Request $request)
     {
         $client = Auth::user();
+
+        abort_unless($client && $client->role === 'client' && $client->status === 'active', 403);
 
 
         /*
@@ -37,6 +40,9 @@ class ClientMessagesController extends Controller
                         );
                 },
             ])
+            ->whereHas('architect', function ($query) {
+                $query->where('role', 'architect')->where('status', 'active');
+            })
             ->where(
                 'client_id',
                 $client->id
@@ -181,6 +187,8 @@ class ClientMessagesController extends Controller
 
         $client = Auth::user();
 
+        abort_unless($client && $client->role === 'client' && $client->status === 'active', 403);
+
 
         /*
         |--------------------------------------------------------------------------
@@ -192,6 +200,9 @@ class ClientMessagesController extends Controller
         */
 
         $project = Project::with('architect')
+            ->whereHas('architect', function ($query) {
+                $query->where('role', 'architect')->where('status', 'active');
+            })
             ->where(
                 'client_id',
                 $client->id
@@ -400,7 +411,8 @@ class ClientMessagesController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        ProjectMessage::create([
+        try {
+            ProjectMessage::create([
 
             'project_id' =>
                 $project->id,
@@ -428,7 +440,16 @@ class ClientMessagesController extends Controller
             'attachment_size' =>
                 $attachmentSize,
 
-        ]);
+            ]);
+        } catch (\Throwable $error) {
+            if ($attachmentPath && Storage::disk('local')->exists($attachmentPath)) {
+                Storage::disk('local')->delete($attachmentPath);
+            }
+
+            return back()->withErrors([
+                'message' => 'The message could not be sent. Please try again.',
+            ]);
+        }
 
 
         /*

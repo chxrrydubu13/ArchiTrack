@@ -348,31 +348,48 @@ class SecureProjectFileController extends Controller
         return null;
     }
 
+    /**
+     * All secure attachment endpoints use this shared authorization check.
+     * Projects with a missing or non-active lead architect are admin-only.
+     */
     private function getAccessibleProject($projectId): Project
     {
-        $userId = auth()->id();
+        $user = auth()->user();
 
-        return Project::where('id', $projectId)
-            ->where(function ($query) use ($userId) {
-                $query
-                    ->where(
-                        'architect_id',
-                        $userId
-                    )
-                    ->orWhere(
-                        'client_id',
-                        $userId
-                    )
-                    ->orWhereHas(
-                        'projectArchitects',
-                        function ($teamQuery) use ($userId) {
-                            $teamQuery->where(
-                                'architect_id',
-                                $userId
-                            );
-                        }
-                    );
-            })
-            ->firstOrFail();
+        if (!$user) {
+            abort(403, 'Authentication required.');
+        }
+
+        $project = Project::query()->findOrFail($projectId);
+
+        if ($user->role === 'admin') {
+            return $project;
+        }
+
+        if (!in_array($user->role, ['architect', 'client'], true)
+            || $user->status !== 'active') {
+            abort(404);
+        }
+
+        // A null architect_id (after permanent account deletion) must not
+        // make retained project files accessible to clients or collaborators.
+        $leadArchitect = $project->architect;
+        if (!$leadArchitect || $leadArchitect->role !== 'architect' || $leadArchitect->status !== 'active') {
+            abort(404);
+        }
+
+        if ($user->role === 'client') {
+            abort_unless((int) $project->client_id === (int) $user->id, 404);
+            return $project;
+        }
+
+        $isLead = (int) $project->architect_id === (int) $user->id;
+        $isCollaborator = $project->projectArchitects()
+            ->where('architect_id', $user->id)
+            ->exists();
+
+        abort_unless($isLead || $isCollaborator, 404);
+
+        return $project;
     }
 }

@@ -1147,6 +1147,12 @@ body {
         grid-template-columns: 1fr !important;
     }
 }
+
+/* Match notification count color across architect sidebar pages. */
+.sidebar .menu-link .sidebar-badge {
+    background: #ef4444 !important;
+    color: #ffffff !important;
+}
 </style>
 <style>
 html, body, button, input, textarea, select, option {
@@ -1302,6 +1308,11 @@ html, body, button, input, textarea, select, option {
             <span class="menu-text">
                 Revisions
             </span>
+            @if(($pendingRevisionCount ?? 0) > 0)
+                <span class="sidebar-badge" aria-label="{{ $pendingRevisionCount }} pending revision requests">
+                    {{ $pendingRevisionCount > 99 ? '99+' : $pendingRevisionCount }}
+                </span>
+            @endif
         </a>
         <!-- MEETINGS -->
         <a
@@ -1319,6 +1330,11 @@ html, body, button, input, textarea, select, option {
             <span class="menu-text">
                 Meetings
             </span>
+            @if(($pendingMeetingCount ?? 0) > 0)
+                <span class="sidebar-badge" aria-label="{{ $pendingMeetingCount }} pending meeting requests">
+                    {{ $pendingMeetingCount > 99 ? '99+' : $pendingMeetingCount }}
+                </span>
+            @endif
         </a>
         <!-- REPORTS -->
         <a

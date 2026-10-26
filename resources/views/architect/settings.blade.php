@@ -75,6 +75,8 @@
         .settings-panel-header h3 {
             font-size: 22px;
         }
+        .sidebar .menu-link .sidebar-badge { margin-left: auto; display: inline-flex; align-items: center; justify-content: center; min-width: 21px; height: 21px; padding: 0 6px; border-radius: 999px; background: #ef4444; color: #fff; font-size: 11px; font-weight: 700; line-height: 1; flex-shrink: 0; }
+        .sidebar-collapsed .sidebar .menu-link .sidebar-badge { position: absolute; top: 2px; right: 2px; min-width: 17px; height: 17px; padding: 0 3px; font-size: 9px; }
     </style>
 </head>
 <body>
@@ -212,6 +214,11 @@
             <span class="menu-text">
                 Revisions
             </span>
+            @if(($$pendingRevisionCount ?? 0) > 0)
+                <span class="sidebar-badge" aria-label="{{ $pendingRevisionCount }} pending revisions">
+                    {{ $pendingRevisionCount > 99 ? '99+' : $pendingRevisionCount }}
+                </span>
+            @endif
         </a>
         <!-- MEETINGS -->
         <a
@@ -229,6 +236,11 @@
             <span class="menu-text">
                 Meetings
             </span>
+            @if(($$pendingMeetingCount ?? 0) > 0)
+                <span class="sidebar-badge" aria-label="{{ $pendingMeetingCount }} pending meetings">
+                    {{ $pendingMeetingCount > 99 ? '99+' : $pendingMeetingCount }}
+                </span>
+            @endif
         </a>
         <!-- REPORTS -->
         <a

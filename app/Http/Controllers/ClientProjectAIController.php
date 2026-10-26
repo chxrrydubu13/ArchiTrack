@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Str;
 
@@ -25,6 +26,21 @@ use Illuminate\Support\Str;
 class ClientProjectAIController extends Controller
 
 {
+    /** Only an active client can use AI on a project led by an active architect. */
+    private function getActiveClientProject($projectId): Project
+    {
+        $user = auth()->user();
+        abort_unless($user && $user->role === 'client' && $user->status === 'active', 403);
+
+        return Project::query()
+            ->whereKey($projectId)
+            ->where('client_id', $user->id)
+            ->whereHas('architect', function ($query) {
+                $query->where('role', 'architect')->where('status', 'active');
+            })
+            ->firstOrFail();
+    }
+
 
     /*
 
@@ -42,11 +58,7 @@ class ClientProjectAIController extends Controller
 
     {
 
-        $project = Project::where('id', $id)
-
-            ->where('client_id', auth()->id())
-
-            ->firstOrFail();
+        $project = $this->getActiveClientProject($id);
 
 
 
@@ -163,6 +175,7 @@ class ClientProjectAIController extends Controller
 
 
         $referenceImagePath = null;
+        $generatedImagePath = null;
 
         $parentHistory = null;
 
@@ -1240,6 +1253,10 @@ class ClientProjectAIController extends Controller
 
 
 
+            if ($generatedImagePath && Storage::disk('local')->exists($generatedImagePath)) {
+                Storage::disk('local')->delete($generatedImagePath);
+            }
+
             if (
 
                 $referenceImagePath
@@ -1336,25 +1353,7 @@ class ClientProjectAIController extends Controller
 
     ) {
 
-        $project =
-
-            Project::where(
-
-                'id',
-
-                $id
-
-            )
-
-            ->where(
-
-                'client_id',
-
-                auth()->id()
-
-            )
-
-            ->firstOrFail();
+        $project = $this->getActiveClientProject($id);
 
 
 
@@ -1570,7 +1569,8 @@ class ClientProjectAIController extends Controller
 
         $message =
 
-            ProjectMessage::create([
+            DB::transaction(function () use ($project, $history, $finalMessage, $generatedPath, $generatedDisk) {
+                $message = ProjectMessage::create([
 
                 'project_id' =>
 
@@ -1663,6 +1663,9 @@ class ClientProjectAIController extends Controller
                 true,
 
         ]);
+
+                return $message;
+            });
 
 
 

@@ -49,63 +49,29 @@ class ArchitectProjectMilestoneController extends Controller
 
 
     private function getProjectForArchitect($projectId)
-
     {
+        $user = auth()->user();
 
-        return Project::where(
+        abort_unless(
+            $user && $user->role === 'architect' && $user->status === 'active',
+            403,
+            'Only active architect accounts can manage project milestones.'
+        );
 
-            'id',
-
-            $projectId
-
-        )
-
-            ->where(
-
-                function ($query) {
-
-
-
-                    $query
-
-                        ->where(
-
-                            'architect_id',
-
-                            auth()->id()
-
-                        )
-
-                        ->orWhereHas(
-
-                            'projectArchitects',
-
-                            function ($teamQuery) {
-
-
-
-                                $teamQuery->where(
-
-                                    'architect_id',
-
-                                    auth()->id()
-
-                                );
-
-                            }
-
-                        );
-
-                }
-
-            )
-
+        return Project::query()
+            ->where('id', $projectId)
+            ->whereHas('architect', function ($query) {
+                $query->where('role', 'architect')
+                    ->where('status', 'active');
+            })
+            ->where(function ($query) use ($user) {
+                $query->where('architect_id', $user->id)
+                    ->orWhereHas('projectArchitects', function ($teamQuery) use ($user) {
+                        $teamQuery->where('architect_id', $user->id);
+                    });
+            })
             ->firstOrFail();
-
     }
-
-
-
 
 
     /*
@@ -1341,86 +1307,8 @@ class ArchitectProjectMilestoneController extends Controller
 
 
 
-            /*
-
-            |--------------------------------------------------------------------------
-
-            | DELETE OLD PROOF IF THERE IS ONE
-
-            |--------------------------------------------------------------------------
-
-            */
-
-
-
-            if (
-
-                $milestone->proof_file
-
-                &&
-
-                $milestone->proof_file !==
-
-                $proofPath
-
-            ) {
-
-
-
-                if (
-
-                    Storage::disk('local')
-
-                        ->exists(
-
-                            $milestone->proof_file
-
-                        )
-
-                ) {
-
-
-
-                    Storage::disk('local')
-
-                        ->delete(
-
-                            $milestone->proof_file
-
-                        );
-
-                }
-
-
-
-                elseif (
-
-                    Storage::disk('public')
-
-                        ->exists(
-
-                            $milestone->proof_file
-
-                        )
-
-                ) {
-
-
-
-                    Storage::disk('public')
-
-                        ->delete(
-
-                            $milestone->proof_file
-
-                        );
-
-                }
-
-            }
-
-
-
+            // Keep the old proof until the new milestone data is saved.
+            $oldProofPath = $milestone->proof_file;
 
 
             /*
@@ -1527,7 +1415,28 @@ class ArchitectProjectMilestoneController extends Controller
 
 
 
-            $milestone->save();
+            try {
+                $milestone->save();
+            } catch (\Throwable $e) {
+                Storage::disk('local')->delete($proofPath);
+                report($e);
+
+                return back()->withErrors([
+                    'proof_file' => 'The milestone could not be saved. Please try again.',
+                ]);
+            }
+
+            if ($oldProofPath && $oldProofPath !== $proofPath) {
+                try {
+                    if (Storage::disk('local')->exists($oldProofPath)) {
+                        Storage::disk('local')->delete($oldProofPath);
+                    } elseif (Storage::disk('public')->exists($oldProofPath)) {
+                        Storage::disk('public')->delete($oldProofPath);
+                    }
+                } catch (\Throwable $e) {
+                    report($e);
+                }
+            }
 
 
 

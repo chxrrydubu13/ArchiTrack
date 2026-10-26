@@ -21,14 +21,22 @@ class ClientProjectMeetingController extends Controller
         $projectId,
         array $with = []
     ) {
-        return Project::where(
-            'id',
-            $projectId
-        )
-            ->where(
-                'client_id',
-                auth()->id()
-            )
+        $client = auth()->user();
+
+        abort_unless(
+            $client && $client->role === 'client' && $client->status === 'active',
+            403,
+            'Your client account is not active.'
+        );
+
+        // An archived, on-hold, or deleted lead architect makes the
+        // entire project read-only to non-admin users.
+        return Project::where('id', $projectId)
+            ->where('client_id', $client->id)
+            ->whereHas('architect', function ($query) {
+                $query->where('role', 'architect')
+                    ->where('status', 'active');
+            })
             ->with($with)
             ->firstOrFail();
     }
@@ -491,6 +499,7 @@ class ClientProjectMeetingController extends Controller
                     'client_id',
                     auth()->id()
                 )
+                ->where('architect_id', $project->architect_id)
                 ->firstOrFail();
 
 
@@ -678,6 +687,7 @@ class ClientProjectMeetingController extends Controller
                     'client_id',
                     auth()->id()
                 )
+                ->where('architect_id', $project->architect_id)
                 ->firstOrFail();
 
 
@@ -803,6 +813,7 @@ class ClientProjectMeetingController extends Controller
                     'client_id',
                     auth()->id()
                 )
+                ->where('architect_id', $project->architect_id)
                 ->firstOrFail();
 
 

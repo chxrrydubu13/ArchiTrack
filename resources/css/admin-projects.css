@@ -1612,3 +1612,93 @@
     }
 
 }
+
+/* =========================================================
+   PROJECT RECORDS WORKSPACE (VIEW PAGE)
+   Integrated into existing admin-projects.css
+========================================================= */
+/* ARCHITRACK — Admin Project Records, workspace v2
+   Scoped to .record-shell to avoid changing other admin screens. */
+.record-shell{--record-ink:#30373c;--record-muted:#757d82;--record-line:#e1dad4;--record-accent:#df6e24;--record-bg:#fff;color:var(--record-ink);max-width:1510px;margin:0 auto;padding:30px 36px 80px;font-family:inherit}
+.record-shell *{box-sizing:border-box}
+.record-breadcrumb{display:flex;align-items:center;gap:11px;margin-bottom:25px;font-size:12px;color:#98a1ac}
+.record-breadcrumb a{color:#6d7786;text-decoration:none;font-weight:650}.record-breadcrumb a:hover{color:var(--record-accent)}
+.record-header{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:32px;align-items:center;border-bottom:1px solid var(--record-line);padding:8px 0 28px}
+.record-eyebrow,.record-progress-label{font-size:10px;font-weight:800;letter-spacing:.15em;color:#8a95a3}.record-eyebrow-separator{padding:0 6px;color:var(--record-accent)}
+.record-header h2{font-size:clamp(29px,3vw,43px);letter-spacing:-.045em;line-height:1.14;margin:11px 0 12px;color:#30373c;font-weight:760}
+.record-header-main>p{font-size:13px;line-height:1.8;color:#738093;max-width:690px;margin:0 0 20px}
+.record-header-tags{display:flex;flex-wrap:wrap;gap:8px}.record-header-tags span{font-size:11px;font-weight:700;padding:7px 11px;border-radius:5px;border:1px solid #d8d0c9;background:#fff;color:#536174}
+.record-header-tags .record-archive-tag{background:#fff0e4;border-color:#f4d4bb;color:#8a4d1e}.record-header-tags .record-view-tag{background:#f2ede8}
+.record-progress-block{border-left:1px solid var(--record-line);padding-left:29px;display:flex;flex-direction:column;gap:10px}
+.record-progress-block strong{font-size:41px;letter-spacing:-.06em;font-weight:760;line-height:1;color:#30373c}.record-progress-block strong small{font-size:20px;color:#8792a0}
+.record-progress-block progress{display:block;width:100%;height:7px;appearance:none;border:0;border-radius:50px;overflow:hidden;background:#eef1f4}
+.record-progress-block progress::-webkit-progress-bar{background:#eef1f4}.record-progress-block progress::-webkit-progress-value{background:#df6e24;border-radius:50px}.record-progress-block progress::-moz-progress-bar{background:#df6e24;border-radius:50px}
+.record-progress-foot{font-size:11px;color:#85909d;line-height:1.5}
+.record-preservation-note{margin-top:20px;padding:13px 16px;border-left:3px solid var(--record-accent);background:#fff7ef;color:#805b43;font-size:12px;line-height:1.7}.record-preservation-note strong{color:#985022}
+.record-stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:28px 0 34px;border:1px solid var(--record-line);border-radius:10px;background:#fff;overflow:hidden}
+.record-stats>div{padding:20px 19px;border-right:1px solid var(--record-line);min-width:0}.record-stats>div:last-child{border-right:0}
+.record-stats span{display:block;color:#8a95a2;font-size:10px;letter-spacing:.075em;font-weight:750;margin-bottom:10px}
+.record-stats strong{display:block;color:#30373c;font-size:27px;letter-spacing:-.035em;line-height:1.2;font-weight:750}.record-stats strong small{font-size:14px;color:#9ca5b0}
+.record-workspace{display:grid;grid-template-columns:220px minmax(0,1fr);gap:34px;align-items:start}
+.record-navigation{position:sticky;top:22px;border-right:1px solid var(--record-line);padding-right:20px}
+.record-navigation-heading{padding:5px 12px 18px}.record-navigation-heading span{display:block;font-size:10px;color:#9ba4af;letter-spacing:.14em;font-weight:800;margin-bottom:7px}.record-navigation-heading strong{font-size:15px;color:#30373c}
+.record-navigation-list{display:flex;flex-direction:column;gap:3px}.record-nav-item{width:100%;display:flex;align-items:center;gap:12px;text-align:left;padding:11px 12px;border:0;border-radius:6px;background:transparent;color:#697789;cursor:pointer;font-size:12px;font-family:inherit;font-weight:650;transition:background .16s,color .16s}
+.record-nav-item:hover{background:#f2ede8;color:#30373c}.record-nav-item.is-active{background:#fff0e4;color:#c86120}.record-nav-item:focus-visible{outline:2px solid var(--record-accent);outline-offset:2px}
+.record-nav-index{color:#aab2bc;font-size:10px;font-weight:800;font-variant-numeric:tabular-nums}.record-nav-item.is-active .record-nav-index{color:#d17a49}
+.record-nav-count{margin-left:auto;font-size:10px;color:#8995a2;background:#f2ede8;border-radius:4px;padding:2px 6px}
+.record-navigation-note{margin:24px 12px 0;padding-top:16px;border-top:1px solid var(--record-line);font-size:11px;line-height:1.7;color:#9aa3af}
+.record-content{min-width:0}.record-panel[hidden]{display:none!important}.record-panel{background:#fff;border:1px solid var(--record-line);border-radius:10px;overflow:hidden;box-shadow:0 4px 18px rgba(35,48,66,.025)}
+.record-section-head{padding:23px 27px;border-bottom:1px solid var(--record-line);display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff}
+.record-section-head>div>span{display:block;font-size:10px;letter-spacing:.12em;color:#9aa3ae;font-weight:800;margin-bottom:6px}.record-section-head h3{margin:0;font-size:19px;font-weight:760;letter-spacing:-.025em;color:#30373c}.record-section-head h3 span{margin-left:10px;color:#a0aab5;font-size:12px;font-weight:600}.record-head-meta{font-size:11px;color:#9aa4b0}
+.record-overview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;padding:6px 27px 18px}.record-info{padding:21px 8px 19px 0;border-bottom:1px solid #e1dad4;min-width:0}.record-info:nth-child(odd){padding-right:20px}.record-info span{display:block;font-size:10px;letter-spacing:.085em;color:#99a2ae;font-weight:750;margin-bottom:9px}.record-info strong{display:block;color:#3d4449;font-size:13px;font-weight:700;overflow-wrap:anywhere}.record-info small{display:block;color:#8b96a4;font-size:11px;margin-top:5px;overflow-wrap:anywhere}
+.record-subsection{padding:21px 27px 25px;border-top:1px solid var(--record-line)}.record-subsection h4{margin:0 0 15px;font-size:13px;color:#3d4449}.record-phase-row{display:flex;justify-content:space-between;align-items:center;gap:15px;border-top:1px solid #e1dad4;padding:13px 0}.record-phase-name strong,.record-person strong{display:block;font-size:12px;color:#3d4449}.record-phase-name small,.record-person small{display:block;font-size:11px;color:#929dab;margin-top:5px}.record-phase-status{font-size:10px;color:#8a5b3c;background:#fff6ef;padding:5px 8px;border-radius:4px;white-space:nowrap}
+.record-person{display:flex;gap:11px;align-items:center;padding:10px 0}.record-person-avatar{display:grid;place-items:center;width:31px;height:31px;border-radius:7px;background:#f2ede8;color:#637083;font-weight:800;font-size:12px}
+.admin-history-record{padding:23px 27px;border-bottom:1px solid var(--record-line);background:#fff}.admin-history-record:last-of-type{border-bottom:0}.admin-history-record-title{font-size:13px;font-weight:750;color:#303c4e;margin:0 0 17px}.admin-history-record dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 26px;margin:0 0 15px}.admin-history-record dt{font-size:10px;color:#9aa4af;text-transform:uppercase;letter-spacing:.08em;font-weight:750}.admin-history-record dd{font-size:12px;line-height:1.65;color:#4b596a;margin:6px 0 0;overflow-wrap:anywhere;white-space:pre-wrap}
+.admin-history-record a,.admin-milestone-row a{display:inline-block;font-size:11px;color:#c86120;text-decoration:none;font-weight:750;margin:5px 14px 5px 0}.admin-history-record a:hover,.admin-milestone-row a:hover{text-decoration:underline}
+.admin-history-versions{margin-top:13px;border-top:1px dashed #e1dad4;padding-top:12px;font-size:11px;color:#7b8795}.admin-history-versions>div{padding:5px 0}
+.admin-milestone-row{padding:13px 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap;border-top:1px solid #e1dad4}.admin-milestone-row strong{font-size:12px;color:#3d4449}.admin-milestone-row span{font-size:11px;color:#85909d}.admin-history-empty,.record-empty{margin:0;padding:23px 27px;color:#9aa4b0;font-size:12px;line-height:1.6}.record-subsection .record-empty{padding:6px 0}
+.record-bottom-note{font-size:11px;color:#a0a9b4;line-height:1.7;margin-top:18px}
+@media(max-width:1150px){.record-shell{padding:26px 22px 60px}.record-workspace{grid-template-columns:185px minmax(0,1fr);gap:20px}.record-navigation{padding-right:12px}.record-stats>div{padding:16px 12px}}
+@media(max-width:800px){.record-header{grid-template-columns:1fr;gap:18px}.record-progress-block{border-left:0;border-top:1px solid var(--record-line);padding:17px 0 0}.record-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.record-stats>div{border-bottom:1px solid var(--record-line)}.record-workspace{grid-template-columns:1fr;gap:20px}.record-navigation{position:static;border:0;padding:0}.record-navigation-heading,.record-navigation-note{display:none}.record-navigation-list{display:flex;flex-direction:row;overflow-x:auto;padding:0 0 8px;gap:6px}.record-nav-item{flex:none;width:auto;border:1px solid var(--record-line);white-space:nowrap;padding:10px 12px}.record-nav-item.is-active{border-color:#efc7a8}}
+@media(max-width:520px){.record-shell{padding:18px 13px 45px}.record-header h2{font-size:29px}.record-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.record-stats>div{border-right:1px solid var(--record-line)}.record-overview-grid,.admin-history-record dl{grid-template-columns:1fr}.record-section-head,.record-subsection,.admin-history-record{padding:19px}.record-overview-grid{padding:0 19px 15px}.record-info{padding:16px 0!important}.record-section-head h3{font-size:17px}}
+
+
+/* ARCHITRACK PROJECT RECORDS — FINAL VISUAL ALIGNMENT */
+.record-shell { --record-line: #d8d0c9; --record-accent: #df6e24; --record-ink: #30373c; --record-muted: #757d82; }
+.record-breadcrumb { margin-bottom: 15px; }
+.record-header { padding: 22px 27px; background: #faf8f5; border: 1px solid #d8d0c9; border-left: 4px solid #df6e24; border-radius: 4px; }
+.record-header h2 { color: #30373c; font-weight: 700; letter-spacing: -1px; }
+.record-progress-block { border-left-color: #d8d0c9; }
+.record-progress-block strong { color: #30373c; }
+.record-stats { border-radius: 3px; background: #faf8f5; margin: 12px 0 18px; }
+.record-stats > div { padding: 15px 18px; }
+.record-stats strong { font-size: 23px; }
+.record-workspace { grid-template-columns: 205px minmax(0, 1fr); gap: 18px; }
+.record-navigation { border: 1px solid #d8d0c9; background: #faf8f5; border-radius: 3px; padding: 12px 9px; top: 15px; }
+.record-navigation-heading { padding: 8px 10px 15px; }
+.record-navigation-note { margin: 16px 10px 6px; }
+.record-nav-item { border-radius: 2px; padding: 11px 10px; }
+.record-nav-item.is-active { background: #fff0e4; box-shadow: inset 3px 0 #df6e24; }
+.record-panel { border-color: #d8d0c9; background: #faf8f5; border-radius: 3px; box-shadow: none; }
+.record-section-head { background: #faf8f5; padding: 20px 24px; border-bottom-color: #d8d0c9; }
+.record-section-head h3 { color: #30373c; font-size: 20px; }
+.record-overview-grid { padding: 4px 24px 12px; }
+.record-info { border-bottom-color: #e1dad4; }
+.record-info strong { color: #30373c; }
+.record-subsection { padding: 20px 24px; border-top-color: #d8d0c9; }
+.record-phase-row { border-top-color: #e1dad4; }
+.admin-history-record { background: #faf8f5; border-bottom-color: #e1dad4; padding: 20px 24px; }
+.admin-history-record dl { gap: 15px 25px; }
+.admin-history-record dd { color: #5a6267; }
+.record-preservation-note { background: #fff7ef; border-color: #df6e24; }
+@media(max-width:800px) {
+  .record-workspace { grid-template-columns: 1fr; }
+  .record-navigation { position: static; padding: 10px; }
+  .record-navigation-list { flex-direction: row; }
+  .record-nav-item.is-active { box-shadow: inset 0 -3px #df6e24; }
+}
+@media(max-width:520px) {
+  .record-header { padding: 20px 17px; }
+  .record-section-head, .record-subsection, .admin-history-record { padding: 17px; }
+  .record-overview-grid { padding: 0 17px 12px; }
+}

@@ -52,6 +52,13 @@ class ArchitectProjectMeetingController extends Controller
 
     ) {
 
+        abort_unless(
+            auth()->check()
+                && auth()->user()->role === 'architect'
+                && auth()->user()->status === 'active',
+            403
+        );
+
         return Project::where(
 
             'id',
@@ -99,6 +106,11 @@ class ArchitectProjectMeetingController extends Controller
                 }
 
             )
+
+            ->whereHas('architect', function ($architectQuery) {
+                $architectQuery->where('role', 'architect')
+                    ->where('status', 'active');
+            })
 
             ->with($with)
 

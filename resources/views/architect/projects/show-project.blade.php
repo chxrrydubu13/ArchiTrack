@@ -28,6 +28,67 @@
 
 
     <style>
+    .workspace-logout-form { margin-left:auto; }
+    .workspace-logout-button { border:1px solid #e4d7cb; background:#fff; color:#a94e20; border-radius:9px; padding:10px 16px; font-weight:700; cursor:pointer; }
+    .workspace-logout-button:hover { background:#fff3e9; }
+    .workspace-request-count { display:inline-flex; align-items:center; justify-content:center; min-width:20px; height:20px; padding:0 6px; margin-left:7px; border-radius:20px; background:#e66b27; color:#fff; font-size:11px; font-weight:800; }
+    #project-chat .messenger-drawer-section-content .meetings-panel { display:block !important; width:100%; min-width:0; padding:0; margin:0; background:transparent; }
+    #project-chat .messenger-drawer-section-content .meetings-panel .section-header { display:flex; flex-wrap:wrap; gap:10px; align-items:start; }
+    #project-chat .messenger-drawer-section-content .meetings-panel .section-header h2 { font-size:17px; }
+    #project-chat .messenger-drawer-section-content .meetings-panel .section-header p { font-size:12px; }
+    #project-chat .messenger-drawer-section-content .meetings-panel * { max-width:100%; box-sizing:border-box; }
+    #project-chat .messenger-drawer-section-content .meetings-panel input,
+    #project-chat .messenger-drawer-section-content .meetings-panel select,
+    #project-chat .messenger-drawer-section-content .meetings-panel textarea { min-width:0; }
+
+/* File-upload modals: scoped layout repair; other workspace sections unchanged */
+#versionModal .upload-modal-card, #uploadModal .upload-modal-card {
+  box-sizing: border-box; width: min(680px, calc(100vw - 32px)); max-width: 680px;
+  max-height: min(90vh, 850px); overflow-y: auto; overflow-x: hidden;
+}
+#versionModal .upload-modal-header, #uploadModal .upload-modal-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 18px; padding: 26px 28px 20px;
+}
+#versionModal .upload-modal-header > div, #uploadModal .upload-modal-header > div {
+  flex: 1; min-width: 0;
+}
+#versionModal .upload-modal-header p, #uploadModal .upload-modal-header p {
+  overflow-wrap: anywhere; line-height: 1.6;
+}
+#versionModal .modal-close, #uploadModal .modal-close {
+  flex: 0 0 42px; width: 42px; height: 42px;
+}
+#versionModal .version-current-file {
+  display: grid; grid-template-columns: 100px minmax(0,1fr); gap: 5px 18px;
+  align-items: center; margin: 0 28px 22px; padding: 16px 18px;
+  border: 1px solid #e5e0d9; border-radius: 12px; background: #f7f5f1;
+}
+#versionModal .version-current-file > span {
+  grid-row: 1 / span 2; font-size: 11px; font-weight: 800;
+  letter-spacing: .07em; color: #bc5b21;
+}
+#versionModal .version-current-file > strong {
+  display: block; min-width: 0; overflow-wrap: anywhere;
+  font-size: 14px; line-height: 1.45; color: #273747;
+}
+#versionModal .version-current-file > small {
+  display: block; min-width: 0; font-size: 12px; line-height: 1.45;
+  color: #677585; overflow-wrap: anywhere;
+}
+#versionModal .upload-form, #uploadModal .upload-form { padding: 0 28px 26px; }
+#versionModal .upload-drop-label, #uploadModal .upload-drop-label { max-width: 100%; overflow-wrap: anywhere; }
+#versionModal .upload-drop-label strong, #uploadModal .upload-drop-label strong {
+  display: block; max-width: 100%; overflow-wrap: anywhere;
+}
+#uploadModal #selectedFileText { overflow-wrap: anywhere; max-height: 110px; overflow-y: auto; }
+@media (max-width: 520px) {
+  #versionModal .upload-modal-header, #uploadModal .upload-modal-header { padding: 20px 18px 16px; }
+  #versionModal .upload-form, #uploadModal .upload-form { padding: 0 18px 20px; }
+  #versionModal .version-current-file { margin: 0 18px 18px; grid-template-columns: 1fr; gap: 7px; }
+  #versionModal .version-current-file > span { grid-row: auto; }
+}
+
         /* =========================================================
            TWO-WAY MEETING APPROVAL
         ========================================================= */
@@ -55,7 +116,7 @@
         .meeting-approval-banner span {
             display: block;
             color: #65717b;
-            font-size: 14pxNone;
+            font-size: 13px;
             line-height: 1.55;
         }
 
@@ -73,7 +134,7 @@
             border-radius: 2px;
             background: #ffffff;
             color: #39434c;
-            font-size: 14pxNone;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
         }
@@ -166,7 +227,7 @@
 .revision-attachment-heading p {
     margin: 0;
     color: #7a8491;
-    font-size: 14pxNone;
+    font-size: 13px;
     line-height: 1.45;
 }
 
@@ -285,7 +346,7 @@
 .revision-attachment-error {
     margin-top: 7px;
     color: #c0392b;
-    font-size: 14pxNone;
+    font-size: 13px;
     font-weight: 600;
 }
 
@@ -417,8 +478,186 @@
     }
 }
 
+
+/* Meetings: comfortable, readable Project Info workspace */
+#project-chat .messenger-info-drawer { width:min(680px, 96%) !important; max-width:calc(100% - 12px); }
+#project-chat .messenger-drawer-body { overflow-y:auto; overflow-x:hidden; min-height:0; padding-bottom:24px; }
+#project-chat .messenger-drawer-section-content { padding:0 20px 20px; }
+#project-chat .messenger-drawer-section-content .meetings-panel { width:100% !important; overflow:visible; }
+#project-chat .meetings-panel .section-header { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 0 16px; }
+#project-chat .meetings-panel .section-header > div { flex:1 1 260px; min-width:0; }
+#project-chat .meetings-panel .section-header h2 { font-size:22px !important; line-height:1.25; margin:5px 0 7px; }
+#project-chat .meetings-panel .section-header p { font-size:13px !important; line-height:1.55; max-width:400px; }
+#project-chat .meetings-panel .meeting-create-button { flex-shrink:0; white-space:nowrap; padding:11px 15px; border-radius:10px; }
+#project-chat .meetings-panel .meeting-summary-grid { display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)) !important; gap:10px !important; margin:12px 0 20px; }
+#project-chat .meetings-panel .meeting-summary-card { min-width:0; padding:13px 12px !important; border-radius:12px; }
+#project-chat .meetings-panel .meeting-summary-card strong { font-size:23px; display:block; margin:4px 0; }
+#project-chat .meetings-panel .meeting-summary-card p { font-size:11px; line-height:1.35; }
+#project-chat .meetings-panel .meeting-list { display:flex; flex-direction:column; gap:14px; }
+#project-chat .meetings-panel .meeting-card { min-width:0; width:100%; padding:18px !important; border-radius:15px; box-shadow:0 2px 12px rgba(30,25,20,.045); }
+#project-chat .meetings-panel .meeting-simple-row { display:flex; align-items:flex-start; flex-wrap:wrap; gap:13px; }
+#project-chat .meetings-panel .meeting-date-block { flex:0 0 66px; min-width:66px; }
+#project-chat .meetings-panel .meeting-simple-info { flex:1 1 210px; min-width:0; overflow-wrap:anywhere; }
+#project-chat .meetings-panel .meeting-simple-info h3 { font-size:16px; line-height:1.4; }
+#project-chat .meetings-panel .meeting-simple-actions { flex:1 1 100%; display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+#project-chat .meetings-panel .meeting-details-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+#project-chat .meetings-panel .meeting-approval-actions { display:flex; flex-wrap:wrap; gap:8px; }
+#project-chat .meetings-panel .meeting-approval-action { white-space:normal; min-height:38px; }
+#project-chat .meetings-panel .meeting-expanded-details { overflow-wrap:anywhere; }
+@media (max-width:700px) {
+  #project-chat .messenger-info-drawer { width:100% !important; max-width:100%; border-radius:0; }
+  #project-chat .messenger-drawer-section-content { padding:0 12px 16px; }
+  #project-chat .meetings-panel .section-header { align-items:stretch; }
+  #project-chat .meetings-panel .meeting-create-button { width:100%; }
+  #project-chat .meetings-panel .meeting-summary-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  #project-chat .meetings-panel .meeting-details-grid { grid-template-columns:1fr; }
+  #project-chat .meetings-panel .meeting-card { padding:12px !important; }
+}
 </style>
 
+<style>
+
+/* ARCHITRACK — legible, spacious phase roadmap redesign */
+.project-phases-panel {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #263244;
+  -webkit-font-smoothing: antialiased;
+}
+.project-phases-panel, .project-phases-panel * { box-sizing: border-box; }
+.project-phases-panel .standard-phase-card {
+  background: #fff !important;
+  border: 1px solid #e4e9ef !important;
+  border-radius: 18px !important;
+  box-shadow: 0 4px 18px rgba(20,34,55,.045) !important;
+  margin-bottom: 18px !important;
+  overflow: visible;
+}
+.project-phases-panel .standard-phase-card.standard-phase-in_progress {
+  border-color: #edaa7b !important;
+  box-shadow: 0 5px 24px rgba(210,101,36,.09) !important;
+}
+.project-phases-panel .standard-phase-card.standard-phase-completed {
+  border-color: #c9e4d4 !important;
+}
+.project-phases-panel .standard-phase-card.standard-phase-locked {
+  opacity: 1 !important;
+  filter: none !important;
+  background: #f6f7f9 !important;
+  border-color: #e1e4e8 !important;
+  box-shadow: none !important;
+}
+.project-phases-panel .standard-phase-card.standard-phase-locked .standard-phase-title h3,
+.project-phases-panel .standard-phase-card.standard-phase-locked .standard-phase-title > p {
+  color: #89919d !important;
+}
+.project-phases-panel .standard-phase-content { min-width: 0; }
+.project-phases-panel .standard-phase-top.phase-dropdown-trigger {
+  gap: 14px !important;
+  padding: 20px 22px !important;
+  border-radius: 17px !important;
+}
+.project-phases-panel .standard-phase-title { min-width: 0; }
+.project-phases-panel .standard-phase-title h3 {
+  font-family: Inter, "Segoe UI", Arial, sans-serif !important;
+  font-size: clamp(19px, 1.65vw, 24px) !important;
+  line-height: 1.32 !important;
+  font-weight: 750 !important;
+  letter-spacing: -.02em !important;
+  margin: 7px 0 8px !important;
+  overflow-wrap: anywhere;
+  color: #202b3a !important;
+}
+.project-phases-panel .standard-phase-title > p {
+  color: #5f6d7e !important;
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  font-weight: 400 !important;
+  margin: 0 !important;
+}
+.project-phases-panel .phase-small-label {
+  font-size: 12px !important;
+  font-weight: 750 !important;
+  letter-spacing: .08em !important;
+  color: #bc5a26 !important;
+}
+.project-phases-panel .phase-status {
+  font-family: Inter, "Segoe UI", Arial, sans-serif !important;
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  white-space: normal !important;
+  text-align: center;
+}
+.project-phases-panel .phase-dropdown-details {
+  border-top: 1px solid #edf0f4;
+  padding-top: 18px;
+}
+.project-phases-panel .phase-progress-dashboard,
+.project-phases-panel .phase-final-completion {
+  background: #fafbfc !important;
+  border: 1px solid #e5eaf0 !important;
+  border-radius: 15px !important;
+  padding: 20px !important;
+  margin-bottom: 20px !important;
+}
+.project-phases-panel .phase-completion-blocked {
+  background: #fff8f1 !important;
+  border: 1px solid #f2d8bd !important;
+  border-radius: 12px !important;
+  padding: 17px 19px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.project-phases-panel .phase-completion-blocked strong {
+  color: #854314 !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+}
+.project-phases-panel .phase-completion-blocked span,
+.project-phases-panel .phase-final-note small {
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+  color: #685d55 !important;
+}
+.project-phases-panel .phase-final-note label {
+  display: block;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #263244 !important;
+  margin-bottom: 9px;
+}
+.project-phases-panel .phase-final-note textarea {
+  display: block;
+  width: 100% !important;
+  min-height: 120px;
+  padding: 13px 15px !important;
+  font: 14px/1.6 Inter, "Segoe UI", Arial, sans-serif !important;
+  color: #273346;
+  border: 1px solid #cdd6e0 !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  resize: vertical;
+}
+.project-phases-panel .phase-final-note textarea:focus {
+  outline: 3px solid rgba(225,112,45,.15) !important;
+  border-color: #d97537 !important;
+}
+.project-phases-panel .phase-final-note small { display: block; margin-top: 9px; }
+.project-phases-panel button,
+.project-phases-panel input,
+.project-phases-panel select,
+.project-phases-panel textarea { font-family: Inter, "Segoe UI", Arial, sans-serif; }
+@media (max-width: 760px) {
+  .project-phases-panel .standard-phase-top.phase-dropdown-trigger { padding: 16px !important; gap: 10px !important; }
+  .project-phases-panel .standard-phase-title h3 { font-size: 19px !important; }
+  .project-phases-panel .standard-phase-title > p { font-size: 13px !important; }
+  .project-phases-panel .phase-progress-dashboard,
+  .project-phases-panel .phase-final-completion { padding: 15px !important; }
+}
+
+</style>
 </head>
 
 
@@ -434,7 +673,9 @@
     */
 
     $activeTab =
-        request('tab', 'overview');
+        request('tab', 'overview') === 'meetings'
+            ? 'messages'
+            : request('tab', 'overview');
 
 
     /*
@@ -488,6 +729,9 @@
     | PRESENCE
     |--------------------------------------------------------------------------
     */
+
+    $workspacePendingRevisions = collect($revisions ?? [])->where('status', 'pending')->count();
+    $workspacePendingMeetings = collect($meetings ?? [])->where('status', 'pending')->count();
 
     $presenceStatus =
         auth()->user()->presence_status
@@ -544,6 +788,13 @@
 
             </a>
 
+
+            <form method="POST" action="{{ route('logout') }}" class="workspace-logout-form">
+                @csrf
+                <button type="submit" class="workspace-logout-button" title="Log out">
+                    <span>Logout</span>
+                </button>
+            </form>
 
             <div class="header-brand">
 
@@ -934,6 +1185,9 @@
             </span>
 
             Messages
+            @if($workspacePendingMeetings > 0)
+                <span class="workspace-request-count" title="Pending meeting requests">{{ $workspacePendingMeetings }}</span>
+            @endif
 
         </a>
 
@@ -962,43 +1216,9 @@
             </span>
 
             Revisions
-
-        </a>
-
-
-
-        <a
-            href="{{ route(
-                'architect.projects.show',
-                ['id' => $project->id]
-            ) }}?tab=meetings"
-            class="
-                workspace-tab
-                {{ $activeTab === 'meetings' ? 'active' : '' }}
-            "
-        >
-
-            <span class="tab-icon">
-
-                <svg viewBox="0 0 24 24">
-
-                    <rect
-                        x="3"
-                        y="5"
-                        width="18"
-                        height="16"
-                        rx="2"
-                    />
-
-                    <path d="M8 3v4"/>
-                    <path d="M16 3v4"/>
-                    <path d="M3 10h18"/>
-
-                </svg>
-
-            </span>
-
-            Meetings
+            @if($workspacePendingRevisions > 0)
+                <span class="workspace-request-count">{{ $workspacePendingRevisions }}</span>
+            @endif
 
         </a>
 
@@ -2652,6 +2872,328 @@
 
 
 
+        @if($isLeadArchitect)
+
+            <section class="financial-management-card">
+
+                <div class="financial-management-head">
+
+                    <div>
+
+                        <span class="section-label">
+                            LEAD ARCHITECT CONTROL
+                        </span>
+
+                        <h3>
+                            Project Budget
+                        </h3>
+
+                        <p>
+                            Set the approved project budget once. Once saved, it cannot be edited.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                @if($project->budget === null)
+                <form
+                    method="POST"
+                    action="{{ route(
+                        'architect.projects.budget.update',
+                        ['id' => $project->id]
+                    ) }}"
+                    class="financial-budget-form"
+                >
+
+                    @csrf
+                    @method('PUT')
+
+
+                    <div class="financial-field">
+
+                        <label for="project_budget">
+                            Budget Amount
+                        </label>
+
+                        <div class="financial-money-input">
+
+                            <span>
+                                ₱
+                            </span>
+
+                            <input
+                                type="number"
+                                name="budget"
+                                id="project_budget"
+                                value="{{ old(
+                                    'budget',
+                                    $project->budget
+                                ) }}"
+                                min="0"
+                                max="999999999.99"
+                                step="0.01"
+                                placeholder="0.00"
+                            >
+
+                        </div>
+
+                        <small>
+                            Leave this blank if the project has no recorded budget yet.
+                        </small>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="financial-primary-button"
+                    >
+                        Save Budget
+                    </button>
+
+                </form>
+                @else
+                    <div class="financial-field">
+                        <label>Approved Budget (Locked)</label>
+                        <div class="financial-money-input">
+                            <span>₱</span>
+                            <input type="text"
+                                   value="{{ number_format((float) $project->budget, 2) }}"
+                                   readonly
+                                   aria-label="Approved project budget, locked">
+                        </div>
+                        <small>
+                            This budget has already been saved and can no longer be edited.
+                        </small>
+                    </div>
+                @endif
+
+            </section>
+
+
+
+            <section class="financial-management-card">
+
+                <div class="financial-management-head">
+
+                    <div>
+
+                        <span class="section-label">
+                            NEW EXPENSE
+                        </span>
+
+                        <h3>
+                            Record Project Expense
+                        </h3>
+
+                        <p>
+                            Add an expense that belongs to this project.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <details class="financial-expense-collapse">
+                    <summary class="financial-expense-collapse-toggle">
+                        <span class="financial-expense-collapse-title">＋ &nbsp; Record a New Expense</span>
+                        <span class="financial-expense-collapse-action">
+                            <span class="financial-expense-label-closed">Click to expand</span>
+                            <span class="financial-expense-label-open">Click to minimize</span>
+                        </span>
+                    </summary>
+                <form
+                    method="POST"
+                    action="{{ route(
+                        'architect.projects.expenses.store',
+                        ['id' => $project->id]
+                    ) }}?tab=financial"
+                    class="financial-expense-form"
+                    @if($financialRemainingBudget !== null)
+                        onsubmit="return validateExpenseBudget(this, {{ json_encode(max(0, (float) $financialRemainingBudget)) }})"
+                    @endif
+                >
+
+                    @csrf
+
+
+                    <div class="financial-form-grid">
+
+
+                        <div class="financial-field">
+
+                            <label for="expense_category">
+                                Category
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                name="category"
+                                id="expense_category"
+                                value="{{ old('category') }}"
+                                maxlength="100"
+                                list="expenseCategories"
+                                placeholder="Example: Materials"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="financial-field">
+
+                            <label for="expense_date">
+                                Expense Date
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="date"
+                                name="expense_date"
+                                id="expense_date"
+                                min="{{ now('Asia/Manila')->format('Y-m-d') }}"
+                                value="{{ old(
+                                    'expense_date',
+                                    now('Asia/Manila')->format('Y-m-d')
+                                ) }}"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="financial-field financial-field-wide">
+
+                            <label for="expense_description">
+                                Description
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                name="description"
+                                id="expense_description"
+                                value="{{ old('description') }}"
+                                maxlength="255"
+                                placeholder="Describe the expense"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="financial-field">
+
+                            <label for="expense_amount">
+                                Amount
+                                <span>*</span>
+                            </label>
+
+                            <div class="financial-money-input">
+
+                                <span>
+                                    ₱
+                                </span>
+
+                                <input
+                                    type="number"
+                                    name="amount"
+                                    id="expense_amount"
+                                    value="{{ old('amount') }}"
+                                    min="0.01"
+                                    max="999999999.99"
+                                    step="0.01"
+                                    placeholder="0.00"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="financial-field financial-field-wide">
+
+                            <label for="expense_notes">
+                                Notes
+                            </label>
+
+                            <textarea
+                                name="notes"
+                                id="expense_notes"
+                                rows="3"
+                                maxlength="2000"
+                                placeholder="Optional additional notes..."
+                            >{{ old('notes') }}</textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    @if($financialRemainingBudget !== null)
+                        <p class="financial-budget-hint" style="margin: 10px 0; font-size: 13px; color: #675d55;">
+                            Available budget: ₱{{ number_format(max(0, (float) $financialRemainingBudget), 2) }}
+                        </p>
+                    @endif
+
+                    <div class="financial-form-actions">
+
+                        <button
+                            type="submit"
+                            class="financial-primary-button"
+                        >
+                            Add Expense
+                        </button>
+
+                    </div>
+
+                </form>
+
+
+                <datalist id="expenseCategories">
+                    <option value="Equipment"></option>
+                    <option value="Labor"></option>
+                    <option value="Materials"></option>
+                    <option value="Miscellaneous"></option>
+                    <option value="Permits"></option>
+                    <option value="Printing"></option>
+                    <option value="Professional Fees"></option>
+                    <option value="Supplies"></option>
+                    <option value="Transportation"></option>
+                </datalist>
+
+                </details>
+
+            </section>
+
+        @else
+
+            <div class="financial-collaborator-note">
+
+                <strong>
+                    Financial records are view only.
+                </strong>
+
+                <span>
+                    Only the lead architect can set the project budget
+                    or add and delete project expenses.
+                </span>
+
+            </div>
+
+        @endif
+
+
+
         <div class="financial-summary-grid">
 
 
@@ -2785,293 +3327,24 @@
 
 
 
-        @if($isLeadArchitect)
 
-            <section class="financial-management-card">
-
-                <div class="financial-management-head">
-
-                    <div>
-
-                        <span class="section-label">
-                            LEAD ARCHITECT CONTROL
-                        </span>
-
-                        <h3>
-                            Project Budget
-                        </h3>
-
-                        <p>
-                            Set or update the approved budget for this project.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <form
-                    method="POST"
-                    action="{{ route(
-                        'architect.projects.budget.update',
-                        ['id' => $project->id]
-                    ) }}"
-                    class="financial-budget-form"
-                >
-
-                    @csrf
-                    @method('PUT')
-
-
-                    <div class="financial-field">
-
-                        <label for="project_budget">
-                            Budget Amount
-                        </label>
-
-                        <div class="financial-money-input">
-
-                            <span>
-                                ₱
-                            </span>
-
-                            <input
-                                type="number"
-                                name="budget"
-                                id="project_budget"
-                                value="{{ old(
-                                    'budget',
-                                    $project->budget
-                                ) }}"
-                                min="0"
-                                max="999999999.99"
-                                step="0.01"
-                                placeholder="0.00"
-                            >
-
-                        </div>
-
-                        <small>
-                            Leave this blank if the project has no recorded budget yet.
-                        </small>
-
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        class="financial-primary-button"
-                    >
-                        Save Budget
-                    </button>
-
-                </form>
-
-            </section>
-
-
-
-            <section class="financial-management-card">
-
-                <div class="financial-management-head">
-
-                    <div>
-
-                        <span class="section-label">
-                            NEW EXPENSE
-                        </span>
-
-                        <h3>
-                            Record Project Expense
-                        </h3>
-
-                        <p>
-                            Add an expense that belongs to this project.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <form
-                    method="POST"
-                    action="{{ route(
-                        'architect.projects.expenses.store',
-                        ['id' => $project->id]
-                    ) }}"
-                    class="financial-expense-form"
-                >
-
-                    @csrf
-
-
-                    <div class="financial-form-grid">
-
-
-                        <div class="financial-field">
-
-                            <label for="expense_category">
-                                Category
-                                <span>*</span>
-                            </label>
-
-                            <input
-                                type="text"
-                                name="category"
-                                id="expense_category"
-                                value="{{ old('category') }}"
-                                maxlength="100"
-                                list="expenseCategories"
-                                placeholder="Example: Materials"
-                                required
-                            >
-
-                        </div>
-
-
-
-                        <div class="financial-field">
-
-                            <label for="expense_date">
-                                Expense Date
-                                <span>*</span>
-                            </label>
-
-                            <input
-                                type="date"
-                                name="expense_date"
-                                id="expense_date"
-                                value="{{ old(
-                                    'expense_date',
-                                    now('Asia/Manila')->format('Y-m-d')
-                                ) }}"
-                                required
-                            >
-
-                        </div>
-
-
-
-                        <div class="financial-field financial-field-wide">
-
-                            <label for="expense_description">
-                                Description
-                                <span>*</span>
-                            </label>
-
-                            <input
-                                type="text"
-                                name="description"
-                                id="expense_description"
-                                value="{{ old('description') }}"
-                                maxlength="255"
-                                placeholder="Describe the expense"
-                                required
-                            >
-
-                        </div>
-
-
-
-                        <div class="financial-field">
-
-                            <label for="expense_amount">
-                                Amount
-                                <span>*</span>
-                            </label>
-
-                            <div class="financial-money-input">
-
-                                <span>
-                                    ₱
-                                </span>
-
-                                <input
-                                    type="number"
-                                    name="amount"
-                                    id="expense_amount"
-                                    value="{{ old('amount') }}"
-                                    min="0.01"
-                                    max="999999999.99"
-                                    step="0.01"
-                                    placeholder="0.00"
-                                    required
-                                >
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="financial-field financial-field-wide">
-
-                            <label for="expense_notes">
-                                Notes
-                            </label>
-
-                            <textarea
-                                name="notes"
-                                id="expense_notes"
-                                rows="3"
-                                maxlength="2000"
-                                placeholder="Optional additional notes..."
-                            >{{ old('notes') }}</textarea>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="financial-form-actions">
-
-                        <button
-                            type="submit"
-                            class="financial-primary-button"
-                        >
-                            Add Expense
-                        </button>
-
-                    </div>
-
-                </form>
-
-
-                <datalist id="expenseCategories">
-                    <option value="Materials"></option>
-                    <option value="Labor"></option>
-                    <option value="Permits"></option>
-                    <option value="Professional Fees"></option>
-                    <option value="Transportation"></option>
-                    <option value="Printing"></option>
-                    <option value="Supplies"></option>
-                    <option value="Equipment"></option>
-                    <option value="Miscellaneous"></option>
-                </datalist>
-
-            </section>
-
-        @else
-
-            <div class="financial-collaborator-note">
-
-                <strong>
-                    Financial records are view only.
-                </strong>
-
-                <span>
-                    Only the lead architect can set the project budget
-                    or add, edit, and delete project expenses.
-                </span>
-
-            </div>
-
-        @endif
-
-
-
-        <section class="financial-expense-register">
+<style>
+.financial-expense-collapse { margin-top: 12px; border: 2px solid #dc8c49; border-radius: 12px; overflow: hidden; background: #fff; }
+.financial-expense-collapse-toggle { cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 20px; background: #fff3e8; color: #693b1e; font-weight: 800; list-style: none; transition: background .2s ease; }
+.financial-expense-collapse-toggle::-webkit-details-marker { display: none; }
+.financial-expense-collapse-toggle:hover, .financial-expense-collapse-toggle:focus-visible { background: #ffe6d1; }
+.financial-expense-collapse-title { font-size: 15px; }
+.financial-expense-collapse-action { display: inline-flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 700; color: #9a4f19; }
+.financial-expense-chevron { display: inline-block; font-size: 23px; line-height: 1; transition: transform .2s ease; }
+.financial-expense-label-open { display: none; }
+.financial-expense-collapse[open] .financial-expense-label-open { display: inline; }
+.financial-expense-collapse[open] .financial-expense-label-closed { display: none; }
+.financial-expense-collapse[open] .financial-expense-chevron { transform: rotate(180deg); }
+.financial-expense-collapse[open] > .financial-expense-collapse-toggle { border-bottom: 1px solid #f0d6bf; }
+.financial-expense-collapse > .financial-expense-form { padding: 18px 20px 8px; }
+@media (max-width: 600px) { .financial-expense-collapse-toggle { padding: 14px; } .financial-expense-collapse-title { font-size: 13px; } .financial-expense-collapse-action { font-size: 11px; gap: 5px; } }
+</style>
+        <section id="recorded-expenses" class="financial-expense-register" style="scroll-margin-top: 90px;">
 
 
             <div class="financial-register-head">
@@ -3188,15 +3461,15 @@
 
                                             <div class="financial-row-actions">
 
+
                                                 <button
                                                     type="button"
                                                     class="financial-edit-button"
-                                                    onclick="toggleExpenseEdit(
-                                                        {{ $expense->id }}
-                                                    )"
+                                                    onclick="if (confirm('Do you want to edit this recorded expense?')) toggleExpenseEdit({{ $expense->id }})"
                                                 >
                                                     Edit
                                                 </button>
+
 
 
                                                 <form
@@ -3235,6 +3508,8 @@
                                 </tr>
 
 
+
+
                                 @if($isLeadArchitect)
 
                                     <tr
@@ -3248,6 +3523,7 @@
 
                                             <form
                                                 method="POST"
+                                                onsubmit="return confirm('Save changes to this recorded expense?')"
                                                 action="{{ route(
                                                     'architect.projects.expenses.update',
                                                     [
@@ -3293,6 +3569,7 @@
                                                         <input
                                                             type="date"
                                                             name="expense_date"
+                                                            min="{{ now('Asia/Manila')->format('Y-m-d') }}"
                                                             value="{{ $expense->expense_date
                                                                 ? $expense->expense_date->format('Y-m-d')
                                                                 : ''
@@ -3438,18 +3715,6 @@
 
 
     <script>
-
-        function toggleExpenseEdit(expenseId)
-        {
-            const row =
-                document.getElementById(
-                    'expenseEditRow' + expenseId
-                );
-
-
-            if (!row) {
-                return;
-            }
 
 
             row.classList.toggle(
@@ -3647,7 +3912,7 @@
             }
 
             .project-phases-panel .phase-small-label {
-                font-size: 14pxNone;
+                font-size: 13px;
                 font-weight: 800;
                 letter-spacing: .11em;
             }
@@ -4227,7 +4492,7 @@
                             standard-phase-locked
                         @endif
 
-                        @if($isCurrent || $isReady)
+                        @if($isCurrent)
                             phase-dropdown-open
                         @else
                             phase-dropdown-closed
@@ -4293,15 +4558,11 @@
                             class="standard-phase-top phase-dropdown-trigger"
                             role="button"
                             tabindex="0"
-                            aria-expanded="{{ ($isCurrent || $isReady) ? 'true' : 'false' }}"
+                            aria-expanded="{{ $isCurrent ? 'true' : 'false' }}"
                             aria-controls="phase-details-{{ $phase->id }}"
+                            aria-disabled="{{ $isLocked ? 'true' : 'false' }}"
                             onclick="toggleProjectPhase({{ $phase->id }}, this)"
-                            onkeydown="
-                                if (event.key === 'Enter' || event.key === ' ') {
-                                    event.preventDefault();
-                                    toggleProjectPhase({{ $phase->id }}, this);
-                                }
-                            "
+                            onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleProjectPhase({{ $phase->id }}, this); }"
                         >
 
 
@@ -4315,14 +4576,6 @@
 
                                         PHASE
                                         {{ $phase->phase_order }}
-
-                                    </span>
-
-
-                                    <span class="phase-weight-badge">
-
-                                        {{ $phaseWeight }}%
-                                        PROJECT VALUE
 
                                     </span>
 
@@ -4415,69 +4668,22 @@
 
 
 
-                        <!-- =================================================
-                            PROGRESS CONTRIBUTION
-                        ================================================== -->
+                        <div class="phase-dropdown-details" id="phase-details-{{ $phase->id }}">
 
-                        <div
-                            class="phase-dropdown-details"
-                            id="phase-details-{{ $phase->id }}"
-                        >
-
-                        <div class="phase-contribution">
-
-
-                            <div class="phase-contribution-copy">
-
-                                <span>
-                                    PROGRESS CONTRIBUTION
-                                </span>
-
-                                <strong>
-
-                                    @if($isCompleted)
-
-                                        {{ $phaseWeight }}%
-                                        earned
-
-                                    @else
-
-                                        {{ $phaseWeight }}%
-                                        when completed
-
-                                    @endif
-
-                                </strong>
-
+                        <!-- PHASE COMPLETION REQUIREMENT -->
+                        <div class="phase-completion-requirement" style="padding:14px 16px;margin:12px 0;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;">
+                            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+                                <strong style="font-size:13px;color:#334155;">Milestone completion</strong>
+                                <strong style="font-size:14px;color:#0f766e;">{{ $milestoneCount > 0 ? round(($fullyCompletedMilestones / $milestoneCount) * 100) : 0 }}% / 100%</strong>
                             </div>
-
-
-
-                            <div class="phase-contribution-track">
-
-                                <div
-                                    class="
-                                        phase-contribution-fill
-
-                                        {{ $isCompleted
-                                            ? 'completed'
-                                            : ''
-                                        }}
-                                    "
-                                    style="
-                                        width:
-                                        {{ $isCompleted
-                                            ? 100
-                                            : 0
-                                        }}%;
-                                    "
-                                ></div>
-
+                            <div style="height:7px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin-top:10px;">
+                                <div style="height:100%;width:{{ $milestoneCount > 0 ? round(($fullyCompletedMilestones / $milestoneCount) * 100) : 0 }}%;background:#0f766e;border-radius:99px;"></div>
                             </div>
-
+                            <small style="display:block;margin-top:9px;color:#64748b;line-height:1.5;">
+                                {{ $fullyCompletedMilestones }} of {{ $milestoneCount }} milestones completed with reports and supporting files.
+                                @if($isLocked) Finish the previous phase at 100% to unlock this phase. @endif
+                            </small>
                         </div>
-
-
 
                         <!-- =================================================
                             PHASE ACTION
@@ -4557,22 +4763,6 @@
                                             </strong>
 
                                         </div>
-
-
-
-                                        <div class="completed-proof-detail">
-
-                                            <span>
-                                                PROGRESS ADDED
-                                            </span>
-
-                                            <strong class="completed-added-progress">
-                                                +{{ $phaseWeight }}%
-                                            </strong>
-
-                                        </div>
-
-                                    </div>
 
 
 
@@ -5174,8 +5364,7 @@
                                             </strong>
 
                                             <span>
-                                                Every milestone must be completed with
-                                                a completion report and supporting proof.
+                                                The next phase stays locked until this phase reaches 100%. Every milestone needs a completion report, supporting proof file, and verified completion details.
                                             </span>
 
                                         </div>
@@ -5230,8 +5419,7 @@
 
 
                                                 <small>
-                                                    All milestones have been verified.
-                                                    Add a final phase summary before completion.
+                                                    100% milestone completion is required. Each milestone must have a completion report and supporting proof file. Add a detailed final phase summary as the phase completion record.
                                                 </small>
 
                                             </div>
@@ -5289,11 +5477,11 @@
 
                             @endif
 
-                        </div>
+                        </div><!-- /phase-action-area -->
 
-                        </div>
+                        </div><!-- /phase-dropdown-details -->
 
-                    </div>
+                    </div><!-- /standard-phase-content -->
 
                 </article>
 
@@ -5592,7 +5780,7 @@
 
                         <small>
                             JPG, JPEG, PNG, PDF, Word, or Excel file.
-                            Images up to 100 MB. Documents up to 10 MB.
+                            Up to 100 MB per file. Select multiple files at once.
                         </small>
 
                     </div>
@@ -7050,11 +7238,15 @@
                             ) }}"
                             enctype="multipart/form-data"
                             class="upload-form"
+                            id="newProjectFilesForm"
                         >
 
                             @csrf
-
-
+                            @if ($errors->any())
+                                <div role="alert" style="padding:12px 14px;margin-bottom:14px;background:#fff2ec;color:#9c351d;border:1px solid #f3c7b4;border-radius:8px;">
+                                    {{ $errors->first() }}
+                                </div>
+                            @endif
 
                             <div class="upload-form-group">
 
@@ -7069,7 +7261,8 @@
 
                                     <input
                                         type="file"
-                                        name="file"
+                                        multiple
+                                        name="files[]"
                                         id="projectFileInput"
                                         required
                                         accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx"
@@ -7099,18 +7292,18 @@
 
 
                                         <strong id="selectedFileName">
-                                            Choose Project File
+                                            Choose Project Files
                                         </strong>
 
 
                                         <span id="selectedFileText">
-                                            Click here to browse your computer
+                                            Click to select multiple files
                                         </span>
 
 
                                         <small>
                                             JPG, JPEG, PNG, PDF, Word, or Excel only.
-                                            Images up to 100 MB. Documents up to 10 MB.
+                                            Up to 100 MB per file. Select multiple files at once.
                                         </small>
 
                                     </label>
@@ -7204,7 +7397,7 @@
                                     type="submit"
                                     class="modal-upload"
                                 >
-                                    Upload File
+                                    Upload Selected Files
                                 </button>
 
                             </div>
@@ -7261,7 +7454,7 @@
                                         </div>
                                         <strong id="selectedVersionFileName">Choose Revised File</strong>
                                         <span id="selectedVersionFileText">Click here to browse your computer</span>
-                                        <small>JPG, JPEG, PNG, PDF, Word, or Excel only. Images up to 100 MB. Documents up to 10 MB.</small>
+                                        <small>JPG, JPEG, PNG, PDF, Word, or Excel only. Up to 100 MB per file. Upload one revised file (100 MB maximum).</small>
                                     </label>
                                 </div>
                             </div>
@@ -10907,7 +11100,7 @@
                                                     border-radius: 7px;
                                                     background: #f47a1f;
                                                     color: #fff;
-                                                    font-size: 14pxNone;
+                                                    font-size: 13px;
                                                     font-weight: 700;
                                                     text-decoration: none;
                                                 "
@@ -10932,7 +11125,7 @@
                                                     border-radius: 7px;
                                                     border: 1px solid rgba(0, 0, 0, 0.12);
                                                     color: inherit;
-                                                    font-size: 14pxNone;
+                                                    font-size: 13px;
                                                     font-weight: 700;
                                                     text-decoration: none;
                                                 "
@@ -11142,7 +11335,7 @@
                                             Upload Revised File
                                         </strong>
                                         <small id="revision_file_text_{{ $revision->id }}">
-                                            JPG, PNG, PDF, Word or Excel · Max 10 MB for documents
+                                            JPG, PNG, PDF, Word or Excel · Max 100 MB per file
                                         </small>
                                     </span>
 
@@ -11375,7 +11568,7 @@
             MEETINGS
         ================================================== -->
 
-        @if($activeTab === 'meetings')
+        @if($activeTab === 'messages')
 
             @php
                 $todayDate = now('Asia/Manila')->format('Y-m-d');
@@ -11389,6 +11582,7 @@
             <section
                 class="tab-panel meetings-panel"
                 id="project-meetings"
+                style="display:none"
             >
 
                 <div class="section-header">
@@ -13280,174 +13474,35 @@ function showSelectedVersionFile()
 
 function showSelectedFile()
 {
-    const input =
-        document.getElementById(
-            'projectFileInput'
-        );
-
-    const fileName =
-        document.getElementById(
-            'selectedFileName'
-        );
-
-    const fileText =
-        document.getElementById(
-            'selectedFileText'
-        );
-
-
-    if (
-        !input
-        ||
-        !input.files
-        ||
-        input.files.length === 0
-    ) {
-        return;
-    }
-
-
-    const file =
-        input.files[0];
-
-
-    if (fileName) {
-
-        fileName.textContent =
-            file.name;
-
-    }
-
-
-    if (fileText) {
-
-        fileText.textContent =
-            formatFileSize(
-                file.size
-            );
-
-    }
+    const input = document.getElementById('projectFileInput');
+    const title = document.getElementById('selectedFileName');
+    const detail = document.getElementById('selectedFileText');
+    if (!input || !input.files || !input.files.length) return;
+    const files = Array.from(input.files);
+    if (title) title.textContent = files.length === 1 ? files[0].name : `${files.length} files selected`;
+    if (detail) detail.textContent = files.map(file => `${file.name} (${formatFileSize(file.size)})`).join(' • ');
 }
-
-
-/* =========================================================
-   FRONTEND FILE VALIDATION
-========================================================= */
 
 function validateSelectedUpload(input)
 {
-    if (
-        !input
-        ||
-        !input.files
-        ||
-        input.files.length === 0
-    ) {
-        return true;
+    if (!input || !input.files || !input.files.length) return true;
+    const allowed = ['jpg','jpeg','png','pdf','doc','docx','xls','xlsx'];
+    const maxBytes = 100 * 1024 * 1024;
+    for (const file of input.files) {
+        const ext = (file.name.split('.').pop() || '').toLowerCase();
+        if (!allowed.includes(ext)) {
+            alert(`${file.name}: unsupported file type.`);
+            input.value = '';
+            return false;
+        }
+        if (file.size > maxBytes) {
+            alert(`${file.name}: exceeds the 100 MB per-file limit.`);
+            input.value = '';
+            return false;
+        }
     }
-
-
-    const file =
-        input.files[0];
-
-
-    const allowedExtensions = [
-        'jpg',
-        'jpeg',
-        'png',
-        'pdf',
-        'doc',
-        'docx',
-        'xls',
-        'xlsx'
-    ];
-
-
-    const imageExtensions = [
-        'jpg',
-        'jpeg',
-        'png'
-    ];
-
-
-    const fileName =
-        file.name || '';
-
-
-    const extension =
-        fileName.includes('.')
-            ? fileName
-                .split('.')
-                .pop()
-                .toLowerCase()
-            : '';
-
-
-    if (
-        !allowedExtensions.includes(
-            extension
-        )
-    ) {
-
-        alert(
-            'Only JPG, JPEG, PNG, PDF, DOC, DOCX, XLS, and XLSX files are allowed.'
-        );
-
-        input.value = '';
-
-        return false;
-    }
-
-
-    const maxImageSize =
-        100 * 1024 * 1024;
-
-
-    const maxDocumentSize =
-        10 * 1024 * 1024;
-
-
-    const isImage =
-        imageExtensions.includes(
-            extension
-        );
-
-
-    if (
-        isImage
-        &&
-        file.size > maxImageSize
-    ) {
-
-        alert(
-            'Images cannot be larger than 100 MB.'
-        );
-
-        input.value = '';
-
-        return false;
-    }
-
-
-    if (
-        !isImage
-        &&
-        file.size > maxDocumentSize
-    ) {
-
-        alert(
-            'Documents cannot be larger than 10 MB.'
-        );
-
-        input.value = '';
-
-        return false;
-    }
-
-
     return true;
 }
-
 
 /* =========================================================
    FILE SIZE FORMATTER
@@ -15252,8 +15307,8 @@ function showRevisionFileName(input, revisionId)
     if (file.size > maxSize) {
         alert(
             isImage
-                ? 'Images cannot be larger than 100 MB.'
-                : 'Documents cannot be larger than 10 MB.'
+                ? 'Files cannot be larger than 100 MB.'
+                : 'Files cannot be larger than 100 MB.'
         );
 
         input.value = '';
@@ -15359,6 +15414,21 @@ document.addEventListener('DOMContentLoaded', function () {
         true
     );
 
+    const meetingsPanel = document.getElementById('project-meetings');
+    if (meetingsPanel) {
+        meetingsPanel.style.display = '';
+        const meetingModal = document.getElementById('meetingModal');
+        if (meetingModal) {
+            // Keep the fixed-position modal outside the transformed drawer.
+            document.body.appendChild(meetingModal);
+        }
+        createDrawerSection(
+            'Meetings' + (@json($workspacePendingMeetings) > 0 ? ' (' + @json($workspacePendingMeetings) + ' pending)' : ''),
+            meetingsPanel,
+            @json(request('tab') === 'meetings' || request('panel') === 'meetings')
+        );
+    }
+
     createDrawerSection(
         'AI Activity & History',
         aiPanel,
@@ -15381,6 +15451,11 @@ document.addEventListener('DOMContentLoaded', function () {
         drawer.setAttribute('aria-hidden', 'true');
     }
 
+    if (@json(request('tab') === 'meetings' || request('panel') === 'meetings')) {
+        projectChat.classList.add('messenger-drawer-open');
+        drawer.setAttribute('aria-hidden', 'false');
+    }
+
     overlay.addEventListener('click', closeDrawer);
 
     drawer
@@ -15395,6 +15470,57 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<style>
+/* ARCHITRACK — unified phase interface: ALL phase states, including locked 4–6 */
+.project-phases-panel {width:100%!important;max-width:1500px!important;margin:0 auto!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;color:#273142!important}
+.project-phases-panel,.project-phases-panel * {box-sizing:border-box!important}
+.project-phases-panel .standard-phase-roadmap {display:flex!important;flex-direction:column!important;gap:0!important;width:100%!important;max-width:100%!important;margin:20px 0!important;padding:0!important;border:1px solid #d9dee7!important;border-radius:0!important;background:#fff!important;box-shadow:none!important}
+.project-phases-panel .standard-phase-roadmap > article.standard-phase-card,
+.project-phases-panel .standard-phase-roadmap > article.standard-phase-card.standard-phase-locked,
+.project-phases-panel .standard-phase-roadmap > article.standard-phase-card.standard-phase-in_progress,
+.project-phases-panel .standard-phase-roadmap > article.standard-phase-card.standard-phase-completed,
+.project-phases-panel .standard-phase-roadmap > article.standard-phase-card.standard-phase-ready {display:block!important;position:relative!important;flex:none!important;float:none!important;width:100%!important;min-width:0!important;max-width:100%!important;min-height:0!important;height:auto!important;margin:0!important;padding:0!important;opacity:1!important;transform:none!important;filter:none!important;border:0!important;border-bottom:1px solid #e0e5eb!important;border-radius:0!important;box-shadow:none!important;background:#fff!important;overflow:hidden!important}
+.project-phases-panel .standard-phase-roadmap > article.standard-phase-card:last-child {border-bottom:0!important}
+.project-phases-panel .standard-phase-roadmap > article.standard-phase-card.standard-phase-locked {background:#f6f7f9!important}
+.project-phases-panel .standard-phase-roadmap > article.standard-phase-card.phase-dropdown-open {border-left:3px solid #e87331!important}
+.project-phases-panel .standard-phase-roadmap .standard-phase-number,.project-phases-panel .standard-phase-roadmap .phase-connector {display:none!important}
+.project-phases-panel .standard-phase-roadmap .standard-phase-content {display:block!important;width:100%!important;min-width:0!important;margin:0!important;padding:0!important}
+.project-phases-panel .standard-phase-roadmap .standard-phase-top.phase-dropdown-trigger {display:flex!important;grid-template-columns:none!important;align-items:center!important;gap:12px!important;min-height:62px!important;width:100%!important;margin:0!important;padding:12px 16px!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;cursor:pointer!important}
+.project-phases-panel .standard-phase-roadmap .standard-phase-top.phase-dropdown-trigger:hover {background:#edf1f5!important}
+.project-phases-panel .standard-phase-roadmap .standard-phase-top.phase-dropdown-trigger:focus-visible {outline:2px solid #e87331!important;outline-offset:-2px!important}
+.project-phases-panel .standard-phase-roadmap .standard-phase-title {display:flex!important;align-items:center!important;flex:1 1 auto!important;min-width:0!important;gap:13px!important;margin:0!important;padding:0!important}
+.project-phases-panel .standard-phase-roadmap .standard-phase-label-row {flex:0 0 64px!important;display:block!important;margin:0!important;padding:0!important}
+.project-phases-panel .standard-phase-roadmap .phase-small-label {font-size:11px!important;font-weight:700!important;letter-spacing:.04em!important;color:#777f8d!important;white-space:nowrap!important}
+.project-phases-panel .standard-phase-roadmap .standard-phase-title h3 {flex:1!important;min-width:0!important;margin:0!important;padding:0!important;font-size:15px!important;font-weight:650!important;line-height:1.45!important;letter-spacing:0!important;color:#263242!important;overflow-wrap:anywhere!important}
+.project-phases-panel .standard-phase-roadmap .standard-phase-title > p {display:none!important}
+.project-phases-panel .standard-phase-roadmap .standard-phase-locked .standard-phase-title h3 {color:#747d8a!important}
+.project-phases-panel .standard-phase-roadmap .phase-status {display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;flex:0 0 105px!important;width:105px!important;min-width:0!important;padding:5px 7px!important;border-radius:0!important;box-shadow:none!important;font-size:11px!important;font-weight:650!important;line-height:1.3!important;white-space:nowrap!important}
+.project-phases-panel .standard-phase-roadmap .phase-status svg {width:12px!important;height:12px!important;flex:none!important}
+.project-phases-panel .standard-phase-roadmap .phase-dropdown-chevron {display:flex!important;grid-column:auto!important;grid-row:auto!important;flex:0 0 20px!important;align-items:center!important;justify-content:center!important;width:20px!important;height:20px!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.project-phases-panel .standard-phase-roadmap .phase-dropdown-chevron svg {width:16px!important;height:16px!important;transition:transform .15s ease!important}
+.project-phases-panel .standard-phase-roadmap .phase-dropdown-open .phase-dropdown-chevron svg {transform:rotate(180deg)!important}
+.project-phases-panel .standard-phase-roadmap .phase-dropdown-details {display:block!important;width:100%!important;min-width:0!important;margin:0!important;padding:16px 18px 20px!important;border-top:1px solid #e0e5eb!important;border-radius:0!important;background:#fcfcfd!important;box-shadow:none!important}
+.project-phases-panel .standard-phase-roadmap .phase-dropdown-closed .phase-dropdown-details {display:none!important}
+.project-phases-panel .standard-phase-roadmap .standard-phase-locked .phase-dropdown-details {background:#f7f8fa!important}
+.project-phases-panel .standard-phase-roadmap .phase-completion-requirement {margin:0 0 14px!important;padding:12px 14px!important;border:1px solid #e0e5eb!important;border-radius:0!important;background:#fff!important}
+.project-phases-panel .standard-phase-roadmap .phase-progress-dashboard,.project-phases-panel .standard-phase-roadmap .phase-final-completion,.project-phases-panel .standard-phase-roadmap .phase-completion-blocked {max-width:100%!important;border-radius:0!important;box-shadow:none!important}
+.project-phases-panel .standard-phase-roadmap p,.project-phases-panel .standard-phase-roadmap label,.project-phases-panel .standard-phase-roadmap li {font-size:13px!important;line-height:1.55!important}
+.project-phases-panel .standard-phase-roadmap input,.project-phases-panel .standard-phase-roadmap select,.project-phases-panel .standard-phase-roadmap textarea,.project-phases-panel .standard-phase-roadmap button {max-width:100%!important;border-radius:0!important;font-family:inherit!important}
+@media(max-width:600px){.project-phases-panel{max-width:100%!important}.project-phases-panel .standard-phase-roadmap .standard-phase-top.phase-dropdown-trigger{gap:7px!important;padding:10px!important}.project-phases-panel .standard-phase-roadmap .standard-phase-title{gap:6px!important}.project-phases-panel .standard-phase-roadmap .standard-phase-label-row{flex-basis:48px!important}.project-phases-panel .standard-phase-roadmap .phase-small-label{font-size:9px!important}.project-phases-panel .standard-phase-roadmap .standard-phase-title h3{font-size:13px!important}.project-phases-panel .standard-phase-roadmap .phase-status{flex-basis:74px!important;width:74px!important;font-size:9px!important;padding:4px!important}.project-phases-panel .standard-phase-roadmap .phase-dropdown-details{padding:12px!important}}
+</style>
 </body>
 
 </html>
+<script>
+function validateExpenseBudget(form, remainingBudget) {
+    const amount = Number(form.querySelector('[name="amount"]')?.value || 0);
+    if (Number.isFinite(amount) && amount > remainingBudget) {
+        alert('Insufficient Budget. The expense exceeds the remaining project budget.');
+        return false;
+    }
+    return true;
+}
+</script>
+
+
+

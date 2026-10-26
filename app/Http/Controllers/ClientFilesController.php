@@ -12,6 +12,12 @@ class ClientFilesController extends Controller
     {
         $client = Auth::user();
 
+        // Inactive clients cannot access the centralized file library.
+        abort_unless(
+            $client && $client->role === 'client' && $client->status === 'active',
+            403
+        );
+
         /*
         |--------------------------------------------------------------------------
         | CLIENT PROJECTS + FILES
@@ -27,6 +33,11 @@ class ClientFilesController extends Controller
                 'files.uploader',
             ])
             ->where('client_id', $client->id)
+            // Only projects whose lead architect account is active are accessible.
+            ->whereHas('architect', function ($query) {
+                $query->where('role', 'architect')
+                    ->where('status', 'active');
+            })
             ->orderBy('project_name')
             ->get();
 

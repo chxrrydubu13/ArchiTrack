@@ -14,7 +14,18 @@ class ArchitectProjectRevisionController extends Controller
 {
     private function getProjectForArchitect($projectId, array $with = [])
     {
+        abort_unless(
+            auth()->check()
+            && auth()->user()->role === 'architect'
+            && auth()->user()->status === 'active',
+            403
+        );
+
         return Project::where('id', $projectId)
+            ->whereHas('architect', function ($leadQuery) {
+                $leadQuery->where('role', 'architect')
+                    ->where('status', 'active');
+            })
             ->where(function ($query) {
                 $query
                     ->where('architect_id', auth()->id())

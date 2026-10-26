@@ -1161,6 +1161,9 @@ class ArchitectProjectController extends Controller
 
 
     {
+        // Archived and on-hold architect accounts cannot access project operations.
+        abort_unless(auth()->user()?->role === 'architect' && auth()->user()?->status === 'active', 403);
+
 
 
 
@@ -1228,7 +1231,9 @@ class ArchitectProjectController extends Controller
 
 
 
-            Project::where(
+            Project::whereHas('architect', function ($leadQuery) {
+                $leadQuery->where('status', 'active');
+            })->where(
 
 
 
@@ -1765,6 +1770,9 @@ class ArchitectProjectController extends Controller
 
 
     {
+        // Archived and on-hold architect accounts cannot access project operations.
+        abort_unless(auth()->user()?->role === 'architect' && auth()->user()?->status === 'active', 403);
+
 
 
 
@@ -1969,6 +1977,9 @@ class ArchitectProjectController extends Controller
 
 
     {
+        // Archived and on-hold architect accounts cannot access project operations.
+        abort_unless(auth()->user()?->role === 'architect' && auth()->user()?->status === 'active', 403);
+
 
 
 
@@ -2032,7 +2043,9 @@ class ArchitectProjectController extends Controller
 
 
 
-            Project::where(
+            Project::whereHas('architect', function ($leadQuery) {
+                $leadQuery->where('status', 'active');
+            })->where(
 
 
 
@@ -3466,10 +3479,16 @@ class ArchitectProjectController extends Controller
     public function updateBudget(Request $request, $id)
 
     {
+        // Archived and on-hold architect accounts cannot access project operations.
+        abort_unless(auth()->user()?->role === 'architect' && auth()->user()?->status === 'active', 403);
+
 
         $project = Project::where('id', $id)
 
             ->where('architect_id', auth()->id())
+            ->whereHas('architect', function ($leadQuery) {
+                $leadQuery->where('status', 'active');
+            })
 
             ->firstOrFail();
 
@@ -3574,10 +3593,16 @@ class ArchitectProjectController extends Controller
     public function storeExpense(Request $request, $id)
 
     {
+        // Archived and on-hold architect accounts cannot access project operations.
+        abort_unless(auth()->user()?->role === 'architect' && auth()->user()?->status === 'active', 403);
+
 
         $project = Project::where('id', $id)
 
             ->where('architect_id', auth()->id())
+            ->whereHas('architect', function ($leadQuery) {
+                $leadQuery->where('status', 'active');
+            })
 
             ->firstOrFail();
 
@@ -3695,7 +3720,7 @@ class ArchitectProjectController extends Controller
 
                 'architect.projects.show',
 
-                $project->id
+                ['id' => $project->id, 'tab' => 'financial']
 
             )
 
@@ -3705,7 +3730,8 @@ class ArchitectProjectController extends Controller
 
                 'Project expense added successfully.'
 
-            );
+            )
+            ->withFragment('recorded-expenses');
 
     }
 
@@ -3734,10 +3760,16 @@ class ArchitectProjectController extends Controller
         $expense
 
     ) {
+        // Archived and on-hold architect accounts cannot access project operations.
+        abort_unless(auth()->user()?->role === 'architect' && auth()->user()?->status === 'active', 403);
+
 
         $project = Project::where('id', $id)
 
             ->where('architect_id', auth()->id())
+            ->whereHas('architect', function ($leadQuery) {
+                $leadQuery->where('status', 'active');
+            })
 
             ->firstOrFail();
 
@@ -3888,10 +3920,16 @@ class ArchitectProjectController extends Controller
     public function destroyExpense($id, $expense)
 
     {
+        // Archived and on-hold architect accounts cannot access project operations.
+        abort_unless(auth()->user()?->role === 'architect' && auth()->user()?->status === 'active', 403);
+
 
         $project = Project::where('id', $id)
 
             ->where('architect_id', auth()->id())
+            ->whereHas('architect', function ($leadQuery) {
+                $leadQuery->where('status', 'active');
+            })
 
             ->firstOrFail();
 
@@ -3970,6 +4008,9 @@ class ArchitectProjectController extends Controller
 
 
     {
+        // Archived and on-hold architect accounts cannot access project operations.
+        abort_unless(auth()->user()?->role === 'architect' && auth()->user()?->status === 'active', 403);
+
 
 
 
@@ -5410,6 +5451,10 @@ class ArchitectProjectController extends Controller
 
 
             ]);
+
+        // Preserve the lead architect's identity after eventual account deletion.
+        $project->original_architect_name = $architect->name;
+        $project->save();
 
 
 

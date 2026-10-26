@@ -13,6 +13,12 @@ class ClientDashboardController extends Controller
     {
         $user = Auth::user();
 
+        // Archived/on-hold client accounts cannot access project dashboards.
+        abort_unless(
+            $user && $user->role === 'client' && $user->status === 'active',
+            403
+        );
+
 
         /*
         |--------------------------------------------------------------------------
@@ -43,7 +49,11 @@ class ClientDashboardController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $projects = Project::where(
+        $projects = Project::whereHas('architect', function ($query) {
+                $query->where('role', 'architect')
+                    ->where('status', 'active');
+            })
+            ->where(
                 'client_id',
                 $user->id
             )

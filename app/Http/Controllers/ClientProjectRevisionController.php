@@ -7,6 +7,7 @@ use App\Models\ProjectRevision;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -26,8 +27,13 @@ class ClientProjectRevisionController extends Controller
         |--------------------------------------------------------------------------
         */
 
+        abort_unless(Auth::user()?->role === 'client' && Auth::user()?->status === 'active', 403);
+
         $project = Project::where('id', $id)
             ->where('client_id', Auth::id())
+            ->whereHas('architect', function ($query) {
+                $query->where('role', 'architect')->where('status', 'active');
+            })
             ->firstOrFail();
 
 
@@ -329,7 +335,8 @@ class ClientProjectRevisionController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $revision =
+        try {
+            $revision =
             ProjectRevision::create([
 
                 'project_id' =>
@@ -416,6 +423,16 @@ class ClientProjectRevisionController extends Controller
                     null,
 
             ]);
+        } catch (\Throwable $error) {
+            if ($attachmentPath && Storage::disk('local')->exists($attachmentPath)) {
+                Storage::disk('local')->delete($attachmentPath);
+            }
+
+            report($error);
+            return back()->withErrors([
+                'description' => 'The revision could not be submitted. Please try again.',
+            ])->withInput();
+        }
 
 
         /*

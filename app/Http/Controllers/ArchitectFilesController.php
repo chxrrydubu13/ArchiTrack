@@ -12,7 +12,17 @@ class ArchitectFilesController extends Controller
     {
         $architect = Auth::user();
 
-        $projects = Project::with([
+        // Archived and on-hold architects cannot access project files.
+        abort_unless(
+            $architect && $architect->role === 'architect' && $architect->status === 'active',
+            403
+        );
+
+        $projects = Project::whereHas('architect', function ($query) {
+                $query->where('role', 'architect')
+                    ->where('status', 'active');
+            })
+            ->with([
                 'client',
                 'files.uploader'
             ])

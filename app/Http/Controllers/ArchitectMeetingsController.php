@@ -22,7 +22,18 @@ class ArchitectMeetingsController extends Controller
 
     private function accessibleProjectsQuery($architectId)
     {
-        return Project::where(
+        abort_unless(
+            Auth::check()
+            && Auth::user()->role === 'architect'
+            && Auth::user()->status === 'active'
+            && (int) Auth::id() === (int) $architectId,
+            403
+        );
+
+        return Project::whereHas('architect', function ($ownerQuery) {
+            $ownerQuery->where('role', 'architect')
+                ->where('status', 'active');
+        })->where(
             function ($query) use ($architectId) {
 
                 $query

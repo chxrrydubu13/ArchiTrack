@@ -24,7 +24,19 @@ class ArchitectProjectPhaseController extends Controller
         $projectId,
         array $with = []
     ) {
-        return Project::where(
+        $user = auth()->user();
+
+        abort_unless(
+            $user && $user->role === 'architect' && $user->status === 'active',
+            403,
+            'Only active architects can manage project phases.'
+        );
+
+        return Project::whereHas('architect', function ($query) {
+                $query->where('role', 'architect')
+                    ->where('status', 'active');
+            })
+            ->where(
             'id',
             $projectId
         )

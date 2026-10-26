@@ -84,12 +84,19 @@ class ArchitectReportController extends Controller
 
     public function saveToGoogleDrive(Request $request)
     {
-        $user =
-            auth()
-                ->user()
-                ->load(
-                    'googleDriveConnection'
-                );
+        abort_unless(
+            auth()->check()
+                && auth()->user()->role === 'architect'
+                && auth()->user()->status === 'active',
+            403
+        );
+
+        $user = auth()->user();
+        abort_unless(
+            $user && $user->role === 'architect' && $user->status === 'active',
+            403
+        );
+        $user->load('googleDriveConnection');
 
         $connection =
             $user->googleDriveConnection;
@@ -440,12 +447,12 @@ class ArchitectReportController extends Controller
     private function buildReportData(
         Request $request
     ): array {
-        $user =
-            auth()
-                ->user()
-                ->load(
-                    'googleDriveConnection'
-                );
+        $user = auth()->user();
+        abort_unless(
+            $user && $user->role === 'architect' && $user->status === 'active',
+            403
+        );
+        $user->load('googleDriveConnection');
 
         $status =
             $request->get('status');
@@ -461,7 +468,12 @@ class ArchitectReportController extends Controller
         */
 
         $accessibleProjectsQuery =
-            Project::where(
+            Project::query()
+                ->whereHas('architect', function ($architectQuery) {
+                    $architectQuery->where('role', 'architect')
+                        ->where('status', 'active');
+                })
+                ->where(
                 function ($query) use ($user) {
 
                     $query

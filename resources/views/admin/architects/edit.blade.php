@@ -76,6 +76,20 @@
     .security-dialog-content p { margin: 0; color: #64748b; line-height: 1.6; font-size: 14px; }
     .security-dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
     @media (max-width: 600px) { .security-panel-header { flex-wrap: wrap; } .security-state { margin-left: 56px; } .security-unlock-row { flex-direction: column; } .security-unlock-button { width: 100%; } }
+
+    /* Password visibility and live requirements */
+    .at-password-wrap { position: relative; width: 100%; }
+    .at-password-wrap > input { width: 100%; box-sizing: border-box; padding-right: 48px !important; }
+    .at-password-toggle { position: absolute; top: 50%; right: 9px; transform: translateY(-50%); border: 0; background: transparent; color: #475569; cursor: pointer; padding: 7px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; }
+    .at-password-toggle:hover, .at-password-toggle:focus-visible { background: #e9edf3; outline-offset: 2px; }
+    .at-password-toggle svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .at-password-rules { margin-top: 11px; padding: 12px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; }
+    .at-password-rules strong { display: block; font-size: 11px; letter-spacing: .04em; margin-bottom: 8px; color: #334155; }
+    .at-password-rules ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+    .at-password-rules li { font-size: 12px; color: #b91c1c; display: flex; gap: 8px; align-items: center; }
+    .at-password-rules li::before { content: '✕'; font-weight: 800; width: 14px; }
+    .at-password-rules li.is-met { color: #15803d; }
+    .at-password-rules li.is-met::before { content: '✓'; }
 </style>
 
 </head>
@@ -693,7 +707,10 @@
                                 @csrf
                                 <label for="unlock_admin_password">Administrator Password</label>
                                 <div class="security-unlock-row">
-                                    <input id="unlock_admin_password" type="password" name="admin_password" required autocomplete="current-password" placeholder="Enter your admin password" aria-describedby="unlockHelp" />
+                                    <div class="at-password-wrap">
+<input id="unlock_admin_password" type="password" name="admin_password" required autocomplete="current-password" placeholder="Enter your admin password" aria-describedby="unlockHelp" />
+<button type="button" class="at-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+</div>
                                     <button type="submit" class="security-unlock-button">Unlock Editing</button>
                                 </div>
                                 <p id="unlockHelp" class="security-help">Your password is verified securely. Access expires after five minutes.</p>
@@ -837,7 +854,8 @@
                             {{-- OPTIONAL PASSWORD UPDATE --}}
                             <div class="form-group">
                                 <label for="password">New Password</label>
-                                <input
+                                <div class="at-password-wrap">
+<input
                                     type="password"
                                     id="password"
                                     name="password"
@@ -846,7 +864,19 @@
                                     minlength="8"
                                     autocomplete="new-password"
                                 >
-                                <small>At least 8 characters, including a special character. Leave blank if unchanged.</small>
+<button type="button" class="at-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+</div>
+                                <small>Leave blank to keep the current password.</small>
+                                <div class="at-password-rules" id="architectPasswordRules" aria-live="polite">
+                                    <strong>PASSWORD MUST CONTAIN:</strong>
+                                    <ul>
+                                        <li data-rule="lower">At least one lowercase letter</li>
+                                        <li data-rule="upper">At least one uppercase letter</li>
+                                        <li data-rule="number">At least one number</li>
+                                        <li data-rule="special">At least one special character</li>
+                                        <li data-rule="length">Minimum 8 characters</li>
+                                    </ul>
+                                </div>
                                 @error('password')
                                     <p class="input-error">{{ $message }}</p>
                                 @enderror
@@ -854,7 +884,8 @@
 
                             <div class="form-group">
                                 <label for="password_confirmation">Confirm New Password</label>
-                                <input
+                                <div class="at-password-wrap">
+<input
                                     type="password"
                                     id="password_confirmation"
                                     name="password_confirmation"
@@ -863,6 +894,8 @@
                                     minlength="8"
                                     autocomplete="new-password"
                                 >
+<button type="button" class="at-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+</div>
                             </div>
 
                             {{-- Active and On Hold are editable after admin unlock; Archived is permanent. --}}
@@ -1031,6 +1064,38 @@
 <script>
 
 document.addEventListener('DOMContentLoaded', function () {
+
+    // Password visibility (does not alter field values or form submission).
+    document.querySelectorAll('.at-password-toggle').forEach(function (button) {
+        button.addEventListener('click', function () {
+            const input = button.parentElement.querySelector('input');
+            if (!input || input.disabled) return;
+            const visible = input.type === 'password';
+            input.type = visible ? 'text' : 'password';
+            button.setAttribute('aria-label', visible ? 'Hide password' : 'Show password');
+            button.setAttribute('title', visible ? 'Hide password' : 'Show password');
+            button.setAttribute('aria-pressed', String(visible));
+            button.style.color = visible ? '#dc6b21' : '';
+        });
+    });
+    const newPasswordInput = document.getElementById('password');
+    const passwordRules = document.getElementById('architectPasswordRules');
+    function updatePasswordRules() {
+        if (!newPasswordInput || !passwordRules) return;
+        const value = newPasswordInput.value;
+        const checks = {
+            lower: /[a-z]/.test(value),
+            upper: /[A-Z]/.test(value),
+            number: /[0-9]/.test(value),
+            special: /[^A-Za-z0-9]/.test(value),
+            length: value.length >= 8
+        };
+        passwordRules.querySelectorAll('[data-rule]').forEach(function (item) {
+            item.classList.toggle('is-met', Boolean(checks[item.dataset.rule]));
+        });
+    }
+    newPasswordInput?.addEventListener('input', updatePasswordRules);
+    updatePasswordRules();
     const editArchitectForm = document.getElementById('editArchitectForm');
     const adminPasswordDialog = document.getElementById('adminPasswordDialog');
     const editUnlocked = @json($editUnlocked);
